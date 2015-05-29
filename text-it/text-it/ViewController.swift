@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import JavaScriptCore
+
 
 class ViewController: NSViewController {
 
