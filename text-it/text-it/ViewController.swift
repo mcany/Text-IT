@@ -17,12 +17,15 @@ class ViewController: NSViewController, NSTextViewDelegate {
     
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
+    var dataLoader: DataLoader!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.dataLoader = DataLoader()
         self.context = JSContext()
+        self.addFunctionsToJSContext()
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeTextView.delegate = self
         self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
@@ -58,6 +61,32 @@ class ViewController: NSViewController, NSTextViewDelegate {
             println(fullCode)
             println(context.evaluateScript(fullCode))
         }
+    }
+    
+    
+    func addFunctionsToJSContext()
+    {
+        let loadData: @objc_block String -> String = { input in
+            return self.dataLoader.loadAccelerometerData(input)
+        }
+        
+        context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "loadData")
+
+        let simplifyString: @objc_block String -> String = { input in
+            return self.simple(input)
+        }
+        context.setObject(unsafeBitCast(simplifyString, AnyObject.self), forKeyedSubscript: "simplifyString")
+        
+
+    }
+    
+
+    func simple(str: String) -> String
+    {
+        var mutableString = NSMutableString(string: str) as CFMutableStringRef
+        CFStringTransform(mutableString, nil, kCFStringTransformToLatin, Boolean(0))
+        CFStringTransform(mutableString, nil, kCFStringTransformStripCombiningMarks, Boolean(0))
+        return mutableString as String
     }
 }
 
