@@ -14,6 +14,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
     @IBOutlet weak var palletTableView: NSTableColumn!
+    @IBOutlet weak var lineChartView: LineChartView!
     
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
@@ -22,18 +23,25 @@ class ViewController: NSViewController, NSTextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         self.dataLoader = DataLoader()
         self.context = JSContext()
         self.addFunctionsToJSContext()
-        self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
+        
         self.codeTextView.delegate = self
         self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
+        
         //line number view
+        self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeScrollView.verticalRulerView = self.lineNumberView
         self.codeScrollView.hasHorizontalRuler = false
         self.codeScrollView.hasVerticalRuler = true
         self.codeScrollView.rulersVisible = true
+        
+        
+        if let lineChart = lineChartView.layer as? LineChart {
+            let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
+            lineChart.datasets += [ LineChart.Dataset(label: "My Data", data: data) ]
+        }
     }
 
     override var representedObject: AnyObject? {
