@@ -10,17 +10,27 @@ import Cocoa
 import JavaScriptCore
 
 class ViewController: NSViewController, NSTextViewDelegate {
-
+    
+    @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
     @IBOutlet weak var palletTableView: NSTableColumn!
+    
+    var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        context = JSContext()
-
+        
         // Do any additional setup after loading the view.
+        self.context = JSContext()
+        self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeTextView.delegate = self
+        self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
+        //line number view
+        self.codeScrollView.verticalRulerView = self.lineNumberView
+        self.codeScrollView.hasHorizontalRuler = false
+        self.codeScrollView.hasVerticalRuler = true
+        self.codeScrollView.rulersVisible = true
     }
 
     override var representedObject: AnyObject? {

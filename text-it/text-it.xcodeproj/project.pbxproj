@@ -12,6 +12,9 @@
 		8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB101B188EB600A2DB8F /* Images.xcassets */; };
 		8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB121B188EB600A2DB8F /* Main.storyboard */; };
 		8C2CEB201B188EB600A2DB8F /* text_itTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB1F1B188EB600A2DB8F /* text_itTests.swift */; };
+		8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */; };
+		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,13 @@
 		8C2CEB191B188EB600A2DB8F /* text-itTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "text-itTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB1E1B188EB600A2DB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2CEB1F1B188EB600A2DB8F /* text_itTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_itTests.swift; sourceTree = "<group>"; };
+		8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "text-it-Bridging-Header.h"; sourceTree = "<group>"; };
+		8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
+		8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
+		8C60024E1B1C460A0057892E /* NoodleLineNumberMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberMarker.h; sourceTree = "<group>"; };
+		8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberMarker.m; sourceTree = "<group>"; };
+		8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkerLineNumberView.m; sourceTree = "<group>"; };
+		8C6002521B1C4F7A0057892E /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerLineNumberView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +85,7 @@
 		8C2CEB091B188EB600A2DB8F /* text-it */ = {
 			isa = PBXGroup;
 			children = (
+				8C6002491B1C45930057892E /* LineView */,
 				8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */,
 				8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */,
 				8C2CEB101B188EB600A2DB8F /* Images.xcassets */,
@@ -107,6 +118,20 @@
 				8C2CEB1E1B188EB600A2DB8F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8C6002491B1C45930057892E /* LineView */ = {
+			isa = PBXGroup;
+			children = (
+				8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */,
+				8C6002521B1C4F7A0057892E /* MarkerLineNumberView.h */,
+				8C60024E1B1C460A0057892E /* NoodleLineNumberMarker.h */,
+				8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */,
+				8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */,
+				8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */,
+				8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */,
+			);
+			name = LineView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,8 +233,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
+				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
 				8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
+				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,10 +355,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "text-it/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "text-it/text-it-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -338,10 +370,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "text-it/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "text-it/text-it-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -400,6 +435,7 @@
 				8C2CEB251B188EB600A2DB8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C2CEB261B188EB600A2DB8F /* Build configuration list for PBXNativeTarget "text-itTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +444,7 @@
 				8C2CEB281B188EB600A2DB8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

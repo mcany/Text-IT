@@ -701,18 +701,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="226" height="268"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="226" height="268"/>
+                                            <size key="minSize" width="225.99999638607622" height="268"/>
                                             <size key="maxSize" width="463" height="10000000"/>
-                                            <attributedString key="textStorage">
-                                                <fragment content="asdasdasd">
-                                                    <attributes>
-                                                        <font key="NSFont" metaFont="smallSystem"/>
-                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="226" height="268"/>
+                                            <size key="minSize" width="225.99999638607622" height="268"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -735,7 +727,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="CWt-9T-2Xz" viewBased="YES" id="RaH-JO-ESJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="97" height="252"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="97" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -780,7 +772,7 @@
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="pya-Kh-0Nf">
-                                    <rect key="frame" x="1" y="118.41515719890594" width="236.70931243896484" height="15"/>
+                                    <rect key="frame" x="1" y="118.41515719890594" width="237" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="0.027492808190061505" horizontal="NO" id="MkT-gJ-rcL">
@@ -795,6 +787,7 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="codeScrollView" destination="hz9-eG-wOb" id="XWI-EO-ppH"/>
                         <outlet property="codeTextView" destination="DeZ-Wl-FwQ" id="fhz-wB-W7d"/>
                         <outlet property="palletTableView" destination="3oq-h2-dSU" id="LLz-CV-6N8"/>
                     </connections>
