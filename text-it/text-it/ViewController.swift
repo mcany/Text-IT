@@ -74,7 +74,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
     
     func addFunctionsToJSContext()
     {
-        let loadData: @objc_block String -> NSData = { input in
+        let loadData: @objc_block String -> [Int] = { input in
             return self.dataLoader.loadAccelerometerData(input)
         }
         
@@ -85,7 +85,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
         }
         self.context.setObject(unsafeBitCast(simplifyString, AnyObject.self), forKeyedSubscript: "simplifyString")
         
-        let displayData: @objc_block NSData -> NSData = { input in
+        let displayData: @objc_block [Int] -> [Int] = { input in
             return self.display(input)
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
@@ -94,20 +94,22 @@ class ViewController: NSViewController, NSTextViewDelegate {
     }
     
 
-    func display(accData: NSData) -> NSData
+    func display(accData: [Int]) -> [Int]
     {
         if let lineChart = lineChartView.layer as? LineChart {
             //let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            let count = accData.length / sizeof(CGFloat)
+            let count = accData.count / sizeof(CGFloat)
             
             // create array of appropriate length:
             var array = [CGFloat](count: count, repeatedValue: 0)
             
             // copy bytes into array
-            accData.getBytes(&array, length:count * sizeof(CGFloat))
-            
+            //accData.getBytes(&array, length:count * sizeof(CGFloat))
             //println(array)
-            lineChart.datasets = [ LineChart.Dataset(label: "My Data", data: array) ]
+            let doubleArray = accData.map {
+                CGFloat(($0))
+            }
+            lineChart.datasets = [ LineChart.Dataset(label: "My Data", data: doubleArray) ]
         }
         return accData
     }
