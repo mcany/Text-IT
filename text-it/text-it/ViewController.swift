@@ -29,7 +29,8 @@ class ViewController: NSViewController, NSTextViewDelegate {
         
         self.codeTextView.delegate = self
         self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
-        
+        self.codeTextView.automaticQuoteSubstitutionEnabled = false
+
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeScrollView.verticalRulerView = self.lineNumberView
