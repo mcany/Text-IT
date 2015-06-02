@@ -11,20 +11,40 @@ import Cocoa
 
 class DataLoader: NSObject {
     
-    func loadAccelerometerData(fileName: String) -> [Int]
+    func loadAccelerometerData(fileName: String) -> [CGFloat]
     {
         var paths:NSArray  = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var documentsDirectory:String = paths[0] as! String
         var appFile: String = documentsDirectory.stringByAppendingPathComponent(fileName)
         
-        var intArray: [Int] = []
+        var cgFloatArray: [CGFloat] = []
 
         
         if let content = String(contentsOfFile:appFile, encoding: NSUTF8StringEncoding, error: nil) {
-            var array = content.componentsSeparatedByString("\n")
-            intArray = map(array) { String($0).toInt() ?? 0 }
+            var array: [String] = content.componentsSeparatedByString(",")
+            //var array2: [String] = content.componentsSeparatedByString(",")
+            //let intArray = map(array) { String($0).toInt() ?? 0 }
 
-            println(array)
+            cgFloatArray = array.map {
+                CGFloat(($0 as NSString).doubleValue)
+           }
+            //println(array2)
+            //println(cgFloatArray)
+            //println(cgFloatArray)
+            /*
+            for item in array
+            {
+                //let element  = (item as NSString).floatValue
+                //println(item)
+                let item2 = item.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                println((item2 as NSString).floatValue)
+                if let n = NSNumberFormatter().numberFromString(item2) {
+                    let f = CGFloat(n)
+                    println(f)
+                }
+            }
+            */
+            
         }
         
         
@@ -61,6 +81,6 @@ class DataLoader: NSObject {
         //[self printAccelerometerData:accelerometerData count:count prefix:'g'];
         
         //var data = NSData()
-        return intArray
+        return cgFloatArray
     }
 }

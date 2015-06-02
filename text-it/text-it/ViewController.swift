@@ -74,7 +74,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
     
     func addFunctionsToJSContext()
     {
-        let loadData: @objc_block String -> [Int] = { input in
+        let loadData: @objc_block String -> [CGFloat] = { input in
             return self.dataLoader.loadAccelerometerData(input)
         }
         
@@ -85,7 +85,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
         }
         self.context.setObject(unsafeBitCast(simplifyString, AnyObject.self), forKeyedSubscript: "simplifyString")
         
-        let displayData: @objc_block [Int] -> [Int] = { input in
+        let displayData: @objc_block [CGFloat] -> () = { input in
             return self.display(input)
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
@@ -94,24 +94,25 @@ class ViewController: NSViewController, NSTextViewDelegate {
     }
     
 
-    func display(accData: [Int]) -> [Int]
+    func display(accData: [CGFloat])
     {
         if let lineChart = lineChartView.layer as? LineChart {
             //let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            let count = accData.count / sizeof(CGFloat)
+            //let count = accData.count / sizeof(CGFloat)
             
             // create array of appropriate length:
-            var array = [CGFloat](count: count, repeatedValue: 0)
+            //var array = [CGFloat](count: count, repeatedValue: 0)
             
             // copy bytes into array
             //accData.getBytes(&array, length:count * sizeof(CGFloat))
             //println(array)
-            let doubleArray = accData.map {
-                CGFloat(($0))
-            }
-            lineChart.datasets = [ LineChart.Dataset(label: "My Data", data: doubleArray) ]
+            let dataset1 = LineChart.Dataset(label: "My Data", data: accData)
+            dataset1.color = NSColor.redColor().CGColor
+            dataset1.fillColor = nil
+            dataset1.curve = .Bezier(0.3)
+            lineChart.datasets = [dataset1]
         }
-        return accData
+        //return accData
     }
     
     func simple(str: String) -> String
