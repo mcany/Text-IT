@@ -8,9 +8,10 @@
 
 import Cocoa
 
+
 class DataLoader: NSObject {
     
-    func loadAccelerometerData(fileName: String) -> String
+    func loadAccelerometerData(fileName: String) -> NSData
     {
         var paths:NSArray  = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var documentsDirectory:String = paths[0] as! String
@@ -18,10 +19,34 @@ class DataLoader: NSObject {
         
         var data = NSData(contentsOfFile:appFile)
         
-        //var count: Int = data.length
+        //var count: Int = data!.length
         
-        println(data)
+        //println(data)
         
-        return appFile
+        
+        let count = data!.length / sizeof(CMDeviceMotion)
+        
+        // create array of appropriate length:
+        var array = [CMAcceleration](count: count, repeatedValue: 0)
+        
+        // copy bytes into array
+        data!.getBytes(&array, length:count * sizeof(CMAcceleration))
+        
+        println(array)
+        
+        //int count = ((int*) data.bytes)[0];
+        
+        
+        //accelerometer
+        //var accelerometerData = [Int]()
+        //data?.getBytes(accelerometerData, length: sizeof(Int))
+        
+       // var accelerometerData = [CMAcceleration]  ([int] data.bytes + 1)
+        
+        //CMAcceleration * accelerometerData = (CMAcceleration*)((int*)data.bytes + 1);
+        //[self printAccelerometerData:accelerometerData count:count prefix:'g'];
+        
+        
+        return data!
     }
 }
