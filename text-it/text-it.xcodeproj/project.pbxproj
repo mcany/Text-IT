@@ -94,7 +94,7 @@
 				8C701D0E1B24861B002BEED5 /* Filters */,
 				8C6002571B1C711E0057892E /* LineChart */,
 				8C6002541B1C5ADE0057892E /* Loader */,
-				8C6002491B1C45930057892E /* LineView */,
+				8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */,
 				8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */,
 				8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */,
 				8C2CEB101B188EB600A2DB8F /* Images.xcassets */,
@@ -107,6 +107,7 @@
 		8C2CEB0A1B188EB600A2DB8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8C6002491B1C45930057892E /* LineView */,
 				8C2CEB0B1B188EB600A2DB8F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -138,7 +139,6 @@
 				8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */,
 				8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */,
 				8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */,
-				8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */,
 			);
 			name = LineView;
 			sourceTree = "<group>";
