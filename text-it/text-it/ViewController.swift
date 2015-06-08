@@ -75,10 +75,13 @@ class ViewController: NSViewController, NSTextViewDelegate {
     
     func addFunctionsToJSContext()
     {
+        self.context.exceptionHandler = { context, exception in
+            println("JS Error: \(exception)")
+        }
+        
         let loadData: @objc_block String -> [CGFloat] = { input in
             return self.dataLoader.loadAccelerometerData(input)
         }
-        
         self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "loadData")
 
         let simplifyString: @objc_block String -> String = { input in
@@ -91,13 +94,12 @@ class ViewController: NSViewController, NSTextViewDelegate {
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
       
-        
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         
+        //test
         var co = LowPassFilter()
         self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
-
     }
     
 

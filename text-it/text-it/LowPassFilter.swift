@@ -9,12 +9,11 @@
 import Cocoa
 import JavaScriptCore
 
-
 // Custom protocol must be declared with `@objc`
 @objc
 protocol LowPassFilterJSExports : JSExport {
-    func lowPass(accData:[CGFloat], kFilteringFactor:CGFloat, frequency: CGFloat) -> [CGFloat]
-    func test()
+    func lowPass(accData:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
+    func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
     static func new() -> LowPassFilter
 }
 
@@ -26,12 +25,13 @@ class LowPassFilter: NSObject,LowPassFilterJSExports  {
         return LowPassFilter()
     }
     
-    func test()
+    func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
     {
-        println("success!");
+        println("success!")
+        return acc
     }
     
-    func lowPass(accData:[CGFloat], kFilteringFactor:CGFloat, frequency: CGFloat) -> [CGFloat]
+    func lowPass(accData:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
     {
         var cgFloatArray: [CGFloat] = []
         let dt = 1.0 / kFilteringFactor;
@@ -39,11 +39,9 @@ class LowPassFilter: NSObject,LowPassFilterJSExports  {
         let alpha = dt / (dt + RC);
        
         var index: Int
-        for index = 0; index < accData.count; ++index {
+        for index = 1; index < accData.count; ++index {
             cgFloatArray.append((alpha * accData[index]) + ((1-alpha) * accData[index-1]))
         }
-        
         return cgFloatArray
     }
-    
 }
