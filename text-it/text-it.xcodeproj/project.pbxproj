@@ -17,6 +17,7 @@
 		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8C6002561B1C5B080057892E /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002551B1C5B080057892E /* DataLoader.swift */; };
 		8C6002591B1C71340057892E /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002581B1C71340057892E /* LineChart.swift */; };
+		8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		8C6002521B1C4F7A0057892E /* MarkerLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerLineNumberView.h; sourceTree = "<group>"; };
 		8C6002551B1C5B080057892E /* DataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		8C6002581B1C71340057892E /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		8C2CEB091B188EB600A2DB8F /* text-it */ = {
 			isa = PBXGroup;
 			children = (
+				8C701D0E1B24861B002BEED5 /* Filters */,
 				8C6002571B1C711E0057892E /* LineChart */,
 				8C6002541B1C5ADE0057892E /* Loader */,
 				8C6002491B1C45930057892E /* LineView */,
@@ -154,6 +157,14 @@
 				8C6002581B1C71340057892E /* LineChart.swift */,
 			);
 			name = LineChart;
+			sourceTree = "<group>";
+		};
+		8C701D0E1B24861B002BEED5 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */,
+			);
+			name = Filters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 				8C6002561B1C5B080057892E /* DataLoader.swift in Sources */,
 				8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */,
 				8C6002591B1C71340057892E /* LineChart.swift in Sources */,
+				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
 			);

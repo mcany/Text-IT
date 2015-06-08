@@ -90,7 +90,13 @@ class ViewController: NSViewController, NSTextViewDelegate {
             return self.display(input)
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
+      
         
+        // export JS class
+        self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
+        
+        var co = LowPassFilter()
+        self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
 
     }
     
