@@ -96,6 +96,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
       
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
+        self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
         
         //test
         var co = LowPassFilter()

@@ -1,8 +1,8 @@
 //
-//  LowPassFilter.swift
+//  RCFilter.swift
 //  text-it
 //
-//  Created by Mertcan Yigin on 6/7/15.
+//  Created by Mertcan Yigin on 6/9/15.
 //  Copyright (c) 2015 Mertcan Yigin. All rights reserved.
 //
 
@@ -11,18 +11,18 @@ import JavaScriptCore
 
 // Custom protocol must be declared with `@objc`
 @objc
-protocol LowPassFilterJSExports : JSExport {
+protocol RCFilterJSExports : JSExport {
     func filter(accData:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
     func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
-    static func new() -> LowPassFilter
+    static func new() -> RCFilter
 }
 
 // Custom class must inherit from `NSObject`
-@objc(LowPassFilter)
-class LowPassFilter: NSObject,LowPassFilterJSExports  {
+@objc(RCFilter)
+class RCFilter: NSObject,RCFilterJSExports  {
     
-    override static func new() -> LowPassFilter {
-        return LowPassFilter()
+    override static func new() -> RCFilter {
+        return RCFilter()
     }
     
     func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
@@ -34,13 +34,10 @@ class LowPassFilter: NSObject,LowPassFilterJSExports  {
     func filter(accData:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
     {
         var cgFloatArray: [CGFloat] = []
-        let dt = 1.0 / kFilteringFactor;
-        let RC = 1.0 / frequency;
-        let alpha = dt / (dt + RC);
-       
+
         var index: Int
-        for index = 1; index < accData.count; ++index {
-            cgFloatArray.append((alpha * accData[index]) + ((1-alpha) * accData[index-1]))
+        for index = 1; index < accData.count-1; ++index {
+            cgFloatArray.append((accData[index-1] / 4) + (accData[index] / 2) + (accData[index+1] / 4))
         }
         return cgFloatArray
     }
