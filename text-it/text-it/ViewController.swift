@@ -15,6 +15,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet var codeTextView: NSTextView!
     @IBOutlet weak var palletTableView: NSTableColumn!
     @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet var debugTextView: NSTextView!
     
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
@@ -30,7 +31,11 @@ class ViewController: NSViewController, NSTextViewDelegate {
         self.codeTextView.delegate = self
         self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
         self.codeTextView.automaticQuoteSubstitutionEnabled = false
-
+        
+        self.debugTextView.delegate = self
+        self.debugTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
+        self.debugTextView.editable = false
+        
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeScrollView.verticalRulerView = self.lineNumberView
@@ -41,49 +46,64 @@ class ViewController: NSViewController, NSTextViewDelegate {
         
         if let lineChart = lineChartView.layer as? LineChart {
             let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            lineChart.datasets += [ LineChart.Dataset(label: "My Data", data: data) ]
+            lineChart.datasets += [ LineChart.Dataset(label: "Test Data", data: data) ]
         }
     }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-    
-
-    
     func textDidChange(notification: NSNotification) {
-        if codeTextView.string!.hasSuffix("\n")
+        var textView = notification.object as! NSTextView
+        if(textView == self.codeTextView)
         {
-            var fullCode: String = codeTextView.string!
-            let lastCodeArray = fullCode.componentsSeparatedByString("\n")
-            
-            if(lastCodeArray.count > 1)
+            if self.codeTextView.string!.hasSuffix("\n")
             {
-                var lastCode: String = lastCodeArray[lastCodeArray.count - 2]
+                var fullCode: String = self.codeTextView.string!
+
+                let lastCodeArray = fullCode.componentsSeparatedByString("\n")
                 
-               // println(lastCode)
-                //println(context.evaluateScript(lastCode))
+                if(lastCodeArray.count > 1)
+                {
+                    var lastCode: String = lastCodeArray[lastCodeArray.count - 2]
+                    
+                    // println(lastCode)
+                    //println(context.evaluateScript(lastCode))
+                }
+                
+                println(fullCode)
+                var result = self.context.evaluateScript(fullCode)
+                println(result)
+                if(!result.toString().hasPrefix("undefined"))
+                {
+                    self.debugTextView.string =  result.toString()
+                    
+                }
             }
+            else if (self.codeTextView.string?.isEmpty == true)
+            {
+                self.debugTextView.string = ""
+            }
+        }
+        else if(textView == self.debugTextView)
+        {
             
-            println(fullCode)
-            println(context.evaluateScript(fullCode))
         }
     }
-    
     
     func addFunctionsToJSContext()
     {
         self.context.exceptionHandler = { context, exception in
             println("JS Error: \(exception)")
+            if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
+            {
+                self.debugTextView.string = self.debugTextView.string! + "\nJS Error: \(exception)"
+                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+            }
         }
         
         let loadData: @objc_block String -> [CGFloat] = { input in
             return self.dataLoader.loadAccelerometerData(input)
         }
         self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "loadData")
-
+        
         let simplifyString: @objc_block String -> String = { input in
             return self.simple(input)
         }
@@ -93,7 +113,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
             return self.display(input)
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
-      
+        
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
@@ -103,7 +123,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
         self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
     }
     
-
+    
     func display(accData: [CGFloat])
     {
         if let lineChart = lineChartView.layer as? LineChart {
