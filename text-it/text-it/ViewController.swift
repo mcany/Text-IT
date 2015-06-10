@@ -42,12 +42,6 @@ class ViewController: NSViewController, NSTextViewDelegate {
         self.codeScrollView.hasHorizontalRuler = false
         self.codeScrollView.hasVerticalRuler = true
         self.codeScrollView.rulersVisible = true
-        
-        
-        if let lineChart = lineChartView.layer as? LineChart {
-            let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            lineChart.datasets += [ LineChart.Dataset(label: "Test Data", data: data) ]
-        }
     }
 
     func textDidChange(notification: NSNotification) {
@@ -104,11 +98,6 @@ class ViewController: NSViewController, NSTextViewDelegate {
         }
         self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "loadData")
         
-        let simplifyString: @objc_block String -> String = { input in
-            return self.simple(input)
-        }
-        self.context.setObject(unsafeBitCast(simplifyString, AnyObject.self), forKeyedSubscript: "simplifyString")
-        
         let displayData: @objc_block [CGFloat] -> () = { input in
             return self.display(input)
         }
@@ -117,10 +106,19 @@ class ViewController: NSViewController, NSTextViewDelegate {
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
+        self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
+        TestCase.context = self.context
         
         //test
         var co = LowPassFilter()
         self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
+        if let lineChart = lineChartView.layer as? LineChart {
+            let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
+            let dataset1 = LineChart.Dataset(label: "My Data", data: data)
+            lineChart.datasets = [dataset1]
+            self.context.globalObject.setValue(lineChart, forProperty: "lineChart")
+            self.context.globalObject.setValue(dataset1, forProperty: "dataSet")
+        }
     }
     
     
@@ -143,14 +141,6 @@ class ViewController: NSViewController, NSTextViewDelegate {
             lineChart.datasets = [dataset1]
         }
         //return accData
-    }
-    
-    func simple(str: String) -> String
-    {
-        var mutableString = NSMutableString(string: str) as CFMutableStringRef
-        CFStringTransform(mutableString, nil, kCFStringTransformToLatin, Boolean(0))
-        CFStringTransform(mutableString, nil, kCFStringTransformStripCombiningMarks, Boolean(0))
-        return mutableString as String
     }
 }
 

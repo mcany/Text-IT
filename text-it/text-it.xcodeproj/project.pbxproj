@@ -19,6 +19,9 @@
 		8C6002591B1C71340057892E /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002581B1C71340057892E /* LineChart.swift */; };
 		8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */; };
 		8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8953BB1B27092A008CFA3C /* RCFilter.swift */; };
+		8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */; };
+		8CDAAAAA1B284AC4002CE2F2 /* TestCaseWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */; };
+		8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,9 @@
 		8C6002581B1C71340057892E /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
 		8C8953BB1B27092A008CFA3C /* RCFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCFilter.swift; sourceTree = "<group>"; };
+		8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCaseWindow.swift; sourceTree = "<group>"; };
+		8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCaseWindow.xib; sourceTree = "<group>"; };
+		8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +99,7 @@
 		8C2CEB091B188EB600A2DB8F /* text-it */ = {
 			isa = PBXGroup;
 			children = (
-				8C701D0E1B24861B002BEED5 /* Filters */,
+				8CDAAAAB1B285476002CE2F2 /* Components */,
 				8C6002571B1C711E0057892E /* LineChart */,
 				8C6002541B1C5ADE0057892E /* Loader */,
 				8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */,
@@ -102,6 +108,8 @@
 				8C2CEB101B188EB600A2DB8F /* Images.xcassets */,
 				8C2CEB121B188EB600A2DB8F /* Main.storyboard */,
 				8C2CEB0A1B188EB600A2DB8F /* Supporting Files */,
+				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
+				8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */,
 			);
 			path = "text-it";
 			sourceTree = "<group>";
@@ -168,6 +176,23 @@
 				8C8953BB1B27092A008CFA3C /* RCFilter.swift */,
 			);
 			name = Filters;
+			sourceTree = "<group>";
+		};
+		8CDAAAAB1B285476002CE2F2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				8CDAAAAC1B285480002CE2F2 /* TestCase */,
+				8C701D0E1B24861B002BEED5 /* Filters */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		8CDAAAAC1B285480002CE2F2 /* TestCase */ = {
+			isa = PBXGroup;
+			children = (
+				8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */,
+			);
+			name = TestCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +277,7 @@
 			files = (
 				8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */,
 				8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */,
+				8CDAAAAA1B284AC4002CE2F2 /* TestCaseWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +300,8 @@
 				8C6002561B1C5B080057892E /* DataLoader.swift in Sources */,
 				8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */,
 				8C6002591B1C71340057892E /* LineChart.swift in Sources */,
+				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
+				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
