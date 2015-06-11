@@ -19,7 +19,7 @@ protocol LowPassFilterJSExports : JSExport {
 
 // Custom class must inherit from `NSObject`
 @objc(LowPassFilter)
-class LowPassFilter: NSObject,LowPassFilterJSExports  {
+class LowPassFilter: Component,LowPassFilterJSExports  {
     
     override static func new() -> LowPassFilter {
         return LowPassFilter()

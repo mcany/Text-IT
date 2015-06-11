@@ -19,7 +19,7 @@ protocol RCFilterJSExports : JSExport {
 
 // Custom class must inherit from `NSObject`
 @objc(RCFilter)
-class RCFilter: NSObject,RCFilterJSExports  {
+class RCFilter: Component,RCFilterJSExports  {
     
     override static func new() -> RCFilter {
         return RCFilter()

@@ -12,33 +12,48 @@ import JavaScriptCore
 // Custom protocol must be declared with `@objc`
 @objc
 protocol TestCaseJSExports : JSExport {
-    //var code: String { get set }
-    //var name: String { get set }
-    
+    var code: String { get }
+    var name: String { get }
     static func new() -> TestCase
+
+    func change() -> TestCase
 }
 
 // Custom class must inherit from `NSObject`
 @objc(TestCase)
-class TestCase: NSObject, TestCaseJSExports {
-    static  var myWindowController: TestCaseWindowController! = TestCaseWindowController(windowNibName: "TestCaseWindow")
+class TestCase: Component, TestCaseJSExports {
+    static  var myWindowController: TestCaseWindowController!
 
-    dynamic var code: String = ""
-    dynamic var name: String = ""
-    static var context: JSContext!
-
+    var code: String = ""
+    var name: String = ""
+    static var staticContext: JSContext!
+    var context: JSContext!
+    
+    override init()
+    {
+        self.code = ""
+        self.name = ""
+    }
+    
     override static func new() -> TestCase {
         var testCase = TestCase()
         openTestCaseWindows(testCase)
+        testCase.context = staticContext
         return testCase
     }
     
     static func openTestCaseWindows(testCase : TestCase)
     {
-        myWindowController.setJSContext(context)
+        myWindowController = TestCaseWindowController(windowNibName: "TestCaseWindow")
+        myWindowController.setJSContext(staticContext)
         myWindowController.settestCase(testCase)
         myWindowController.showWindow(nil)
-
+    }
+    
+    func change() -> TestCase
+    {
+        TestCase.openTestCaseWindows(self)
+        return self
     }
 }
 

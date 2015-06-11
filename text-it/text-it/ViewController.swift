@@ -107,7 +107,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
         self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
-        TestCase.context = self.context
+        TestCase.staticContext = self.context
         
         //test
         var co = LowPassFilter()

@@ -27,6 +27,7 @@ import JavaScriptCore
     func settestCase(testCase: TestCase)
     {
         self.testCase = testCase
+        
     }
     
     override func windowDidLoad() {
@@ -34,8 +35,14 @@ import JavaScriptCore
         
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
         //self.codeTextView.string = "function(){\n\n\n};"
+        self.codeTextView.string = ""
+        self.funcName.stringValue = ""
+        if self.testCase != nil
+        {
+            self.funcName.stringValue = self.testCase.name
+            self.codeTextView.string = self.testCase.code
+        }
     }
-
     
     @IBAction func saveButtonTapped(sender: AnyObject) {
         var userInput = self.codeTextView.string
@@ -45,8 +52,8 @@ import JavaScriptCore
         if(!result.toString().hasPrefix("JS Error"))
         {
             
-            testCase.code = userInput!
-            testCase.name = self.funcName.stringValue
+            self.testCase.code = userInput!
+            self.testCase.name = self.funcName.stringValue
             println(self.context.evaluateScript(testCase.name+"()"))
             self.close()
         }
@@ -54,6 +61,6 @@ import JavaScriptCore
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
+        self.close()
     }
 }
