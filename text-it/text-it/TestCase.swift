@@ -15,8 +15,8 @@ protocol TestCaseJSExports : JSExport {
     var code: String { get }
     var name: String { get }
     static func new() -> TestCase
-
     func change() -> TestCase
+    func evaluate()
 }
 
 // Custom class must inherit from `NSObject`
@@ -54,6 +54,11 @@ class TestCase: Component, TestCaseJSExports {
     {
         TestCase.openTestCaseWindows(self)
         return self
+    }
+    
+    func evaluate()
+    {
+        println(self.context.evaluateScript(self.name + "()" ))
     }
 }
 

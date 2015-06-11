@@ -9,10 +9,7 @@
 import Foundation
 import JavaScriptCore
 
-
-
-
-
 class Component : NSObject {
 
+    
 }

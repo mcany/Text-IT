@@ -67,8 +67,8 @@ class ViewController: NSViewController, NSTextViewDelegate {
                 println(result)
                 if(!result.toString().hasPrefix("undefined"))
                 {
-                    self.debugTextView.string =  result.toString()
-                    
+                    self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
+                    self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
                 }
             }
             else if (self.codeTextView.string?.isEmpty == true)
@@ -88,7 +88,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
             println("JS Error: \(exception)")
             if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
             {
-                self.debugTextView.string = self.debugTextView.string! + "\nJS Error: \(exception)"
+                self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
                 self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
             }
         }
@@ -106,6 +106,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
+        self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")
         self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
         TestCase.staticContext = self.context
         
