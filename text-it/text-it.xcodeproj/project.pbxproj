@@ -18,6 +18,7 @@
 		8C6002561B1C5B080057892E /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002551B1C5B080057892E /* DataLoader.swift */; };
 		8C6002591B1C71340057892E /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002581B1C71340057892E /* LineChart.swift */; };
 		8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */; };
+		8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */; };
 		8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8953BB1B27092A008CFA3C /* RCFilter.swift */; };
 		8CA733881B299937005243A1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA733871B299937005243A1 /* Component.swift */; };
 		8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7338B1B29A1E5005243A1 /* Evaluator.swift */; };
@@ -56,6 +57,7 @@
 		8C6002551B1C5B080057892E /* DataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		8C6002581B1C71340057892E /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
+		8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentModel.swift; sourceTree = "<group>"; };
 		8C8953BB1B27092A008CFA3C /* RCFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCFilter.swift; sourceTree = "<group>"; };
 		8CA733871B299937005243A1 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CA7338B1B29A1E5005243A1 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		8CDAAAAB1B285476002CE2F2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */,
 				8CA7338D1B29A1EA005243A1 /* Evaluator */,
 				8CA733871B299937005243A1 /* Component.swift */,
 				8CDAAAAC1B285480002CE2F2 /* TestCase */,
@@ -342,6 +345,7 @@
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
 				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,
+				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,

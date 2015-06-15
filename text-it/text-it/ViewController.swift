@@ -9,7 +9,7 @@
 import Cocoa
 import JavaScriptCore
 
-class ViewController: NSViewController, NSTextViewDelegate {
+class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource {
     
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
@@ -20,6 +20,13 @@ class ViewController: NSViewController, NSTextViewDelegate {
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
     var dataLoader: DataLoader!
+    //test
+    var items: [String] = ["Item 1", "Item 2", "Item is an item", "Thing"]
+    let featurExtractionComponent : ComponentModel = ComponentModel(name: "Feature Extraction");
+    let filterComponent:ComponentModel = ComponentModel(name: "Filter");
+    let testCaseComponent : ComponentModel  = ComponentModel(name: "Test Case");
+    
+    @IBOutlet weak var componentOutlineView: NSOutlineView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +49,17 @@ class ViewController: NSViewController, NSTextViewDelegate {
         self.codeScrollView.hasHorizontalRuler = false
         self.codeScrollView.hasVerticalRuler = true
         self.codeScrollView.rulersVisible = true
+        
+        //test items
+        self.componentOutlineView.setDataSource(self)
+        self.componentOutlineView.setDelegate(self)
+        self.featurExtractionComponent.methodNames.append("Mean")
+        self.featurExtractionComponent.methodNames.append("Median")
+        
+        self.filterComponent.methodNames.append("RC Filter")
+        self.filterComponent.methodNames.append("LowPass Filter")
+        
+        self.testCaseComponent.methodNames.append("New Test")
     }
     
     func textDidChange(notification: NSNotification) {
@@ -146,5 +164,81 @@ class ViewController: NSViewController, NSTextViewDelegate {
         }
         //return accData
     }
+    
+    func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
+        println("child:ofItem")
+        if let it: AnyObject = item {
+            switch it {
+            case let c as ComponentModel: // This works even though NSMutableArray is more accurate
+                return c.methodNames[index]
+            default:
+                assert(false, "outlineView:index:item: gave a dud item")
+                return self
+            }
+        } else {
+            switch index {
+            case 0:
+                return featurExtractionComponent
+            case 1:
+                return filterComponent
+            default:
+                return testCaseComponent
+            }
+        }
+    }
+    
+    func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
+        println("isItemExpandable")
+        switch item {
+        case let c as ComponentModel:
+            return (c.methodNames.count > 0) ? true : false
+        default:
+            return false
+        }
+    }
+    
+    func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
+        println("numberOfChildrenOfItem")
+        if let it: AnyObject = item {
+            println("\(it)")
+            switch it {
+            case let c as ComponentModel:
+                return c.methodNames.count
+            default:
+                return 0
+            }
+        } else {
+            return 3 // Flora and Fauna
+        }
+    }
+    
+    // NSOutlineViewDelegate
+    func outlineView(outlineView: NSOutlineView, viewForTableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
+        println("viewForTableColumn")
+        switch item {
+        case let c as ComponentModel:
+            let view = outlineView.makeViewWithIdentifier("HeaderCell", owner: self) as! NSTableCellView
+            if let textField = view.textField {
+                textField.stringValue = c.name
+            }
+            return view
+        default:
+            let view = outlineView.makeViewWithIdentifier("DataCell", owner: self) as! NSTableCellView
+            if let textField = view.textField {
+                textField.stringValue = item as! String
+            }
+            return view
+        }
+    }
+    
+    func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
+        switch item {
+        case let c as ComponentModel:
+            return true
+        default:
+            return false
+        }
+    }
+
 }
 
