@@ -43,32 +43,35 @@ class ViewController: NSViewController, NSTextViewDelegate {
         self.codeScrollView.hasVerticalRuler = true
         self.codeScrollView.rulersVisible = true
     }
-
+    
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
         if(textView == self.codeTextView)
         {
-            if self.codeTextView.string!.hasSuffix("\n")
+            var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
-                var fullCode: String = self.codeTextView.string!
-
-                let lastCodeArray = fullCode.componentsSeparatedByString("\n")
+                var fullCode: String = codeWithoutWhitespaceAndNewline!
+                
+                let lastCodeArray = fullCode.componentsSeparatedByString(";")
+                println(lastCodeArray)
                 
                 if(lastCodeArray.count > 1)
                 {
                     var lastCode: String = lastCodeArray[lastCodeArray.count - 2]
                     
-                    // println(lastCode)
+                    println(lastCode)
                     //println(context.evaluateScript(lastCode))
-                }
-                
-                println(fullCode)
-                var result = self.context.evaluateScript(fullCode)
-                println(result)
-                if(!result.toString().hasPrefix("undefined"))
-                {
-                    self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
-                    self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+                    
+                    
+                    //println(fullCode)
+                    var result = self.context.evaluateScript(lastCode)
+                    println(result)
+                    if(!result.toString().hasPrefix("undefined"))
+                    {
+                        self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
+                        self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+                    }
                 }
             }
             else if (self.codeTextView.string?.isEmpty == true)
