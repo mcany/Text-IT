@@ -53,13 +53,13 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         //test items
         self.componentOutlineView.setDataSource(self)
         self.componentOutlineView.setDelegate(self)
-        self.featurExtractionComponent.methodNames.append("Mean")
-        self.featurExtractionComponent.methodNames.append("Median")
+        self.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
+        self.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
         
-        self.filterComponent.methodNames.append("RC Filter")
-        self.filterComponent.methodNames.append("LowPass Filter")
+        self.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
+        self.filterComponent.methodNames.append(SubComponentModel(name: "LowPass Filter"))
         
-        self.testCaseComponent.methodNames.append("New Test")
+        self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
     }
     
     func textDidChange(notification: NSNotification) {
@@ -156,7 +156,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
             // copy bytes into array
             //accData.getBytes(&array, length:count * sizeof(CGFloat))
             //println(array)
-            let dataset1 = LineChart.Dataset(label: "My Data", data: accData)
+            let dataset1 = LineChart.Dataset(label: "Sample Data", data: accData)
             dataset1.color = NSColor.redColor().CGColor
             dataset1.fillColor = nil
             dataset1.curve = .Bezier(0.3)
@@ -165,6 +165,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         //return accData
     }
     
+    
+    //component NSOutlineView
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
         println("child:ofItem")
         if let it: AnyObject = item {
@@ -222,12 +224,14 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
                 textField.stringValue = c.name
             }
             return view
-        default:
+        case let s as SubComponentModel:
             let view = outlineView.makeViewWithIdentifier("DataCell", owner: self) as! NSTableCellView
             if let textField = view.textField {
-                textField.stringValue = item as! String
+                textField.stringValue = s.name
             }
             return view
+        default:
+            return nil
         }
     }
     

@@ -10,10 +10,19 @@ import Cocoa
 
 class ComponentModel: NSObject {
     let name: String
-    var methodNames: [String] = []
+    var methodNames: [SubComponentModel] = []
 
     init(name: String) {
         self.name = name
     }
 
+}
+
+class SubComponentModel: NSObject {
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
 }
