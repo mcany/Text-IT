@@ -12,6 +12,8 @@
 		8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB101B188EB600A2DB8F /* Images.xcassets */; };
 		8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB121B188EB600A2DB8F /* Main.storyboard */; };
 		8C2CEB201B188EB600A2DB8F /* text_itTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB1F1B188EB600A2DB8F /* text_itTests.swift */; };
+		8C3265931B34B2BC00D958A2 /* IFFirmata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3265901B34B2BC00D958A2 /* IFFirmata.m */; };
+		8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3265921B34B2BC00D958A2 /* IFFirmataCommunicationModule.m */; };
 		8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */; };
 		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -47,6 +49,10 @@
 		8C2CEB191B188EB600A2DB8F /* text-itTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "text-itTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB1E1B188EB600A2DB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2CEB1F1B188EB600A2DB8F /* text_itTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_itTests.swift; sourceTree = "<group>"; };
+		8C32658F1B34B2BC00D958A2 /* IFFirmata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFFirmata.h; sourceTree = "<group>"; };
+		8C3265901B34B2BC00D958A2 /* IFFirmata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFFirmata.m; sourceTree = "<group>"; };
+		8C3265911B34B2BC00D958A2 /* IFFirmataCommunicationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFFirmataCommunicationModule.h; sourceTree = "<group>"; };
+		8C3265921B34B2BC00D958A2 /* IFFirmataCommunicationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFFirmataCommunicationModule.m; sourceTree = "<group>"; };
 		8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "text-it-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 		8C2CEB0A1B188EB600A2DB8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8C32658B1B34B22800D958A2 /* Firmata */,
 				8C2CEB101B188EB600A2DB8F /* Images.xcassets */,
 				8C6002491B1C45930057892E /* LineView */,
 				8C2CEB0B1B188EB600A2DB8F /* Info.plist */,
@@ -139,6 +146,17 @@
 				8C2CEB1E1B188EB600A2DB8F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8C32658B1B34B22800D958A2 /* Firmata */ = {
+			isa = PBXGroup;
+			children = (
+				8C32658F1B34B2BC00D958A2 /* IFFirmata.h */,
+				8C3265901B34B2BC00D958A2 /* IFFirmata.m */,
+				8C3265911B34B2BC00D958A2 /* IFFirmataCommunicationModule.h */,
+				8C3265921B34B2BC00D958A2 /* IFFirmataCommunicationModule.m */,
+			);
+			name = Firmata;
 			sourceTree = "<group>";
 		};
 		8C6002491B1C45930057892E /* LineView */ = {
@@ -344,11 +362,13 @@
 				8C6002591B1C71340057892E /* LineChart.swift in Sources */,
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
 				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
+				8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */,
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
+				8C3265931B34B2BC00D958A2 /* IFFirmata.m in Sources */,
 				8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
