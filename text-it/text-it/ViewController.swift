@@ -9,7 +9,7 @@
 import Cocoa
 import JavaScriptCore
 
-class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource {
+class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource, BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate {
     
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
@@ -20,6 +20,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
     var dataLoader: DataLoader!
+    var firmataController: IFFirmata
     //test
     var items: [String] = ["Item 1", "Item 2", "Item is an item", "Thing"]
     let featurExtractionComponent : ComponentModel = ComponentModel(name: "Feature Extraction");
@@ -49,6 +50,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.codeScrollView.hasHorizontalRuler = false
         self.codeScrollView.hasVerticalRuler = true
         self.codeScrollView.rulersVisible = true
+        
+        //Firmata & BLE
+        BLEDiscovery.sharedInstance().discoveryDelegate = self
+        BLEDiscovery.sharedInstance().peripheralDelegate = self
+        self.firmataController = IFFirmata()
+        self.firmataController.delegate = self
         
         //test items
         self.componentOutlineView.setDataSource(self)

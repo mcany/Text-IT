@@ -9,3 +9,8 @@
 
 #import "IFFirmata.h"
 #import "IFFirmataCommunicationModule.h"
+
+#import "BLE.h"
+#import "BLEDiscovery.h"
+#import "BLEHelper.h"
+#import "BLEService.h"
