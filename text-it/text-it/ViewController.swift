@@ -20,7 +20,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
     var dataLoader: DataLoader!
-    var firmataController: IFFirmata
+    var firmataController: IFFirmata!
+    
     //test
     var items: [String] = ["Item 1", "Item 2", "Item is an item", "Thing"]
     let featurExtractionComponent : ComponentModel = ComponentModel(name: "Feature Extraction");
@@ -250,6 +251,81 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
             return false
         }
     }
-
+    
+    //ble
+    func bleServiceDidConnect(service: BLEService!) {
+        service.delegate = self
+    }
+    
+    func bleServiceDidDisconnect(service: BLEService!) {
+        service.delegate = nil
+        service.dataDelegate = nil
+    }
+    
+    func bleServiceIsReady(service: BLEService!) {
+        
+    }
+    
+    func bleServiceDidReset() {
+        
+    }
+    
+    func discoveryDidRefresh() {
+        
+    }
+    
+    func discoveryStatePoweredOff() {
+        
+    }
+    
+    func peripheralDiscovered(peripheral: CBPeripheral!) {
+        
+    }
+    //firmata delegates
+    func sendI2CRequests()
+    {
+        self.firmataController.sendI2CStartReadingAddress(104, reg: 59, size: 6)
+    }
+    
+    
+    func firmataController(firmataController: IFFirmata!, didReceiveFirmwareName name: String!) {
+        self.firmataController.sendResetRequest()
+        self.sendI2CRequests()
+    }
+    
+    
+    
+    
+    
+    /*
+    func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
+    {
+        var address = buffer[2] + (buffer[3] << 7);
+        var registerNumber = buffer[4];
+        
+        if !(self.firmataController.startedI2C)
+        {
+            println("reporting but i2c did not start")
+            self.firmataController.sendI2CStopReadingAddress(Int(address))
+        }
+        else
+        {
+            THI2
+            id<THI2CProtocol> component = [project.currentBoard I2CComponentWithAddress:address];
+            
+            THI2CRegister * reg = [component.i2cComponent registerWithNumber:registerNumber];
+            
+            if(reg){
+                /*
+                NSLog(@"%d %d %d %d %d %d %d %d",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6],buffer[7]);*/
+                
+                [component setValuesFromBuffer:buffer+6 length:length-6];
+                
+                //NSData * data = [NSData dataWithBytes:values length:size];
+                //reg.value = data;
+            }
+        }
+    }
+    */
 }
 
