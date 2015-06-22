@@ -297,11 +297,10 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     
     
     
-    /*
     func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
     {
-        var address = buffer[2] + (buffer[3] << 7);
-        var registerNumber = buffer[4];
+        var address = buffer[2] + (buffer[3] << 7)
+        var registerNumber = buffer[4]
         
         if !(self.firmataController.startedI2C)
         {
@@ -310,22 +309,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         }
         else
         {
-            THI2
-            id<THI2CProtocol> component = [project.currentBoard I2CComponentWithAddress:address];
-            
-            THI2CRegister * reg = [component.i2cComponent registerWithNumber:registerNumber];
-            
-            if(reg){
-                /*
-                NSLog(@"%d %d %d %d %d %d %d %d",buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6],buffer[7]);*/
-                
-                [component setValuesFromBuffer:buffer+6 length:length-6];
-                
-                //NSData * data = [NSData dataWithBytes:values length:size];
-                //reg.value = data;
-            }
+            println(buffer)
         }
     }
-    */
+    
 }
 
