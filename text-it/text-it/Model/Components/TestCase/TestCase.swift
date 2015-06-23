@@ -21,7 +21,7 @@ protocol TestCaseJSExports : JSExport {
 
 // Custom class must inherit from `NSObject`
 @objc(TestCase)
-class TestCase: Component, TestCaseJSExports {
+class TestCase: Component, TestCaseJSExports, NSCoding {
     static  var myWindowController: TestCaseWindowController!
 
     var code: String = ""
@@ -48,6 +48,18 @@ class TestCase: Component, TestCaseJSExports {
         myWindowController.setJSContext(staticContext)
         myWindowController.settestCase(testCase)
         myWindowController.showWindow(nil)
+    }
+    
+    required init(coder aDecoder: NSCoder)
+    {
+        code = aDecoder.decodeObjectForKey("code") as! String;
+        name = aDecoder.decodeObjectForKey("name") as! String;
+    }
+
+    func encodeWithCoder(aCoder: NSCoder)
+    {
+        aCoder.encodeObject(code, forKey: "code")
+        aCoder.encodeObject(name, forKey: "name")
     }
     
     func change() -> TestCase

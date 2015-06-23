@@ -9,7 +9,7 @@
 import Cocoa
 import JavaScriptCore
 
-class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource, BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate {
+class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource, BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate, THServerControllerDelegate {
     
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
@@ -21,6 +21,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     var context: JSContext!
     var dataLoader: DataLoader!
     var firmataController: IFFirmata!
+    var serverController: THServerController!
     
     //test
     var items: [String] = ["Item 1", "Item 2", "Item is an item", "Thing"]
@@ -68,6 +69,34 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.filterComponent.methodNames.append(SubComponentModel(name: "LowPass Filter"))
         
         self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
+        
+        //server
+        self.serverController = THServerController()
+        self.serverController.delegate = self
+        self.serverController.startServer()
+    }
+    
+    //server test
+
+    
+    func server(controller: THServerController!, peerConnected peerName: String!) {
+        println(peerName)
+    }
+    
+    func server(controller: THServerController!, peerDisconnected peerName: String!) {
+        println(peerName)
+    }
+    
+    func server(controller: THServerController!, isTransferring transferring: Bool) {
+        println("transferring: "  + String(stringInterpolationSegment:transferring) )
+    }
+    
+    func server(controller: THServerController!, isRunning running: Bool) {
+        println("isRunning: " + String(stringInterpolationSegment:running)   )
+    }
+    
+    func server(controller: THServerController!, isReadyForSceneTransfer ready: Bool) {
+        println("isReadyForSceneTransfer: " + String(stringInterpolationSegment:ready)   )
     }
     
     func textDidChange(notification: NSNotification) {
