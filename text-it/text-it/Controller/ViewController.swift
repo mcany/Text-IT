@@ -78,6 +78,11 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     
     //server test
 
+    func sendMessage()
+    {
+        self.serverController.sendMessage("test message")
+        //self.serverController.sendObject(TestCase())
+    }
     
     func server(controller: THServerController!, peerConnected peerName: String!) {
         println(peerName)
@@ -160,6 +165,11 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
             return self.display(input)
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
+        
+        let sendMessage: @objc_block () -> () = { input in
+            return self.sendMessage()
+        }
+        self.context.setObject(unsafeBitCast(sendMessage, AnyObject.self), forKeyedSubscript: "sendMessage")
         
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")

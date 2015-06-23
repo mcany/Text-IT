@@ -32,6 +32,7 @@
 -(void) startServer;
 -(void) stopServer;
 - (void)sendMessage:(NSString *)message ;
+-(void) sendObject:(id<NSCoding>) object;
 @end
 
 

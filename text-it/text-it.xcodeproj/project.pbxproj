@@ -17,6 +17,7 @@
 		8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3265981B34B42300D958A2 /* BLEDiscovery.m */; };
 		8C32659E1B34B42300D958A2 /* BLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659A1B34B42300D958A2 /* BLEHelper.m */; };
 		8C32659F1B34B42300D958A2 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659C1B34B42300D958A2 /* BLEService.m */; };
+		8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */; };
 		8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */; };
 		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -65,6 +66,7 @@
 		8C32659A1B34B42300D958A2 /* BLEHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEHelper.m; sourceTree = "<group>"; };
 		8C32659B1B34B42300D958A2 /* BLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEService.h; sourceTree = "<group>"; };
 		8C32659C1B34B42300D958A2 /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
+		8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCustomComponent.swift; sourceTree = "<group>"; };
 		8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "text-it-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */,
+				8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */,
 			);
 			path = TestCase;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,

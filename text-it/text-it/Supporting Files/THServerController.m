@@ -22,11 +22,8 @@
     if (self = [super init]) {
         
         _localPeerId = [[MCPeerID alloc] initWithDisplayName:@"Text-IT MAC"];
-
-        _session = [[MCSession alloc] initWithPeer:self.localPeerId];
-        _session.delegate = self;
         
-        _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:self.localPeerId discoveryInfo:nil serviceType:@"TextIT service"];
+        _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:self.localPeerId discoveryInfo:nil serviceType:@"textit-service"];
         _advertiser.delegate = self;
         
         _invitationHandlers = [NSMutableArray array];
@@ -97,6 +94,8 @@
     NSData *messageData = [message dataUsingEncoding:NSUTF8StringEncoding];
 
     NSError *error;
+    NSLog(@"connected peers [%@]", self.session.connectedPeers);
+
     [self.session sendData:messageData toPeers:self.session.connectedPeers withMode:MCSessionSendDataReliable error:&error];
     
     if (error) {
