@@ -28,6 +28,7 @@
 		8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8953BB1B27092A008CFA3C /* RCFilter.swift */; };
 		8CA733881B299937005243A1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA733871B299937005243A1 /* Component.swift */; };
 		8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7338B1B29A1E5005243A1 /* Evaluator.swift */; };
+		8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */; };
 		8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */; };
 		8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */; };
 		8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */; };
@@ -81,6 +82,7 @@
 		8C8953BB1B27092A008CFA3C /* RCFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCFilter.swift; sourceTree = "<group>"; };
 		8CA733871B299937005243A1 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CA7338B1B29A1E5005243A1 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBLECommunicationModule.swift; sourceTree = "<group>"; };
 		8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterComponent.swift; sourceTree = "<group>"; };
 		8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THServerController.h; sourceTree = "<group>"; };
 		8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THServerController.m; sourceTree = "<group>"; };
@@ -140,8 +142,7 @@
 		8C2CEB0A1B188EB600A2DB8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */,
-				8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */,
+				8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */,
 				8C3265951B34B3F000D958A2 /* BLE */,
 				8C32658B1B34B22800D958A2 /* Firmata */,
 				8C2CEB101B188EB600A2DB8F /* Images.xcassets */,
@@ -189,6 +190,7 @@
 				8C32659A1B34B42300D958A2 /* BLEHelper.m */,
 				8C32659B1B34B42300D958A2 /* BLEService.h */,
 				8C32659C1B34B42300D958A2 /* BLEService.m */,
+				8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */,
 			);
 			path = BLE;
 			sourceTree = "<group>";
@@ -267,6 +269,15 @@
 				8CA7338B1B29A1E5005243A1 /* Evaluator.swift */,
 			);
 			path = Evaluator;
+			sourceTree = "<group>";
+		};
+		8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */ = {
+			isa = PBXGroup;
+			children = (
+				8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */,
+				8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */,
+			);
+			path = TangoHappServerController;
 			sourceTree = "<group>";
 		};
 		8CD97D041B38A0550076C8C9 /* FeatureExtraction */ = {
@@ -408,6 +419,7 @@
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
 				8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */,
 				8C32659F1B34B42300D958A2 /* BLEService.m in Sources */,
+				8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */,
 				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
 				8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */,
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,

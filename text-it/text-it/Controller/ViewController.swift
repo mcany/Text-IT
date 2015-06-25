@@ -59,6 +59,11 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.firmataController = IFFirmata()
         self.firmataController.delegate = self
         
+        //To communicate with iPad
+        self.serverController = THServerController()
+        self.serverController.delegate = self
+        self.serverController.startServer()
+        
         //test items
         self.componentOutlineView.setDataSource(self)
         self.componentOutlineView.setDelegate(self)
@@ -69,15 +74,16 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.filterComponent.methodNames.append(SubComponentModel(name: "LowPass Filter"))
         
         self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
-        
-        //server
-        self.serverController = THServerController()
-        self.serverController.delegate = self
-        self.serverController.startServer()
+    }
+    
+    //BLE test
+    func startScanning()
+    {
+        BLEDiscovery.sharedInstance().startScanningForSupportedUUIDs()
+        println("scanningStarted")
     }
     
     //server test
-
     func sendMessage()
     {
         self.serverController.sendMessage("test message")
@@ -169,11 +175,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
         
-        let sendMessage: @objc_block () -> () = { input in
-            return self.sendMessage()
-        }
-        self.context.setObject(unsafeBitCast(sendMessage, AnyObject.self), forKeyedSubscript: "sendMessage")
-        
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
@@ -182,6 +183,17 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         TestCase.staticContext = self.context
         
         //test
+        let sendMessage: @objc_block () -> () = { input in
+            return self.sendMessage()
+        }
+        self.context.setObject(unsafeBitCast(sendMessage, AnyObject.self), forKeyedSubscript: "sendMessage")
+        
+        
+        let startScanning: @objc_block () -> () = { input in
+            return self.startScanning()
+        }
+        self.context.setObject(unsafeBitCast(startScanning, AnyObject.self), forKeyedSubscript: "startScanning")
+        
         var co = LowPassFilter()
         self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
         if let lineChart = lineChartView.layer as? LineChart {
@@ -218,7 +230,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     
     //component NSOutlineView
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-        println("child:ofItem")
+        //println("child:ofItem")
         if let it: AnyObject = item {
             switch it {
             case let c as ComponentModel: // This works even though NSMutableArray is more accurate
@@ -240,7 +252,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     }
     
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-        println("isItemExpandable")
+        //println("isItemExpandable")
         switch item {
         case let c as ComponentModel:
             return (c.methodNames.count > 0) ? true : false
@@ -250,7 +262,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     }
     
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-        println("numberOfChildrenOfItem")
+        //println("numberOfChildrenOfItem")
         if let it: AnyObject = item {
             println("\(it)")
             switch it {
@@ -260,13 +272,13 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
                 return 0
             }
         } else {
-            return 3 // Flora and Fauna
+            return 3 // 3 categories
         }
     }
     
     // NSOutlineViewDelegate
     func outlineView(outlineView: NSOutlineView, viewForTableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-        println("viewForTableColumn")
+        //println("viewForTableColumn")
         switch item {
         case let c as ComponentModel:
             let view = outlineView.makeViewWithIdentifier("HeaderCell", owner: self) as! NSTableCellView
@@ -296,51 +308,83 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     
     //ble
     func bleServiceDidConnect(service: BLEService!) {
+        println("bleServiceDidConnect")
         service.delegate = self
     }
     
     func bleServiceDidDisconnect(service: BLEService!) {
+        println("bleServiceDidDisconnect")
         service.delegate = nil
         service.dataDelegate = nil
     }
     
     func bleServiceIsReady(service: BLEService!) {
-        
+        println("bleServiceIsReady")
+        var bleCommunicationModule = CustomBLECommunicationModule()
+        bleCommunicationModule.bleService = service
+        bleCommunicationModule.firmataController = self.firmataController
+        service.dataDelegate = bleCommunicationModule
+        self.firmataController.communicationModule = bleCommunicationModule;
+        self.firmataController.sendFirmwareRequest()
     }
     
+    
     func bleServiceDidReset() {
-        
+        println("bleServiceDidReset")
+
     }
     
     func discoveryDidRefresh() {
-        
+        println("discoveryDidRefresh")
+
     }
     
     func discoveryStatePoweredOff() {
-        
+        println("discoveryStatePoweredOff")
+
     }
     
     func peripheralDiscovered(peripheral: CBPeripheral!) {
-        
+        println("peripheralDiscovered")
+        println(peripheral.name)
+        self.connectToBle()
     }
+    
+    func connectToBle()
+    {
+        println("connectToBle")
+
+        if(BLEDiscovery.sharedInstance().foundPeripherals.count > 0)
+        {
+            for foundPeripheral in BLEDiscovery.sharedInstance().foundPeripherals
+            {
+                if(foundPeripheral.name == "Biscuit")
+                {
+                    BLEDiscovery.sharedInstance().connectPeripheral(foundPeripheral as! CBPeripheral)
+                }
+            }
+        }
+    }
+    
     //firmata delegates
     func sendI2CRequests()
     {
+        println("sendI2CRequests")
+
         self.firmataController.sendI2CStartReadingAddress(104, reg: 59, size: 6)
     }
     
     
     func firmataController(firmataController: IFFirmata!, didReceiveFirmwareName name: String!) {
-        self.firmataController.sendResetRequest()
+        println("didReceiveFirmwareName")
+
         self.sendI2CRequests()
     }
     
-    
-    
-    
-    
     func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
     {
+        println("didReceiveI2CReply")
+
         var address = buffer[2] + (buffer[3] << 7)
         var registerNumber = buffer[4]
         
@@ -354,6 +398,17 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
             println(buffer)
         }
     }
+
+    func firmataController(firmataController: IFFirmata!, didReceiveAnalogMessageOnChannel channel: Int, value: Int) {
+        println("didReceiveAnalogMessageOnChannel")
+    }
     
+    func firmataController(firmataController: IFFirmata!, didReceiveDigitalMessageForPort port: Int, value: Int) {
+        println("didReceiveDigitalMessageForPort")
+    }
+    
+    func firmataController(firmataController: IFFirmata!, didReceivePinStateResponse buffer: UnsafeMutablePointer<UInt8>, length: Int) {
+        println("didReceivePinStateResponse")
+    }
 }
 

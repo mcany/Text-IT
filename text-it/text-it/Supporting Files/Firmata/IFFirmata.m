@@ -389,13 +389,13 @@ www.interactex.org
 }
 
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)originalLength{
-    /*
+    
     printf("before:\n");
     for (int i = 0 ; i < originalLength; i++) {
         int value = buffer[i];
         printf("%d ",value);
     }
-    printf("\n");*/
+    printf("\n");
     
     if(self.communicationModule.usesFillBytes){
         [self cleanAddedBytes:buffer lenght:&originalLength];
