@@ -9,7 +9,7 @@
 import Cocoa
 import JavaScriptCore
 
-class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource {
+class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource, BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate, THServerControllerDelegate {
     
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
@@ -20,6 +20,9 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
     var dataLoader: DataLoader!
+    var firmataController: IFFirmata!
+    var serverController: THServerController!
+    
     //test
     var items: [String] = ["Item 1", "Item 2", "Item is an item", "Thing"]
     let featurExtractionComponent : ComponentModel = ComponentModel(name: "Feature Extraction");
@@ -50,6 +53,12 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.codeScrollView.hasVerticalRuler = true
         self.codeScrollView.rulersVisible = true
         
+        //Firmata & BLE
+        BLEDiscovery.sharedInstance().discoveryDelegate = self
+        BLEDiscovery.sharedInstance().peripheralDelegate = self
+        self.firmataController = IFFirmata()
+        self.firmataController.delegate = self
+        
         //test items
         self.componentOutlineView.setDataSource(self)
         self.componentOutlineView.setDelegate(self)
@@ -60,6 +69,42 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.filterComponent.methodNames.append(SubComponentModel(name: "LowPass Filter"))
         
         self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
+        
+        //server
+        self.serverController = THServerController()
+        self.serverController.delegate = self
+        self.serverController.startServer()
+    }
+    
+    //server test
+
+    func sendMessage()
+    {
+        self.serverController.sendMessage("test message")
+        var custom = THCustomComponent()
+        custom.name = "testName"
+        custom.code = "testCode"
+        self.serverController.sendObject(custom)
+    }
+    
+    func server(controller: THServerController!, peerConnected peerName: String!) {
+        println(peerName)
+    }
+    
+    func server(controller: THServerController!, peerDisconnected peerName: String!) {
+        println(peerName)
+    }
+    
+    func server(controller: THServerController!, isTransferring transferring: Bool) {
+        println("transferring: "  + String(stringInterpolationSegment:transferring) )
+    }
+    
+    func server(controller: THServerController!, isRunning running: Bool) {
+        println("isRunning: " + String(stringInterpolationSegment:running)   )
+    }
+    
+    func server(controller: THServerController!, isReadyForSceneTransfer ready: Bool) {
+        println("isReadyForSceneTransfer: " + String(stringInterpolationSegment:ready)   )
     }
     
     func textDidChange(notification: NSNotification) {
@@ -123,6 +168,11 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
             return self.display(input)
         }
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
+        
+        let sendMessage: @objc_block () -> () = { input in
+            return self.sendMessage()
+        }
+        self.context.setObject(unsafeBitCast(sendMessage, AnyObject.self), forKeyedSubscript: "sendMessage")
         
         // export JS class
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
@@ -243,6 +293,67 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
             return false
         }
     }
-
+    
+    //ble
+    func bleServiceDidConnect(service: BLEService!) {
+        service.delegate = self
+    }
+    
+    func bleServiceDidDisconnect(service: BLEService!) {
+        service.delegate = nil
+        service.dataDelegate = nil
+    }
+    
+    func bleServiceIsReady(service: BLEService!) {
+        
+    }
+    
+    func bleServiceDidReset() {
+        
+    }
+    
+    func discoveryDidRefresh() {
+        
+    }
+    
+    func discoveryStatePoweredOff() {
+        
+    }
+    
+    func peripheralDiscovered(peripheral: CBPeripheral!) {
+        
+    }
+    //firmata delegates
+    func sendI2CRequests()
+    {
+        self.firmataController.sendI2CStartReadingAddress(104, reg: 59, size: 6)
+    }
+    
+    
+    func firmataController(firmataController: IFFirmata!, didReceiveFirmwareName name: String!) {
+        self.firmataController.sendResetRequest()
+        self.sendI2CRequests()
+    }
+    
+    
+    
+    
+    
+    func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
+    {
+        var address = buffer[2] + (buffer[3] << 7)
+        var registerNumber = buffer[4]
+        
+        if !(self.firmataController.startedI2C)
+        {
+            println("reporting but i2c did not start")
+            self.firmataController.sendI2CStopReadingAddress(Int(address))
+        }
+        else
+        {
+            println(buffer)
+        }
+    }
+    
 }
 

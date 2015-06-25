@@ -12,6 +12,12 @@
 		8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB101B188EB600A2DB8F /* Images.xcassets */; };
 		8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB121B188EB600A2DB8F /* Main.storyboard */; };
 		8C2CEB201B188EB600A2DB8F /* text_itTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB1F1B188EB600A2DB8F /* text_itTests.swift */; };
+		8C3265931B34B2BC00D958A2 /* IFFirmata.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3265901B34B2BC00D958A2 /* IFFirmata.m */; };
+		8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3265921B34B2BC00D958A2 /* IFFirmataCommunicationModule.m */; };
+		8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3265981B34B42300D958A2 /* BLEDiscovery.m */; };
+		8C32659E1B34B42300D958A2 /* BLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659A1B34B42300D958A2 /* BLEHelper.m */; };
+		8C32659F1B34B42300D958A2 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659C1B34B42300D958A2 /* BLEService.m */; };
+		8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */; };
 		8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */; };
 		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -22,6 +28,8 @@
 		8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8953BB1B27092A008CFA3C /* RCFilter.swift */; };
 		8CA733881B299937005243A1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA733871B299937005243A1 /* Component.swift */; };
 		8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7338B1B29A1E5005243A1 /* Evaluator.swift */; };
+		8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */; };
+		8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */; };
 		8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */; };
 		8CDAAAAA1B284AC4002CE2F2 /* TestCaseWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */; };
 		8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */; };
@@ -39,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		8C2CEB071B188EB600A2DB8F /* text-it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C2CEB0B1B188EB600A2DB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C2CEB0B1B188EB600A2DB8F /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8C2CEB101B188EB600A2DB8F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -47,6 +55,18 @@
 		8C2CEB191B188EB600A2DB8F /* text-itTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "text-itTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB1E1B188EB600A2DB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2CEB1F1B188EB600A2DB8F /* text_itTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text_itTests.swift; sourceTree = "<group>"; };
+		8C32658F1B34B2BC00D958A2 /* IFFirmata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFFirmata.h; sourceTree = "<group>"; };
+		8C3265901B34B2BC00D958A2 /* IFFirmata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFFirmata.m; sourceTree = "<group>"; };
+		8C3265911B34B2BC00D958A2 /* IFFirmataCommunicationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFFirmataCommunicationModule.h; sourceTree = "<group>"; };
+		8C3265921B34B2BC00D958A2 /* IFFirmataCommunicationModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFFirmataCommunicationModule.m; sourceTree = "<group>"; };
+		8C3265961B34B42300D958A2 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
+		8C3265971B34B42300D958A2 /* BLEDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDiscovery.h; sourceTree = "<group>"; };
+		8C3265981B34B42300D958A2 /* BLEDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDiscovery.m; sourceTree = "<group>"; };
+		8C3265991B34B42300D958A2 /* BLEHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEHelper.h; sourceTree = "<group>"; };
+		8C32659A1B34B42300D958A2 /* BLEHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEHelper.m; sourceTree = "<group>"; };
+		8C32659B1B34B42300D958A2 /* BLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEService.h; sourceTree = "<group>"; };
+		8C32659C1B34B42300D958A2 /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
+		8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCustomComponent.swift; sourceTree = "<group>"; };
 		8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "text-it-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
@@ -61,6 +81,9 @@
 		8C8953BB1B27092A008CFA3C /* RCFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCFilter.swift; sourceTree = "<group>"; };
 		8CA733871B299937005243A1 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CA7338B1B29A1E5005243A1 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterComponent.swift; sourceTree = "<group>"; };
+		8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THServerController.h; sourceTree = "<group>"; };
+		8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THServerController.m; sourceTree = "<group>"; };
 		8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCaseWindow.swift; sourceTree = "<group>"; };
 		8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCaseWindow.xib; sourceTree = "<group>"; };
 		8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
@@ -117,11 +140,15 @@
 		8C2CEB0A1B188EB600A2DB8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */,
+				8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */,
+				8C3265951B34B3F000D958A2 /* BLE */,
+				8C32658B1B34B22800D958A2 /* Firmata */,
 				8C2CEB101B188EB600A2DB8F /* Images.xcassets */,
-				8C6002491B1C45930057892E /* LineView */,
-				8C2CEB0B1B188EB600A2DB8F /* Info.plist */,
+				8C6002491B1C45930057892E /* NoodleLineView */,
+				8C2CEB0B1B188EB600A2DB8F /* .. */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8C2CEB1C1B188EB600A2DB8F /* text-itTests */ = {
@@ -141,7 +168,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8C6002491B1C45930057892E /* LineView */ = {
+		8C32658B1B34B22800D958A2 /* Firmata */ = {
+			isa = PBXGroup;
+			children = (
+				8C32658F1B34B2BC00D958A2 /* IFFirmata.h */,
+				8C3265901B34B2BC00D958A2 /* IFFirmata.m */,
+				8C3265911B34B2BC00D958A2 /* IFFirmataCommunicationModule.h */,
+				8C3265921B34B2BC00D958A2 /* IFFirmataCommunicationModule.m */,
+			);
+			path = Firmata;
+			sourceTree = "<group>";
+		};
+		8C3265951B34B3F000D958A2 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				8C3265961B34B42300D958A2 /* BLE.h */,
+				8C3265971B34B42300D958A2 /* BLEDiscovery.h */,
+				8C3265981B34B42300D958A2 /* BLEDiscovery.m */,
+				8C3265991B34B42300D958A2 /* BLEHelper.h */,
+				8C32659A1B34B42300D958A2 /* BLEHelper.m */,
+				8C32659B1B34B42300D958A2 /* BLEService.h */,
+				8C32659C1B34B42300D958A2 /* BLEService.m */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+		8C6002491B1C45930057892E /* NoodleLineView */ = {
 			isa = PBXGroup;
 			children = (
 				8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */,
@@ -151,7 +203,7 @@
 				8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */,
 				8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */,
 			);
-			name = LineView;
+			path = NoodleLineView;
 			sourceTree = "<group>";
 		};
 		8C6002541B1C5ADE0057892E /* Loader */ = {
@@ -159,7 +211,7 @@
 			children = (
 				8C6002551B1C5B080057892E /* DataLoader.swift */,
 			);
-			name = Loader;
+			path = Loader;
 			sourceTree = "<group>";
 		};
 		8C6002571B1C711E0057892E /* LineChart */ = {
@@ -167,16 +219,17 @@
 			children = (
 				8C6002581B1C71340057892E /* LineChart.swift */,
 			);
-			name = LineChart;
+			path = LineChart;
 			sourceTree = "<group>";
 		};
-		8C701D0E1B24861B002BEED5 /* Filters */ = {
+		8C701D0E1B24861B002BEED5 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
 				8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */,
 				8C8953BB1B27092A008CFA3C /* RCFilter.swift */,
+				8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */,
 			);
-			name = Filters;
+			path = Filter;
 			sourceTree = "<group>";
 		};
 		8CA733841B298E95005243A1 /* Model */ = {
@@ -186,7 +239,7 @@
 				8C6002541B1C5ADE0057892E /* Loader */,
 				8C6002571B1C711E0057892E /* LineChart */,
 			);
-			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8CA733851B298EAB005243A1 /* View */ = {
@@ -195,7 +248,7 @@
 				8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */,
 				8C2CEB121B188EB600A2DB8F /* Main.storyboard */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		8CA733861B298ECD005243A1 /* Controller */ = {
@@ -205,7 +258,7 @@
 				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
 				8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */,
 			);
-			name = Controller;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		8CA7338D1B29A1EA005243A1 /* Evaluator */ = {
@@ -213,27 +266,36 @@
 			children = (
 				8CA7338B1B29A1E5005243A1 /* Evaluator.swift */,
 			);
-			name = Evaluator;
+			path = Evaluator;
+			sourceTree = "<group>";
+		};
+		8CD97D041B38A0550076C8C9 /* FeatureExtraction */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FeatureExtraction;
 			sourceTree = "<group>";
 		};
 		8CDAAAAB1B285476002CE2F2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */,
-				8CA7338D1B29A1EA005243A1 /* Evaluator */,
 				8CA733871B299937005243A1 /* Component.swift */,
+				8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */,
+				8CD97D041B38A0550076C8C9 /* FeatureExtraction */,
+				8CA7338D1B29A1EA005243A1 /* Evaluator */,
 				8CDAAAAC1B285480002CE2F2 /* TestCase */,
-				8C701D0E1B24861B002BEED5 /* Filters */,
+				8C701D0E1B24861B002BEED5 /* Filter */,
 			);
-			name = Components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		8CDAAAAC1B285480002CE2F2 /* TestCase */ = {
 			isa = PBXGroup;
 			children = (
 				8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */,
+				8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */,
 			);
-			name = TestCase;
+			path = TestCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
@@ -343,13 +406,20 @@
 				8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */,
 				8C6002591B1C71340057892E /* LineChart.swift in Sources */,
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
+				8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */,
+				8C32659F1B34B42300D958A2 /* BLEService.m in Sources */,
 				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
+				8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */,
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,
+				8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
+				8C3265931B34B2BC00D958A2 /* IFFirmata.m in Sources */,
+				8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */,
 				8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */,
+				8C32659E1B34B42300D958A2 /* BLEHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +448,7 @@
 				8C2CEB131B188EB600A2DB8F /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
