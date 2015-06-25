@@ -82,6 +82,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     {
         self.serverController.sendMessage("test message")
         var custom = THCustomComponent()
+        custom.name = "testName"
+        custom.code = "testCode"
         self.serverController.sendObject(custom)
     }
     
