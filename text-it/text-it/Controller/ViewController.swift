@@ -81,7 +81,8 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     func sendMessage()
     {
         self.serverController.sendMessage("test message")
-        //self.serverController.sendObject(TestCase())
+        var custom = THCustomComponent()
+        self.serverController.sendObject(custom)
     }
     
     func server(controller: THServerController!, peerConnected peerName: String!) {
