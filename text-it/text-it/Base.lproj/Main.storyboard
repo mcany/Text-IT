@@ -644,7 +644,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="text_it" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="65.5" y="-88"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -655,6 +655,25 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="17F0BD34-0DED-4957-B68C-FAE21BDF121A" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="small" id="hxq-3w-whe">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="ZjM-iG-mEL"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="yql-hT-gyT"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="w4O-8p-Rca"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="to6-Zj-Dqs"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="xHE-Kw-L8L"/>
+                                <toolbarItem implicitItemIdentifier="F8ED7DEB-D16D-4B1D-9666-3174D8A41CB1" explicitItemIdentifier="PushToolbarItem" label="Push" paletteLabel="Push" tag="101" image="push" id="eJa-Ft-0DT"/>
+                                <toolbarItem implicitItemIdentifier="ED788751-2D40-458F-A89A-931FD42D9BC9" explicitItemIdentifier="RecordToolbarItem" label="Record" paletteLabel="Record" tag="102" image="record" id="p2X-Zq-58k"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="tis-Xh-pXJ"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="ZjM-iG-mEL"/>
+                                <toolbarItem reference="yql-hT-gyT"/>
+                                <toolbarItem reference="tis-Xh-pXJ"/>
+                                <toolbarItem reference="eJa-Ft-0DT"/>
+                                <toolbarItem reference="p2X-Zq-58k"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -845,5 +864,7 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="push" width="64" height="64"/>
+        <image name="record" width="64" height="64"/>
     </resources>
 </document>
