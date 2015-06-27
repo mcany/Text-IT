@@ -662,8 +662,16 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="w4O-8p-Rca"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="to6-Zj-Dqs"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="xHE-Kw-L8L"/>
-                                <toolbarItem implicitItemIdentifier="F8ED7DEB-D16D-4B1D-9666-3174D8A41CB1" explicitItemIdentifier="PushToolbarItem" label="Push" paletteLabel="Push" tag="101" image="push" id="eJa-Ft-0DT"/>
-                                <toolbarItem implicitItemIdentifier="ED788751-2D40-458F-A89A-931FD42D9BC9" explicitItemIdentifier="RecordToolbarItem" label="Record" paletteLabel="Record" tag="102" image="record" id="p2X-Zq-58k"/>
+                                <toolbarItem implicitItemIdentifier="F8ED7DEB-D16D-4B1D-9666-3174D8A41CB1" explicitItemIdentifier="PushToolbarItem" label="Push" paletteLabel="Push" tag="101" image="push" id="eJa-Ft-0DT">
+                                    <connections>
+                                        <action selector="pushButtonTapped:" target="Oky-zY-oP4" id="5gc-Ik-m8b"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="ED788751-2D40-458F-A89A-931FD42D9BC9" explicitItemIdentifier="RecordToolbarItem" label="Record" paletteLabel="Record" tag="102" image="record" id="p2X-Zq-58k">
+                                    <connections>
+                                        <action selector="recordButtonTapped:" target="Oky-zY-oP4" id="gQF-KM-RGH"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="tis-Xh-pXJ"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -706,10 +714,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="165" height="214"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="165" height="214"/>
+                                            <size key="minSize" width="180" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="165" height="214"/>
+                                            <size key="minSize" width="180" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -744,10 +752,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="165" height="51"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="165" height="51"/>
+                                            <size key="minSize" width="180" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="165" height="51"/>
+                                            <size key="minSize" width="180" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>

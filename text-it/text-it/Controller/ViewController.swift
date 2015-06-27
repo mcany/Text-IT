@@ -18,6 +18,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet var debugTextView: NSTextView!
     @IBOutlet weak var componentOutlineView: NSOutlineView!
 
+    @IBOutlet weak var pushToolBarItem: NSToolbarItem!
 
     var lineNumberView: NoodleLineNumberView!
     var context: JSContext!
@@ -210,7 +211,12 @@ class ViewController: NSViewController, NSTextViewDelegate {
         //return accData
     }
     
-    @IBAction func saveButtonTapped(toolbarItem: NSToolbarItem) {
-        
+    @IBAction func pushButtonTapped(toolbarItem: NSToolbarItem) {
+        println("pushButtonTapped")
+    }
+    
+    
+    @IBAction func recordButtonTapped(toolbarItem: NSToolbarItem) {
+        println("recordButtonTapped")
     }
 }
