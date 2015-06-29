@@ -18,6 +18,7 @@
 		8C32659E1B34B42300D958A2 /* BLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659A1B34B42300D958A2 /* BLEHelper.m */; };
 		8C32659F1B34B42300D958A2 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659C1B34B42300D958A2 /* BLEService.m */; };
 		8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */; };
+		8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C515AFE1B4143A4005ED4C8 /* WindowController.swift */; };
 		8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */; };
 		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -26,6 +27,14 @@
 		8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */; };
 		8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */; };
 		8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8953BB1B27092A008CFA3C /* RCFilter.swift */; };
+		8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */; };
+		8CA303421B3D4E9100002404 /* ViewControllerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303411B3D4E9100002404 /* ViewControllerServer.swift */; };
+		8CA303461B3D4F7300002404 /* ViewControllerOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */; };
+		8CA3034B1B3D51B200002404 /* push.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA303491B3D51B200002404 /* push.png */; };
+		8CA3034C1B3D51B200002404 /* push@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA3034A1B3D51B200002404 /* push@2x.png */; };
+		8CA3034F1B3D52BB00002404 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA3034D1B3D52BB00002404 /* record.png */; };
+		8CA303501B3D52BB00002404 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CA3034E1B3D52BB00002404 /* record@2x.png */; };
+		8CA303521B3D573B00002404 /* ViewControllerToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */; };
 		8CA733881B299937005243A1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA733871B299937005243A1 /* Component.swift */; };
 		8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7338B1B29A1E5005243A1 /* Evaluator.swift */; };
 		8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */; };
@@ -68,6 +77,7 @@
 		8C32659B1B34B42300D958A2 /* BLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEService.h; sourceTree = "<group>"; };
 		8C32659C1B34B42300D958A2 /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
 		8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCustomComponent.swift; sourceTree = "<group>"; };
+		8C515AFE1B4143A4005ED4C8 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "text-it-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
@@ -80,6 +90,14 @@
 		8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
 		8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentModel.swift; sourceTree = "<group>"; };
 		8C8953BB1B27092A008CFA3C /* RCFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCFilter.swift; sourceTree = "<group>"; };
+		8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBLE_Firmata.swift; sourceTree = "<group>"; };
+		8CA303411B3D4E9100002404 /* ViewControllerServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerServer.swift; sourceTree = "<group>"; };
+		8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerOutlineView.swift; sourceTree = "<group>"; };
+		8CA303491B3D51B200002404 /* push.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = push.png; sourceTree = "<group>"; };
+		8CA3034A1B3D51B200002404 /* push@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "push@2x.png"; sourceTree = "<group>"; };
+		8CA3034D1B3D52BB00002404 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
+		8CA3034E1B3D52BB00002404 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
+		8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerToolbar.swift; sourceTree = "<group>"; };
 		8CA733871B299937005243A1 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CA7338B1B29A1E5005243A1 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
 		8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBLECommunicationModule.swift; sourceTree = "<group>"; };
@@ -142,6 +160,7 @@
 		8C2CEB0A1B188EB600A2DB8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8CA303471B3D516B00002404 /* Resources */,
 				8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */,
 				8C3265951B34B3F000D958A2 /* BLE */,
 				8C32658B1B34B22800D958A2 /* Firmata */,
@@ -234,6 +253,25 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		8CA303471B3D516B00002404 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8CA303481B3D518E00002404 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8CA303481B3D518E00002404 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8CA3034D1B3D52BB00002404 /* record.png */,
+				8CA3034E1B3D52BB00002404 /* record@2x.png */,
+				8CA303491B3D51B200002404 /* push.png */,
+				8CA3034A1B3D51B200002404 /* push@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		8CA733841B298E95005243A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +297,11 @@
 				8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */,
 				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
 				8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */,
+				8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */,
+				8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */,
+				8CA303411B3D4E9100002404 /* ViewControllerServer.swift */,
+				8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */,
+				8C515AFE1B4143A4005ED4C8 /* WindowController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -389,9 +432,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA3034C1B3D51B200002404 /* push@2x.png in Resources */,
 				8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */,
 				8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */,
 				8CDAAAAA1B284AC4002CE2F2 /* TestCaseWindow.xib in Resources */,
+				8CA3034F1B3D52BB00002404 /* record.png in Resources */,
+				8CA3034B1B3D51B200002404 /* push.png in Resources */,
+				8CA303501B3D52BB00002404 /* record@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */,
+				8CA303521B3D573B00002404 /* ViewControllerToolbar.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
@@ -419,11 +467,14 @@
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
 				8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */,
 				8C32659F1B34B42300D958A2 /* BLEService.m in Sources */,
+				8CA303421B3D4E9100002404 /* ViewControllerServer.swift in Sources */,
 				8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */,
 				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
 				8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */,
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,
 				8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */,
+				8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */,
+				8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
@@ -431,6 +482,7 @@
 				8C3265931B34B2BC00D958A2 /* IFFirmata.m in Sources */,
 				8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */,
 				8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */,
+				8CA303461B3D4F7300002404 /* ViewControllerOutlineView.swift in Sources */,
 				8C32659E1B34B42300D958A2 /* BLEHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

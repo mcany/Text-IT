@@ -9,17 +9,26 @@
 import Cocoa
 import JavaScriptCore
 
-class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegate, NSOutlineViewDataSource, BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate, THServerControllerDelegate {
+class ViewController: NSViewController, NSTextViewDelegate {
     
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
     @IBOutlet weak var palletTableView: NSTableColumn!
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet var debugTextView: NSTextView!
+    @IBOutlet weak var componentOutlineView: NSOutlineView!
     
-    var lineNumberView: NoodleLineNumberView!
+    //toolbar
+    var toolBar:NSToolbar!
+    var pushToolBarItem: NSToolbarItem!
+    var recordToolBarItem: NSToolbarItem!
+
+    //code text view
     var context: JSContext!
+    var lineNumberView: NoodleLineNumberView!
     var dataLoader: DataLoader!
+
+    //connections
     var firmataController: IFFirmata!
     var serverController: THServerController!
     
@@ -29,7 +38,6 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
     let filterComponent:ComponentModel = ComponentModel(name: "Filter");
     let testCaseComponent : ComponentModel  = ComponentModel(name: "Test Case");
     
-    @IBOutlet weak var componentOutlineView: NSOutlineView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,25 +101,7 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         self.serverController.sendObject(custom)
     }
     
-    func server(controller: THServerController!, peerConnected peerName: String!) {
-        println(peerName)
-    }
-    
-    func server(controller: THServerController!, peerDisconnected peerName: String!) {
-        println(peerName)
-    }
-    
-    func server(controller: THServerController!, isTransferring transferring: Bool) {
-        println("transferring: "  + String(stringInterpolationSegment:transferring) )
-    }
-    
-    func server(controller: THServerController!, isRunning running: Bool) {
-        println("isRunning: " + String(stringInterpolationSegment:running)   )
-    }
-    
-    func server(controller: THServerController!, isReadyForSceneTransfer ready: Bool) {
-        println("isReadyForSceneTransfer: " + String(stringInterpolationSegment:ready)   )
-    }
+  
     
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
@@ -226,189 +216,4 @@ class ViewController: NSViewController, NSTextViewDelegate, NSOutlineViewDelegat
         }
         //return accData
     }
-    
-    
-    //component NSOutlineView
-    func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-        //println("child:ofItem")
-        if let it: AnyObject = item {
-            switch it {
-            case let c as ComponentModel: // This works even though NSMutableArray is more accurate
-                return c.methodNames[index]
-            default:
-                assert(false, "outlineView:index:item: gave a dud item")
-                return self
-            }
-        } else {
-            switch index {
-            case 0:
-                return featurExtractionComponent
-            case 1:
-                return filterComponent
-            default:
-                return testCaseComponent
-            }
-        }
-    }
-    
-    func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-        //println("isItemExpandable")
-        switch item {
-        case let c as ComponentModel:
-            return (c.methodNames.count > 0) ? true : false
-        default:
-            return false
-        }
-    }
-    
-    func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-        //println("numberOfChildrenOfItem")
-        if let it: AnyObject = item {
-            println("\(it)")
-            switch it {
-            case let c as ComponentModel:
-                return c.methodNames.count
-            default:
-                return 0
-            }
-        } else {
-            return 3 // 3 categories
-        }
-    }
-    
-    // NSOutlineViewDelegate
-    func outlineView(outlineView: NSOutlineView, viewForTableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-        //println("viewForTableColumn")
-        switch item {
-        case let c as ComponentModel:
-            let view = outlineView.makeViewWithIdentifier("HeaderCell", owner: self) as! NSTableCellView
-            if let textField = view.textField {
-                textField.stringValue = c.name
-            }
-            return view
-        case let s as SubComponentModel:
-            let view = outlineView.makeViewWithIdentifier("DataCell", owner: self) as! NSTableCellView
-            if let textField = view.textField {
-                textField.stringValue = s.name
-            }
-            return view
-        default:
-            return nil
-        }
-    }
-    
-    func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
-        switch item {
-        case let c as ComponentModel:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    //ble
-    func bleServiceDidConnect(service: BLEService!) {
-        println("bleServiceDidConnect")
-        service.delegate = self
-    }
-    
-    func bleServiceDidDisconnect(service: BLEService!) {
-        println("bleServiceDidDisconnect")
-        service.delegate = nil
-        service.dataDelegate = nil
-    }
-    
-    func bleServiceIsReady(service: BLEService!) {
-        println("bleServiceIsReady")
-        var bleCommunicationModule = CustomBLECommunicationModule()
-        bleCommunicationModule.bleService = service
-        bleCommunicationModule.firmataController = self.firmataController
-        service.dataDelegate = bleCommunicationModule
-        self.firmataController.communicationModule = bleCommunicationModule;
-        self.firmataController.sendFirmwareRequest()
-    }
-    
-    
-    func bleServiceDidReset() {
-        println("bleServiceDidReset")
-
-    }
-    
-    func discoveryDidRefresh() {
-        println("discoveryDidRefresh")
-
-    }
-    
-    func discoveryStatePoweredOff() {
-        println("discoveryStatePoweredOff")
-
-    }
-    
-    func peripheralDiscovered(peripheral: CBPeripheral!) {
-        println("peripheralDiscovered")
-        println(peripheral.name)
-        self.connectToBle()
-    }
-    
-    func connectToBle()
-    {
-        println("connectToBle")
-
-        if(BLEDiscovery.sharedInstance().foundPeripherals.count > 0)
-        {
-            for foundPeripheral in BLEDiscovery.sharedInstance().foundPeripherals
-            {
-                if(foundPeripheral.name == "Biscuit")
-                {
-                    BLEDiscovery.sharedInstance().connectPeripheral(foundPeripheral as! CBPeripheral)
-                }
-            }
-        }
-    }
-    
-    //firmata delegates
-    func sendI2CRequests()
-    {
-        println("sendI2CRequests")
-
-        self.firmataController.sendI2CStartReadingAddress(104, reg: 59, size: 6)
-    }
-    
-    
-    func firmataController(firmataController: IFFirmata!, didReceiveFirmwareName name: String!) {
-        println("didReceiveFirmwareName")
-
-        self.sendI2CRequests()
-    }
-    
-    func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
-    {
-        println("didReceiveI2CReply")
-
-        var address = buffer[2] + (buffer[3] << 7)
-        var registerNumber = buffer[4]
-        
-        if !(self.firmataController.startedI2C)
-        {
-            println("reporting but i2c did not start")
-            self.firmataController.sendI2CStopReadingAddress(Int(address))
-        }
-        else
-        {
-            println(buffer)
-        }
-    }
-
-    func firmataController(firmataController: IFFirmata!, didReceiveAnalogMessageOnChannel channel: Int, value: Int) {
-        println("didReceiveAnalogMessageOnChannel")
-    }
-    
-    func firmataController(firmataController: IFFirmata!, didReceiveDigitalMessageForPort port: Int, value: Int) {
-        println("didReceiveDigitalMessageForPort")
-    }
-    
-    func firmataController(firmataController: IFFirmata!, didReceivePinStateResponse buffer: UnsafeMutablePointer<UInt8>, length: Int) {
-        println("didReceivePinStateResponse")
-    }
 }
-

@@ -644,20 +644,50 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="text_it" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="65.5" y="-88"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="text_it" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="17F0BD34-0DED-4957-B68C-FAE21BDF121A" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="small" id="hxq-3w-whe">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="ZjM-iG-mEL"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="yql-hT-gyT"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="w4O-8p-Rca"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="to6-Zj-Dqs"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="xHE-Kw-L8L"/>
+                                <toolbarItem implicitItemIdentifier="F8ED7DEB-D16D-4B1D-9666-3174D8A41CB1" explicitItemIdentifier="PushToolbarItem" label="Push" paletteLabel="Push" tag="101" image="push" autovalidates="NO" id="eJa-Ft-0DT">
+                                    <connections>
+                                        <action selector="pushButtonTapped:" target="Oky-zY-oP4" id="J53-nT-klA"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="ED788751-2D40-458F-A89A-931FD42D9BC9" explicitItemIdentifier="RecordToolbarItem" label="Record" paletteLabel="Record" tag="102" image="record" autovalidates="NO" id="p2X-Zq-58k">
+                                    <connections>
+                                        <action selector="recordButtonTapped:" target="Oky-zY-oP4" id="eTV-co-yfR"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="tis-Xh-pXJ"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="ZjM-iG-mEL"/>
+                                <toolbarItem reference="yql-hT-gyT"/>
+                                <toolbarItem reference="tis-Xh-pXJ"/>
+                                <toolbarItem reference="eJa-Ft-0DT"/>
+                                <toolbarItem reference="p2X-Zq-58k"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <outlet property="pushToolBarItem" destination="eJa-Ft-0DT" id="Snh-LS-dFs"/>
+                        <outlet property="recordToolBarItem" destination="p2X-Zq-58k" id="uQ6-S1-vT5"/>
+                        <outlet property="toolBar" destination="hxq-3w-whe" id="y4T-Kq-dYk"/>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="V64-WD-nCZ"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -684,13 +714,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DeZ-Wl-FwQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="165" height="214"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="214"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="165" height="214"/>
+                                            <size key="minSize" width="180" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="165" height="214"/>
+                                            <size key="minSize" width="180" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -722,13 +752,13 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="dan-5K-zzu">
-                                            <rect key="frame" x="0.0" y="0.0" width="165" height="51"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="51"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="165" height="51"/>
+                                            <size key="minSize" width="180" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="165" height="51"/>
+                                            <size key="minSize" width="180" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -845,5 +875,7 @@
     </scenes>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="push" width="64" height="64"/>
+        <image name="record" width="64" height="64"/>
     </resources>
 </document>
