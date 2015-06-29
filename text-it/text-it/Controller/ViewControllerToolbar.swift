@@ -8,8 +8,16 @@
 
 import Cocoa
 
-extension ViewController {
+extension ViewController: NSWindowDelegate {
     
-
-
+    func pushButtonTapped(toolbarItem: NSToolbarItem) {
+        println("pushButtonTapped")
+        self.sendMessage()
+    }
+    
+    
+    func recordButtonTapped(toolbarItem: NSToolbarItem) {
+        println("recordButtonTapped")
+        self.startReceivingData()
+    }
 }

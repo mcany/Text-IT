@@ -17,12 +17,18 @@ class ViewController: NSViewController, NSTextViewDelegate {
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet var debugTextView: NSTextView!
     @IBOutlet weak var componentOutlineView: NSOutlineView!
+    
+    //toolbar
+    var toolBar:NSToolbar!
+    var pushToolBarItem: NSToolbarItem!
+    var recordToolBarItem: NSToolbarItem!
 
-    @IBOutlet weak var pushToolBarItem: NSToolbarItem!
-
-    var lineNumberView: NoodleLineNumberView!
+    //code text view
     var context: JSContext!
+    var lineNumberView: NoodleLineNumberView!
     var dataLoader: DataLoader!
+
+    //connections
     var firmataController: IFFirmata!
     var serverController: THServerController!
     
@@ -209,14 +215,5 @@ class ViewController: NSViewController, NSTextViewDelegate {
             lineChart.datasets = [dataset1]
         }
         //return accData
-    }
-    
-    @IBAction func pushButtonTapped(toolbarItem: NSToolbarItem) {
-        println("pushButtonTapped")
-    }
-    
-    
-    @IBAction func recordButtonTapped(toolbarItem: NSToolbarItem) {
-        println("recordButtonTapped")
     }
 }

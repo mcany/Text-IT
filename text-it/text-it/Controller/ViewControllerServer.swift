@@ -13,10 +13,12 @@ extension ViewController: THServerControllerDelegate {
     // MARK: - Server delegates
 
     func server(controller: THServerController!, peerConnected peerName: String!) {
+        self.pushToolBarItem.enabled = true
         println(peerName)
     }
     
     func server(controller: THServerController!, peerDisconnected peerName: String!) {
+        self.pushToolBarItem.enabled = false
         println(peerName)
     }
     

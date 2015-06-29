@@ -28,6 +28,12 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         }
     }
     
+    func startReceivingData()
+    {
+        self.firmataController.sendFirmwareRequest()
+
+    }
+    
     func bleServiceIsReady(service: BLEService!) {
         println("bleServiceIsReady")
         var bleCommunicationModule = CustomBLECommunicationModule()
@@ -35,7 +41,7 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         bleCommunicationModule.firmataController = self.firmataController
         service.dataDelegate = bleCommunicationModule
         self.firmataController.communicationModule = bleCommunicationModule;
-        self.firmataController.sendFirmwareRequest()
+        self.recordToolBarItem.enabled = true
     }
     
     func peripheralDiscovered(peripheral: CBPeripheral!) {
@@ -51,6 +57,7 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     
     func bleServiceDidDisconnect(service: BLEService!) {
         println("bleServiceDidDisconnect")
+        self.recordToolBarItem.enabled = false
         service.delegate = nil
         service.dataDelegate = nil
     }
