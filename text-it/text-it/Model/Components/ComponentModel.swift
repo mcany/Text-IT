@@ -10,16 +10,21 @@ import Cocoa
 
 class ComponentModel: NSObject {
     let name: String
-    var methodNames: [SubComponentModel] = []
-
+    var methodNames: [SubComponentModel] = []{
+        didSet{
+            ViewControllerOutlineView.sharedInstance.outlineView.reloadData()
+        }
+    }
+    
+    
     init(name: String) {
         self.name = name
     }
-
+    
 }
 
 class SubComponentModel: NSObject {
-
+    
     let name: String
     
     init(name: String) {

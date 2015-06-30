@@ -21,7 +21,7 @@ protocol ParserJSExports : JSExport {
 
 // Custom class must inherit from `NSObject`
 @objc(Parser)
-class Parser: NSObject, ParserJSExports {
+class Parser: Component, ParserJSExports {
     static  var myWindowController: ParserWindowController!
     static var staticContext: JSContext!
     var context: JSContext!

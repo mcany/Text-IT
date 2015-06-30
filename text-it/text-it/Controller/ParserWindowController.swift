@@ -41,6 +41,7 @@ import JavaScriptCore
             self.parser.code = userInput!
             self.parser.name = self.funcName.stringValue
             println(self.context.evaluateScript(parser.name+"()"))
+            ViewControllerOutlineView.sharedInstance.parserComponent.methodNames.append(SubComponentModel(name: self.parser.name))
             self.close()
         }
         

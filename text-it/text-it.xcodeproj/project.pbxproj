@@ -283,7 +283,6 @@
 		8CA733841B298E95005243A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8CC1B3411B42BA6D001AC34D /* Parser */,
 				8CDAAAAB1B285476002CE2F2 /* Components */,
 				8C6002541B1C5ADE0057892E /* Loader */,
 				8C6002571B1C711E0057892E /* LineChart */,
@@ -332,6 +331,7 @@
 				8CC1B3421B42BA8B001AC34D /* Parser.swift */,
 			);
 			name = Parser;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */ = {
@@ -355,6 +355,7 @@
 			children = (
 				8CA733871B299937005243A1 /* Component.swift */,
 				8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */,
+				8CC1B3411B42BA6D001AC34D /* Parser */,
 				8CD97D041B38A0550076C8C9 /* FeatureExtraction */,
 				8CA7338D1B29A1EA005243A1 /* Evaluator */,
 				8CDAAAAC1B285480002CE2F2 /* TestCase */,

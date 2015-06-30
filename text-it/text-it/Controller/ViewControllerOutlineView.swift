@@ -8,8 +8,17 @@
 
 import Cocoa
 
-extension ViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
+class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewDataSource {
     
+    static let sharedInstance = ViewControllerOutlineView()
+
+    //test
+    let featurExtractionComponent: ComponentModel = ComponentModel(name: "Feature Extraction")
+    let filterComponent: ComponentModel = ComponentModel(name: "Filter")
+    let testCaseComponent: ComponentModel = ComponentModel(name: "Test Case")
+    let parserComponent: ComponentModel = ComponentModel(name: "Parser")
+    
+    var outlineView: NSOutlineView!
     //MARK: - NSOutlineView component
     
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
@@ -25,11 +34,13 @@ extension ViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
         } else {
             switch index {
             case 0:
-                return featurExtractionComponent
+                return self.featurExtractionComponent
             case 1:
-                return filterComponent
+                return self.filterComponent
+            case 2:
+                return self.testCaseComponent
             default:
-                return testCaseComponent
+                return self.parserComponent
             }
         }
     }
@@ -47,7 +58,7 @@ extension ViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
         //println("numberOfChildrenOfItem")
         if let it: AnyObject = item {
-            println("\(it)")
+            //println("\(it)")
             switch it {
             case let c as ComponentModel:
                 return c.methodNames.count
@@ -55,7 +66,7 @@ extension ViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
                 return 0
             }
         } else {
-            return 3 // 3 categories
+            return 4 // 4 categories
         }
     }
     

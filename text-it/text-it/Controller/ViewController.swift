@@ -31,13 +31,6 @@ class ViewController: NSViewController {
     var firmataController: IFFirmata!
     var serverController: THServerController!
     
-    //test
-    var items: [String] = ["Item 1", "Item 2", "Item is an item", "Thing"]
-    let featurExtractionComponent : ComponentModel = ComponentModel(name: "Feature Extraction");
-    let filterComponent:ComponentModel = ComponentModel(name: "Filter");
-    let testCaseComponent : ComponentModel  = ComponentModel(name: "Test Case");
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,15 +65,16 @@ class ViewController: NSViewController {
         self.serverController.startServer()
         
         //test items
-        self.componentOutlineView.setDataSource(self)
-        self.componentOutlineView.setDelegate(self)
-        self.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
-        self.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
+        self.componentOutlineView.setDataSource(ViewControllerOutlineView.sharedInstance)
+        self.componentOutlineView.setDelegate(ViewControllerOutlineView.sharedInstance)
+        ViewControllerOutlineView.sharedInstance.outlineView = self.componentOutlineView
+        //self.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
+        //self.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
         
-        self.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
-        self.filterComponent.methodNames.append(SubComponentModel(name: "LowPass Filter"))
+        ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
+        ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "LowPass Filter"))
         
-        self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
+        //self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
     }
         
     //BLE test

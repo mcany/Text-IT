@@ -51,6 +51,7 @@ import JavaScriptCore
             self.testCase.code = userInput!
             self.testCase.name = self.funcName.stringValue
             println(self.context.evaluateScript(testCase.name+"()"))
+            ViewControllerOutlineView.sharedInstance.testCaseComponent.methodNames.append(SubComponentModel(name: self.testCase.name))
             self.close()
         }
 
