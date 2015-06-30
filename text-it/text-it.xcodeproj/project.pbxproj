@@ -38,6 +38,9 @@
 		8CA303521B3D573B00002404 /* ViewControllerToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */; };
 		8CA733881B299937005243A1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA733871B299937005243A1 /* Component.swift */; };
 		8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7338B1B29A1E5005243A1 /* Evaluator.swift */; };
+		8CC1B3431B42BA8B001AC34D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B3421B42BA8B001AC34D /* Parser.swift */; };
+		8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */; };
+		8CC1B3471B42BBC8001AC34D /* ParserWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */; };
 		8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */; };
 		8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */; };
 		8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */; };
@@ -102,6 +105,9 @@
 		8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerToolbar.swift; sourceTree = "<group>"; };
 		8CA733871B299937005243A1 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CA7338B1B29A1E5005243A1 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		8CC1B3421B42BA8B001AC34D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserWindowController.swift; sourceTree = "<group>"; };
+		8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParserWindow.xib; sourceTree = "<group>"; };
 		8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBLECommunicationModule.swift; sourceTree = "<group>"; };
 		8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterComponent.swift; sourceTree = "<group>"; };
 		8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THServerController.h; sourceTree = "<group>"; };
@@ -277,6 +283,7 @@
 		8CA733841B298E95005243A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8CC1B3411B42BA6D001AC34D /* Parser */,
 				8CDAAAAB1B285476002CE2F2 /* Components */,
 				8C6002541B1C5ADE0057892E /* Loader */,
 				8C6002571B1C711E0057892E /* LineChart */,
@@ -289,6 +296,7 @@
 			children = (
 				8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */,
 				8C2CEB121B188EB600A2DB8F /* Main.storyboard */,
+				8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,14 +305,15 @@
 			isa = PBXGroup;
 			children = (
 				8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */,
-				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
+				8C515AFE1B4143A4005ED4C8 /* WindowController.swift */,
 				8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */,
 				8C515B001B41A896005ED4C8 /* ViewControllerTextView.swift */,
 				8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */,
 				8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */,
 				8CA303411B3D4E9100002404 /* ViewControllerServer.swift */,
 				8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */,
-				8C515AFE1B4143A4005ED4C8 /* WindowController.swift */,
+				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
+				8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -315,6 +324,14 @@
 				8CA7338B1B29A1E5005243A1 /* Evaluator.swift */,
 			);
 			path = Evaluator;
+			sourceTree = "<group>";
+		};
+		8CC1B3411B42BA6D001AC34D /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				8CC1B3421B42BA8B001AC34D /* Parser.swift */,
+			);
+			name = Parser;
 			sourceTree = "<group>";
 		};
 		8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */ = {
@@ -435,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC1B3471B42BBC8001AC34D /* ParserWindow.xib in Resources */,
 				8CA3034C1B3D51B200002404 /* push@2x.png in Resources */,
 				8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */,
 				8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */,
@@ -461,6 +479,7 @@
 			files = (
 				8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */,
 				8CA303521B3D573B00002404 /* ViewControllerToolbar.swift in Sources */,
+				8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
@@ -478,6 +497,7 @@
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,
 				8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */,
 				8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */,
+				8CC1B3431B42BA8B001AC34D /* Parser.swift in Sources */,
 				8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,

@@ -37,12 +37,12 @@ class TestCase: Component, TestCaseJSExports, NSCoding {
     
     override static func new() -> TestCase {
         var testCase = TestCase()
-        openTestCaseWindows(testCase)
+        openTestCaseWindow(testCase)
         testCase.context = staticContext
         return testCase
     }
     
-    static func openTestCaseWindows(testCase : TestCase)
+    static func openTestCaseWindow(testCase : TestCase)
     {
         myWindowController = TestCaseWindowController(windowNibName: "TestCaseWindow")
         myWindowController.setJSContext(staticContext)
@@ -64,7 +64,7 @@ class TestCase: Component, TestCaseJSExports, NSCoding {
     
     func change() -> TestCase
     {
-        TestCase.openTestCaseWindows(self)
+        TestCase.openTestCaseWindow(self)
         return self
     }
     

@@ -127,7 +127,9 @@ class ViewController: NSViewController {
         self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")
         self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
         TestCase.staticContext = self.context
-        
+        Parser.staticContext = self.context
+        self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
+
         //test
         let sendMessage: @objc_block () -> () = { input in
             return self.sendMessage()
