@@ -700,7 +700,7 @@
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="text_it" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view id="euF-E2-a6y" customClass="LineChartView" customModule="text_it" customModuleProvider="target">
                                 <rect key="frame" x="311" y="143" width="171" height="158"/>

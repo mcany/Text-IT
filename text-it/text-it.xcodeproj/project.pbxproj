@@ -19,6 +19,7 @@
 		8C32659F1B34B42300D958A2 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659C1B34B42300D958A2 /* BLEService.m */; };
 		8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */; };
 		8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C515AFE1B4143A4005ED4C8 /* WindowController.swift */; };
+		8C515B011B41A896005ED4C8 /* ViewControllerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C515B001B41A896005ED4C8 /* ViewControllerTextView.swift */; };
 		8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C60024F1B1C460A0057892E /* NoodleLineNumberMarker.m */; };
 		8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6002511B1C4F7A0057892E /* MarkerLineNumberView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -78,6 +79,7 @@
 		8C32659C1B34B42300D958A2 /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
 		8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCustomComponent.swift; sourceTree = "<group>"; };
 		8C515AFE1B4143A4005ED4C8 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		8C515B001B41A896005ED4C8 /* ViewControllerTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTextView.swift; sourceTree = "<group>"; };
 		8C60024A1B1C45C20057892E /* text-it-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "text-it-Bridging-Header.h"; sourceTree = "<group>"; };
 		8C60024B1B1C45C30057892E /* NoodleLineNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoodleLineNumberView.h; sourceTree = "<group>"; };
 		8C60024C1B1C45C30057892E /* NoodleLineNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoodleLineNumberView.m; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */,
 				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
 				8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */,
+				8C515B001B41A896005ED4C8 /* ViewControllerTextView.swift */,
 				8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */,
 				8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */,
 				8CA303411B3D4E9100002404 /* ViewControllerServer.swift */,
@@ -469,6 +472,7 @@
 				8C32659F1B34B42300D958A2 /* BLEService.m in Sources */,
 				8CA303421B3D4E9100002404 /* ViewControllerServer.swift in Sources */,
 				8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */,
+				8C515B011B41A896005ED4C8 /* ViewControllerTextView.swift in Sources */,
 				8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */,
 				8C3265941B34B2BC00D958A2 /* IFFirmataCommunicationModule.m in Sources */,
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,

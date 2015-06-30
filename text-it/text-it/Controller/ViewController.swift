@@ -9,11 +9,10 @@
 import Cocoa
 import JavaScriptCore
 
-class ViewController: NSViewController, NSTextViewDelegate {
+class ViewController: NSViewController {
     
     @IBOutlet weak var codeScrollView: NSScrollView!
     @IBOutlet var codeTextView: NSTextView!
-    @IBOutlet weak var palletTableView: NSTableColumn!
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet var debugTextView: NSTextView!
     @IBOutlet weak var componentOutlineView: NSOutlineView!
@@ -83,7 +82,7 @@ class ViewController: NSViewController, NSTextViewDelegate {
         
         self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
     }
-    
+        
     //BLE test
     func startScanning()
     {
@@ -99,49 +98,6 @@ class ViewController: NSViewController, NSTextViewDelegate {
         custom.name = "testName"
         custom.code = "testCode"
         self.serverController.sendObject(custom)
-    }
-    
-  
-    
-    func textDidChange(notification: NSNotification) {
-        var textView = notification.object as! NSTextView
-        if(textView == self.codeTextView)
-        {
-            var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-            if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
-            {
-                var fullCode: String = codeWithoutWhitespaceAndNewline!
-                
-                let lastCodeArray = fullCode.componentsSeparatedByString(";")
-                println(lastCodeArray)
-                
-                if(lastCodeArray.count > 1)
-                {
-                    var lastCode: String = lastCodeArray[lastCodeArray.count - 2]
-                    
-                    println(lastCode)
-                    //println(context.evaluateScript(lastCode))
-                    
-                    
-                    //println(fullCode)
-                    var result = self.context.evaluateScript(lastCode)
-                    println(result)
-                    if(!result.toString().hasPrefix("undefined"))
-                    {
-                        self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
-                        self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-                    }
-                }
-            }
-            else if (self.codeTextView.string?.isEmpty == true)
-            {
-                self.debugTextView.string = ""
-            }
-        }
-        else if(textView == self.debugTextView)
-        {
-            
-        }
     }
     
     func addFunctionsToJSContext()
