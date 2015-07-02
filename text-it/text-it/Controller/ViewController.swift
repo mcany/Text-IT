@@ -110,7 +110,7 @@ class ViewController: NSViewController {
     {
         self.serverController.sendMessage("test message")
         var custom = THCustomComponent()
-        custom.name = "myFunction"
+        custom.name = "sideHop"
         custom.code = self.codeTextView.string!
         
         self.serverController.sendObject(custom)
