@@ -17,6 +17,7 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
     let filterComponent: ComponentModel = ComponentModel(name: "Filter")
     let testCaseComponent: ComponentModel = ComponentModel(name: "Test Case")
     let parserComponent: ComponentModel = ComponentModel(name: "Parser")
+    let machineLearningComponent: ComponentModel = ComponentModel(name: "Machine Learning")
     
     var outlineView: NSOutlineView!
     //MARK: - NSOutlineView component
@@ -38,9 +39,11 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
             case 1:
                 return self.filterComponent
             case 2:
-                return self.testCaseComponent
-            default:
+                return self.machineLearningComponent
+            case 3:
                 return self.parserComponent
+            default:
+                return self.testCaseComponent
             }
         }
     }
@@ -66,7 +69,7 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
                 return 0
             }
         } else {
-            return 4 // 4 categories
+            return 5 // 5 categories
         }
     }
     

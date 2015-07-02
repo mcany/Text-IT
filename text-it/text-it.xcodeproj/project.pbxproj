@@ -42,6 +42,9 @@
 		8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */; };
 		8CC1B3471B42BBC8001AC34D /* ParserWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */; };
 		8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */; };
+		8CD47EFA1B45371B00DB7D04 /* CParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD47EF91B45371B00DB7D04 /* CParser.m */; };
+		8CD47F051B453E3D00DB7D04 /* THBandageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD47F041B453E3D00DB7D04 /* THBandageData.swift */; };
+		8CD47F091B4541A600DB7D04 /* LinearAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD47F081B4541A600DB7D04 /* LinearAcceleration.swift */; };
 		8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */; };
 		8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */; };
 		8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */; };
@@ -109,6 +112,10 @@
 		8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserWindowController.swift; sourceTree = "<group>"; };
 		8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParserWindow.xib; sourceTree = "<group>"; };
 		8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBLECommunicationModule.swift; sourceTree = "<group>"; };
+		8CD47EF81B45371B00DB7D04 /* CParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParser.h; sourceTree = "<group>"; };
+		8CD47EF91B45371B00DB7D04 /* CParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParser.m; sourceTree = "<group>"; };
+		8CD47F041B453E3D00DB7D04 /* THBandageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THBandageData.swift; sourceTree = "<group>"; };
+		8CD47F081B4541A600DB7D04 /* LinearAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearAcceleration.swift; sourceTree = "<group>"; };
 		8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterComponent.swift; sourceTree = "<group>"; };
 		8CD97D0D1B39AB7D0076C8C9 /* THServerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THServerController.h; sourceTree = "<group>"; };
 		8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THServerController.m; sourceTree = "<group>"; };
@@ -283,6 +290,7 @@
 		8CA733841B298E95005243A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8CD47F061B45414C00DB7D04 /* ETextileData */,
 				8CDAAAAB1B285476002CE2F2 /* Components */,
 				8C6002541B1C5ADE0057892E /* Loader */,
 				8C6002571B1C711E0057892E /* LineChart */,
@@ -329,6 +337,8 @@
 			isa = PBXGroup;
 			children = (
 				8CC1B3421B42BA8B001AC34D /* Parser.swift */,
+				8CD47EF81B45371B00DB7D04 /* CParser.h */,
+				8CD47EF91B45371B00DB7D04 /* CParser.m */,
 			);
 			name = Parser;
 			path = ..;
@@ -341,6 +351,23 @@
 				8CD97D0E1B39AB7D0076C8C9 /* THServerController.m */,
 			);
 			path = TangoHappServerController;
+			sourceTree = "<group>";
+		};
+		8CD47F061B45414C00DB7D04 /* ETextileData */ = {
+			isa = PBXGroup;
+			children = (
+				8CD47F071B45416E00DB7D04 /* DataModel */,
+				8CD47F041B453E3D00DB7D04 /* THBandageData.swift */,
+			);
+			name = ETextileData;
+			sourceTree = "<group>";
+		};
+		8CD47F071B45416E00DB7D04 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8CD47F081B4541A600DB7D04 /* LinearAcceleration.swift */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 		8CD97D041B38A0550076C8C9 /* FeatureExtraction */ = {
@@ -498,12 +525,15 @@
 				8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */,
 				8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */,
 				8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */,
+				8CD47F051B453E3D00DB7D04 /* THBandageData.swift in Sources */,
+				8CD47EFA1B45371B00DB7D04 /* CParser.m in Sources */,
 				8CC1B3431B42BA8B001AC34D /* Parser.swift in Sources */,
 				8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
+				8CD47F091B4541A600DB7D04 /* LinearAcceleration.swift in Sources */,
 				8C3265931B34B2BC00D958A2 /* IFFirmata.m in Sources */,
 				8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */,
 				8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */,
