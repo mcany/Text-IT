@@ -186,7 +186,7 @@ class ViewController: NSViewController {
             dataset1.fillColor = nil
             dataset1.curve = .Bezier(0.3)
             lineChart.datasets = [dataset1]
-            lineChart.xAxis.labels = nil
+            lineChart.xAxis.labels = ["January"] 
         }
         //return accData
     }

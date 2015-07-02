@@ -7,8 +7,22 @@
 //
 
 import Cocoa
+import JavaScriptCore
 
-class PeakDetection: NSObject {
+// Custom protocol must be declared with `@objc`
+@objc
+protocol PeakDetectionJSExports : JSExport {
+    var maxtab: [CGFloat] {get}
+    var mintab: [CGFloat] {get}
+
+    
+    func detectPeaks(arrayData:[CGFloat], peakThreshold:CGFloat )
+    static func new() -> PeakDetection
+}
+
+// Custom class must inherit from `NSObject`
+@objc(PeakDetection)
+class PeakDetection: Component, PeakDetectionJSExports{
     
     //%PEAKDET Detect peaks in a vector
     //      [MAXTAB, MINTAB] = PEAKDET(V, DELTA) finds the local
@@ -27,7 +41,11 @@ class PeakDetection: NSObject {
     
     var maxtab: [CGFloat]
     var mintab: [CGFloat]
-
+    
+    override static func new() -> PeakDetection {
+        return PeakDetection()
+    }
+    
     override init() {
         maxtab = []
         mintab = []

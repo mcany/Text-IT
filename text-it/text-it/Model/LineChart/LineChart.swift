@@ -480,7 +480,7 @@ extension LineChart {
                     if labels != nil && index < labels!.count {
                         tick.label = labels![index]
                     }                    
-                    
+                    tick.label = ""
                     addSublayer(tick)
                     newTicks += [tick]
                     
