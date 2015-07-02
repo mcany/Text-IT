@@ -396,12 +396,13 @@ www.interactex.org
         printf("%d ",value);
     }
     printf("\n");
+
     
-    if(self.communicationModule.usesFillBytes){
-        [self cleanAddedBytes:buffer lenght:&originalLength];
-    }
+    //if(self.communicationModule.usesFillBytes){
+    //    [self cleanAddedBytes:buffer lenght:&originalLength];
+    //}
     
-    NSInteger length = originalLength;
+    //NSInteger length = originalLength;
     /*
     printf("receiving:\n");
     for (int i = 0 ; i < length; i++) {
@@ -410,6 +411,8 @@ www.interactex.org
     }
     printf("\n");*/
     
+    
+    /*
     for (int i = 0 ; i < length; i++) {
         uint8_t value = buffer[i];
         
@@ -438,6 +441,7 @@ www.interactex.org
             parseCommandLength = 0;
 		}
 	}
+     */
 }
 
 @end

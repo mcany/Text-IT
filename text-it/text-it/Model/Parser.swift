@@ -51,13 +51,21 @@ class Parser: Component, ParserJSExports {
     
     func parse(data: UnsafeMutablePointer<UInt8>, length: Int)
     {
-        var linAccelX = (CShort) ((data[0] << 8) | data[1])
-        var linAccelY = (CShort) ((data[2] << 8) | data[3])
-        var linAccelZ = (CShort) ((data[4] << 8) | data[5])
+        
+        println(data)
+        
+        var shiftedDataX = (data[0] << 8)
+        var shiftedDataY = (data[2] << 8)
+        var shiftedDataZ = (data[4] << 8)
+        
+        var linAccelX = (CShort) (shiftedDataX | data[1])
+        var linAccelY = (CShort) (shiftedDataY | data[3])
+        var linAccelZ = (CShort) (shiftedDataZ | data[5])
         
         
-        
-
+        println(" x: " + linAccelX.description)
+        println(" y: " + linAccelY.description)
+        println(" z: " + linAccelZ.description)
 /*
             KHSensorData *sensorData = [KHSensorData new];
             

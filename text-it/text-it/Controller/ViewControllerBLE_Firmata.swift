@@ -20,7 +20,7 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         {
             for foundPeripheral in BLEDiscovery.sharedInstance().foundPeripherals
             {
-                if(foundPeripheral.name == "Biscuit")
+                if(foundPeripheral.name! == "Biscuit")
                 {
                     BLEDiscovery.sharedInstance().connectPeripheral(foundPeripheral as! CBPeripheral)
                 }

@@ -20,7 +20,9 @@ class CustomBLECommunicationModule: IFFirmataCommunicationModule, BLEServiceData
     
     func didReceiveData(buffer: UnsafeMutablePointer<UInt8>, lenght originalLength: Int) {
         //println("CustomBLECommunicationModule didReceiveData: ")
-        self.firmataController.didReceiveData(buffer, lenght: originalLength)
+        //self.firmataController.didReceiveData(buffer, lenght: originalLength)
+        var parser = Parser()
+        parser.parse(buffer, length: originalLength)
     }
     
     /*

@@ -14,7 +14,7 @@ class LinearAcceleration: NSObject {
     var x: CGFloat = 0.0;
     var y: CGFloat = 0.0;
     var z: CGFloat = 0.0;
-    var sensorData: THBandageData;
+    //var sensorData: THBandageData;
     
     override init() {
         

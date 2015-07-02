@@ -709,7 +709,7 @@ extension LineChart {
             self.data = data
             
             
-            defaultPoint.path = CGPath.Circle(10.0)
+            //defaultPoint.path = CGPath.Circle(10.0)
             defaultPoint.strokeColor = CGColorCreateFromHex(0xFFFFFF)
             
             super.init()
@@ -788,7 +788,7 @@ extension LineChart {
         
         override init!(layer: AnyObject!) {
             super.init(layer: layer)
-            path = layer.path
+            //path = layer.path
             strokeColor = layer.strokeColor
             fillColor = layer.fillColor
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C02EB671B4571670085D44D /* PeakDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02EB661B4571670085D44D /* PeakDetection.swift */; };
 		8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */; };
 		8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */; };
 		8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB101B188EB600A2DB8F /* Images.xcassets */; };
@@ -42,7 +43,6 @@
 		8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */; };
 		8CC1B3471B42BBC8001AC34D /* ParserWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */; };
 		8CC60E8E1B3C2A9900A545AC /* CustomBLECommunicationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */; };
-		8CD47EFA1B45371B00DB7D04 /* CParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD47EF91B45371B00DB7D04 /* CParser.m */; };
 		8CD47F051B453E3D00DB7D04 /* THBandageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD47F041B453E3D00DB7D04 /* THBandageData.swift */; };
 		8CD47F091B4541A600DB7D04 /* LinearAcceleration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD47F081B4541A600DB7D04 /* LinearAcceleration.swift */; };
 		8CD97D091B38AA2F0076C8C9 /* FilterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */; };
@@ -63,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C02EB661B4571670085D44D /* PeakDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeakDetection.swift; path = "text-it/Model/PeakDetection.swift"; sourceTree = SOURCE_ROOT; };
 		8C2CEB071B188EB600A2DB8F /* text-it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB0B1B188EB600A2DB8F /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,8 +113,6 @@
 		8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserWindowController.swift; sourceTree = "<group>"; };
 		8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParserWindow.xib; sourceTree = "<group>"; };
 		8CC60E8D1B3C2A9900A545AC /* CustomBLECommunicationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBLECommunicationModule.swift; sourceTree = "<group>"; };
-		8CD47EF81B45371B00DB7D04 /* CParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CParser.h; sourceTree = "<group>"; };
-		8CD47EF91B45371B00DB7D04 /* CParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CParser.m; sourceTree = "<group>"; };
 		8CD47F041B453E3D00DB7D04 /* THBandageData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THBandageData.swift; sourceTree = "<group>"; };
 		8CD47F081B4541A600DB7D04 /* LinearAcceleration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinearAcceleration.swift; sourceTree = "<group>"; };
 		8CD97D081B38AA2F0076C8C9 /* FilterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterComponent.swift; sourceTree = "<group>"; };
@@ -337,8 +336,6 @@
 			isa = PBXGroup;
 			children = (
 				8CC1B3421B42BA8B001AC34D /* Parser.swift */,
-				8CD47EF81B45371B00DB7D04 /* CParser.h */,
-				8CD47EF91B45371B00DB7D04 /* CParser.m */,
 			);
 			name = Parser;
 			path = ..;
@@ -373,6 +370,7 @@
 		8CD97D041B38A0550076C8C9 /* FeatureExtraction */ = {
 			isa = PBXGroup;
 			children = (
+				8C02EB661B4571670085D44D /* PeakDetection.swift */,
 			);
 			path = FeatureExtraction;
 			sourceTree = "<group>";
@@ -509,6 +507,7 @@
 				8CA303521B3D573B00002404 /* ViewControllerToolbar.swift in Sources */,
 				8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
+				8C02EB671B4571670085D44D /* PeakDetection.swift in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
 				8C6002561B1C5B080057892E /* DataLoader.swift in Sources */,
@@ -526,7 +525,6 @@
 				8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */,
 				8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */,
 				8CD47F051B453E3D00DB7D04 /* THBandageData.swift in Sources */,
-				8CD47EFA1B45371B00DB7D04 /* CParser.m in Sources */,
 				8CC1B3431B42BA8B001AC34D /* Parser.swift in Sources */,
 				8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,

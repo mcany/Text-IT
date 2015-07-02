@@ -64,12 +64,12 @@ class ViewController: NSViewController {
         self.serverController.delegate = self
         self.serverController.startServer()
         
-        //test items
+        //outlineview items
         self.componentOutlineView.setDataSource(ViewControllerOutlineView.sharedInstance)
         self.componentOutlineView.setDelegate(ViewControllerOutlineView.sharedInstance)
         ViewControllerOutlineView.sharedInstance.outlineView = self.componentOutlineView
         
-        
+        //feature extraction
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Deviation"))
@@ -79,19 +79,23 @@ class ViewController: NSViewController {
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "FFT"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Energy"))
         
+        //filter
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Low-Pass Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "High-Pass Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Moving Window Average Filter"))
 
-        
+        //machine learning
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "k-Nearest Neighbors"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Hidden Markov Model"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
 
-        //self.testCaseComponent.methodNames.append(SubComponentModel(name: "New Test"))
+        //test
+        //let data2: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0, 2.0]
+        //var peakDetect = PeakDetection()
+        //peakDetect.detectPeaks(data2, peakThreshold: 1)
     }
         
     //BLE test
@@ -106,8 +110,9 @@ class ViewController: NSViewController {
     {
         self.serverController.sendMessage("test message")
         var custom = THCustomComponent()
-        custom.name = "testName"
-        custom.code = "testCode"
+        custom.name = "myFunction"
+        custom.code = "function myFunction(sideHops){var filter = RCFilter.new();var filteredSignal=filter.filter(sideHop,60,5)return 5;}"
+        
         self.serverController.sendObject(custom)
     }
     
@@ -157,10 +162,9 @@ class ViewController: NSViewController {
         self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
         if let lineChart = lineChartView.layer as? LineChart {
             let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            let dataset1 = LineChart.Dataset(label: "My Data", data: data)
-            lineChart.datasets = [dataset1]
+            display(data)
             self.context.globalObject.setValue(lineChart, forProperty: "lineChart")
-            self.context.globalObject.setValue(dataset1, forProperty: "dataSet")
+            //self.context.globalObject.setValue(dataset1, forProperty: "dataSet")
         }
     }
     
@@ -182,6 +186,7 @@ class ViewController: NSViewController {
             dataset1.fillColor = nil
             dataset1.curve = .Bezier(0.3)
             lineChart.datasets = [dataset1]
+            lineChart.xAxis.labels = nil
         }
         //return accData
     }
