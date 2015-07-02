@@ -14,6 +14,14 @@ extension ViewController: NSTextViewDelegate {
         var textView = notification.object as! NSTextView
         if(textView == self.codeTextView)
         {
+            var result = self.context.evaluateScript(textView.string)
+            println(result)
+            if(!result.toString().hasPrefix("undefined"))
+            {
+                self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
+                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+            }
+            /*
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
@@ -44,6 +52,7 @@ extension ViewController: NSTextViewDelegate {
             {
                 self.debugTextView.string = ""
             }
+*/
         }
         else if(textView == self.debugTextView)
         {

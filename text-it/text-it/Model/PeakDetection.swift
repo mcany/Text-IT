@@ -16,7 +16,7 @@ protocol PeakDetectionJSExports : JSExport {
     var mintab: [CGFloat] {get}
 
     
-    func detectPeaks(arrayData:[CGFloat], peakThreshold:CGFloat )
+    func detectPeaks(arrayData:[CGFloat],_ peakThreshold:CGFloat )
     static func new() -> PeakDetection
 }
 
@@ -53,7 +53,7 @@ class PeakDetection: Component, PeakDetectionJSExports{
         super.init()
     }
     
-    func detectPeaks(arrayData:[CGFloat], peakThreshold:CGFloat )
+    func detectPeaks(arrayData:[CGFloat],_ peakThreshold:CGFloat )
     {
         maxtab = []
         mintab = []

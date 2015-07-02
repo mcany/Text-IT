@@ -111,7 +111,7 @@ class ViewController: NSViewController {
         self.serverController.sendMessage("test message")
         var custom = THCustomComponent()
         custom.name = "myFunction"
-        custom.code = "function myFunction(sideHops){var filter = RCFilter.new();var filteredSignal=filter.filter(sideHop,60,5)return 5;}"
+        custom.code = self.codeTextView.string!
         
         self.serverController.sendObject(custom)
     }
@@ -138,6 +138,8 @@ class ViewController: NSViewController {
         self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
         
         // export JS class
+        self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
+
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
         self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")
