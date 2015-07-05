@@ -139,7 +139,7 @@ class ViewController: NSViewController {
         
         // export JS class
         self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
-
+        self.context.setObject(StandardDeviation.self, forKeyedSubscript: "StandardDeviation")
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
         self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")

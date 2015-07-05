@@ -29,6 +29,7 @@
 		8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */; };
 		8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */; };
 		8C8953BC1B27092A008CFA3C /* RCFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8953BB1B27092A008CFA3C /* RCFilter.swift */; };
+		8C9DD2381B49A08F0055DB65 /* StandardDeviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DD2371B49A08F0055DB65 /* StandardDeviation.swift */; };
 		8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */; };
 		8CA303421B3D4E9100002404 /* ViewControllerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303411B3D4E9100002404 /* ViewControllerServer.swift */; };
 		8CA303461B3D4F7300002404 /* ViewControllerOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */; };
@@ -63,7 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8C02EB661B4571670085D44D /* PeakDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeakDetection.swift; path = "text-it/Model/PeakDetection.swift"; sourceTree = SOURCE_ROOT; };
+		8C02EB661B4571670085D44D /* PeakDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeakDetection.swift; path = "text-it/Model/Components/FeatureExtraction/PeakDetection.swift"; sourceTree = SOURCE_ROOT; };
 		8C2CEB071B188EB600A2DB8F /* text-it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB0B1B188EB600A2DB8F /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		8C701D0F1B2486EB002BEED5 /* LowPassFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowPassFilter.swift; sourceTree = "<group>"; };
 		8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentModel.swift; sourceTree = "<group>"; };
 		8C8953BB1B27092A008CFA3C /* RCFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCFilter.swift; sourceTree = "<group>"; };
+		8C9DD2371B49A08F0055DB65 /* StandardDeviation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardDeviation.swift; sourceTree = "<group>"; };
 		8CA3033F1B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBLE_Firmata.swift; sourceTree = "<group>"; };
 		8CA303411B3D4E9100002404 /* ViewControllerServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerServer.swift; sourceTree = "<group>"; };
 		8CA303451B3D4F7300002404 /* ViewControllerOutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerOutlineView.swift; sourceTree = "<group>"; };
@@ -337,8 +339,7 @@
 			children = (
 				8CC1B3421B42BA8B001AC34D /* Parser.swift */,
 			);
-			name = Parser;
-			path = ..;
+			path = Parser;
 			sourceTree = "<group>";
 		};
 		8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */ = {
@@ -371,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				8C02EB661B4571670085D44D /* PeakDetection.swift */,
+				8C9DD2371B49A08F0055DB65 /* StandardDeviation.swift */,
 			);
 			path = FeatureExtraction;
 			sourceTree = "<group>";
@@ -508,6 +510,7 @@
 				8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
 				8C02EB671B4571670085D44D /* PeakDetection.swift in Sources */,
+				8C9DD2381B49A08F0055DB65 /* StandardDeviation.swift in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
 				8C6002561B1C5B080057892E /* DataLoader.swift in Sources */,
