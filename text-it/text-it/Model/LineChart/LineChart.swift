@@ -157,7 +157,7 @@ import QuartzCore
         override func mouseMoved(theEvent: NSEvent) {
             //var mouseLocation = convertPoint(theEvent.locationInWindow, fromView: nil)
             var mouseLocation = lineChart.convertPoint(theEvent.locationInWindow, toLayer: lineChart.datasets.first)
-            
+           /*
             if let point = lineChart.closestPointTo(mouseLocation) {
                 if popoverPoint == nil || popoverPoint! != point {
                     if popoverPoint != nil {
@@ -173,8 +173,7 @@ import QuartzCore
                     popover.showRelativeToRect(rect, ofView: self, preferredEdge: NSMaxYEdge)
                     popover.contentViewController!.view.window!.ignoresMouseEvents = true // to prevent mouseExited from triggering when mouse over popover
                 }
-            }
-            
+            } */
         }
     }
     

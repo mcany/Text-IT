@@ -132,10 +132,10 @@ class ViewController: NSViewController {
         }
         self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "loadData")
         
-        let displayData: @objc_block [CGFloat] -> () = { input in
+        let display: @objc_block [CGFloat] -> () = { input in
             return self.display(input)
         }
-        self.context.setObject(unsafeBitCast(displayData, AnyObject.self), forKeyedSubscript: "displayData")
+        self.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
         
         // export JS class
         self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
@@ -162,16 +162,10 @@ class ViewController: NSViewController {
         
         var co = LowPassFilter()
         self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
-        if let lineChart = lineChartView.layer as? LineChart {
-            let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            display(data)
-            self.context.globalObject.setValue(lineChart, forProperty: "lineChart")
-            //self.context.globalObject.setValue(dataset1, forProperty: "dataSet")
-        }
     }
     
     
-    func display(accData: [CGFloat])
+    func display(data: [CGFloat])
     {
         if let lineChart = lineChartView.layer as? LineChart {
             //let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
@@ -183,12 +177,12 @@ class ViewController: NSViewController {
             // copy bytes into array
             //accData.getBytes(&array, length:count * sizeof(CGFloat))
             //println(array)
-            let dataset1 = LineChart.Dataset(label: "Sample Data", data: accData)
+            let dataset1 = LineChart.Dataset(label: "Data", data: data)
             dataset1.color = NSColor.redColor().CGColor
             dataset1.fillColor = nil
             dataset1.curve = .Bezier(0.3)
             lineChart.datasets = [dataset1]
-            lineChart.xAxis.labels = ["January"] 
+            //lineChart.xAxis.labels = ["January"]
         }
         //return accData
     }

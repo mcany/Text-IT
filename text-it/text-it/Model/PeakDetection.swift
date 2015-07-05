@@ -12,9 +12,10 @@ import JavaScriptCore
 // Custom protocol must be declared with `@objc`
 @objc
 protocol PeakDetectionJSExports : JSExport {
-    var maxtab: [CGFloat] {get}
-    var mintab: [CGFloat] {get}
-
+    var maxPeaks: [CGFloat] {get}
+    var minPeaks: [CGFloat] {get}
+    var numOfMaxPeaks: Int {get}
+    var numOfMinPeaks: Int {get}
     
     func detectPeaks(arrayData:[CGFloat],_ peakThreshold:CGFloat )
     static func new() -> PeakDetection
@@ -39,24 +40,38 @@ class PeakDetection: Component, PeakDetectionJSExports{
     //      Eli Billauer, 3.4.05 (Explicitly not copyrighted).
     //      This function is released to the public domain; Any use is allowed.
     
-    var maxtab: [CGFloat]
-    var mintab: [CGFloat]
+    var maxPeaks: [CGFloat]{
+        didSet{
+            self.numOfMaxPeaks = self.maxPeaks.count
+        }
+    }
+    
+    var minPeaks: [CGFloat]{
+        didSet{
+            self.numOfMinPeaks = self.minPeaks.count
+        }
+    }
+    
+    var numOfMaxPeaks: Int
+    var numOfMinPeaks: Int
+
     
     override static func new() -> PeakDetection {
         return PeakDetection()
     }
     
     override init() {
-        maxtab = []
-        mintab = []
-        
+        self.maxPeaks = []
+        self.minPeaks = []
+        self.numOfMaxPeaks = 0
+        self.numOfMinPeaks = 0
         super.init()
     }
     
     func detectPeaks(arrayData:[CGFloat],_ peakThreshold:CGFloat )
     {
-        maxtab = []
-        mintab = []
+        self.maxPeaks = []
+        self.minPeaks = []
         
         if(peakThreshold <= 0)
         {
@@ -87,7 +102,7 @@ class PeakDetection: Component, PeakDetectionJSExports{
             {
                 if(current < maximum - peakThreshold)
                 {
-                    maxtab.append(maximum)
+                    self.maxPeaks.append(maximum)
                     minimum = current
                     lookformax = false
                 }
@@ -96,12 +111,12 @@ class PeakDetection: Component, PeakDetectionJSExports{
             {
                 if(current > minimum + peakThreshold)
                 {
-                    mintab.append(minimum)
+                    self.minPeaks.append(minimum)
                     minimum = current
                     lookformax = true
                 }
             }
         }
-        println(maxtab)
+        //println(maxPeaks)
     }
 }
