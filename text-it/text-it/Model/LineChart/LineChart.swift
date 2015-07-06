@@ -13,98 +13,98 @@ import QuartzCore
     
     // Mark:
     @objc protocol LineChartTooltip  {
-        var point: LineChart.Point? { get set }
+    var point: LineChart.Point? { get set }
     }
-
+    
     
     import UIKit
     
     class LineChartView: UIView {
-        override class func layerClass() -> AnyClass { return LineChart.self }
-        var lineChart: LineChart { return layer as LineChart }
-        var popoverController: UIPopoverController?
-        var popoverPoint: LineChart.Point?
-        
-        
-        required init(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-            popoverController = UIPopoverController(contentViewController: SimpleLineChartTooltop(nibName: nil, bundle: nil))
-
-            lineChart.contentsScale = UIScreen.mainScreen().scale
-        }
-        
-        override func layoutSubviews() {
-            println("layoutSubviews")
-            lineChart.frame = self.bounds
-        }
-        override func awakeFromNib() {
-            println("Awake from nib")
-            addGestureRecognizer( UIPanGestureRecognizer(target: self, action: Selector("pan:")) )
-        }
-        func pan(recognizer: UIPanGestureRecognizer) {
-            if popoverController != nil {
-                if recognizer.state == UIGestureRecognizerState.Began {
-                    popoverController!.passthroughViews = [self] // add this view as a passthroughViews so pan gesture will continue working while popover is displayed
-            
-                } else if recognizer.state == UIGestureRecognizerState.Changed {
-                    var touchLocation = lineChart.convertPoint(recognizer.locationInView(self), toLayer: lineChart.datasets.first)
-                    if let point = lineChart.closestPointTo(touchLocation) {
-                        if popoverPoint == nil || popoverPoint! != point {
-                            if popoverPoint != nil {
-                                popoverPoint!.highlighted = false // un-highlight the previously highlighted point
-                            }
-                            popoverPoint = point
-                            if popoverController!.popoverVisible {
-                                popoverController!.dismissPopoverAnimated(false)
-                            }
-                            if let vc = popoverController!.contentViewController as? LineChartTooltip {
-                                // set the point of the popover contentViewController so it can update it's view
-                                vc.point = point
-                            }
-                            point.highlighted = true
-                            let rect = CGRect(origin: lineChart.convertPoint(point.position, fromLayer: lineChart.datasets.first), size: CGSize(width: 1.0, height: 1.0))
-                            popoverController!.presentPopoverFromRect(rect, inView: self, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: false)
-                        }
-                    }
-                } else if recognizer.state == UIGestureRecognizerState.Ended {
-                    popoverController!.passthroughViews = []
-                    if popoverController!.popoverVisible {
-                        popoverPoint!.highlighted = false // un-highlight the previously highlighted point
-                        popoverController!.dismissPopoverAnimated(true)
-                    }
-                }
-            }
-        }
-    }
-    class SimpleLineChartTooltop : UIViewController, LineChartTooltip {
-        // a very simple tooltip view controller to be presented by popover controller
-        let lineLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 20.0))
-        let valueLabel = UILabel(frame: CGRect(x: 0.0, y: 20.0, width: 100.0, height: 20.0))
-        var point: LineChart.Point? {
-            didSet {
-                valueLabel.text = point == nil ? "" : point!.value.description
-                lineLabel.text = point == nil || point!.dataset == nil ? "" : point!.dataset!.label
-            }
-        }
-        override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-            super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-            view.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 45.0)
-            preferredContentSize = view.frame.size
-            lineLabel.textAlignment = NSTextAlignment.Center
-            view.addSubview(lineLabel)
-            valueLabel.textAlignment = NSTextAlignment.Center
-            view.addSubview(valueLabel)
-        }
-        required init(coder aDecoder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    override class func layerClass() -> AnyClass { return LineChart.self }
+    var lineChart: LineChart { return layer as! LineChart }
+    var popoverController: UIPopoverController?
+    var popoverPoint: LineChart.Point?
+    
+    
+    required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    popoverController = UIPopoverController(contentViewController: SimpleLineChartTooltop(nibName: nil, bundle: nil))
+    
+    lineChart.contentsScale = UIScreen.mainScreen().scale
     }
     
-#else
+    override func layoutSubviews() {
+    println("layoutSubviews")
+    lineChart.frame = self.bounds
+    }
+    override func awakeFromNib() {
+    println("Awake from nib")
+    addGestureRecognizer( UIPanGestureRecognizer(target: self, action: Selector("pan:")) )
+    }
+    func pan(recognizer: UIPanGestureRecognizer) {
+    if popoverController != nil {
+    if recognizer.state == UIGestureRecognizerState.Began {
+    popoverController!.passthroughViews = [self] // add this view as a passthroughViews so pan gesture will continue working while popover is displayed
+    
+    } else if recognizer.state == UIGestureRecognizerState.Changed {
+    var touchLocation = lineChart.convertPoint(recognizer.locationInView(self), toLayer: lineChart.datasets.first)
+    if let point = lineChart.closestPointTo(touchLocation) {
+    if popoverPoint == nil || popoverPoint! != point {
+    if popoverPoint != nil {
+    popoverPoint!.highlighted = false // un-highlight the previously highlighted point
+    }
+    popoverPoint = point
+    if popoverController!.popoverVisible {
+    popoverController!.dismissPopoverAnimated(false)
+    }
+    if let vc = popoverController!.contentViewController as? LineChartTooltip {
+    // set the point of the popover contentViewController so it can update it's view
+    vc.point = point
+    }
+    point.highlighted = true
+    let rect = CGRect(origin: lineChart.convertPoint(point.position, fromLayer: lineChart.datasets.first), size: CGSize(width: 1.0, height: 1.0))
+    popoverController!.presentPopoverFromRect(rect, inView: self, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: false)
+    }
+    }
+    } else if recognizer.state == UIGestureRecognizerState.Ended {
+    popoverController!.passthroughViews = []
+    if popoverController!.popoverVisible {
+    popoverPoint!.highlighted = false // un-highlight the previously highlighted point
+    popoverController!.dismissPopoverAnimated(true)
+    }
+    }
+    }
+    }
+    }
+    class SimpleLineChartTooltop : UIViewController, LineChartTooltip {
+    // a very simple tooltip view controller to be presented by popover controller
+    let lineLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 20.0))
+    let valueLabel = UILabel(frame: CGRect(x: 0.0, y: 20.0, width: 100.0, height: 20.0))
+    var point: LineChart.Point? {
+    didSet {
+    valueLabel.text = point == nil ? "" : point!.value.description
+    lineLabel.text = point == nil || point!.dataset == nil ? "" : point!.dataset!.label
+    }
+    }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    view.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 45.0)
+    preferredContentSize = view.frame.size
+    lineLabel.textAlignment = NSTextAlignment.Center
+    view.addSubview(lineLabel)
+    valueLabel.textAlignment = NSTextAlignment.Center
+    view.addSubview(valueLabel)
+    }
+    required init(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+    }
+    }
+    
+    #else
     import AppKit
     
     class LineChartView: NSView {
-        // A simple NSView which "hosts" a LineChart as it's layer 
+        // A simple NSView which "hosts" a LineChart as it's layer
         // It does a couple nice things on top of the core LineChart functionality:
         //   1) Auto-resizes the LineChart layer when view is resized
         //   2) Tracks mouse movement and displays a tooltip at the closest point
@@ -157,14 +157,14 @@ import QuartzCore
         override func mouseMoved(theEvent: NSEvent) {
             //var mouseLocation = convertPoint(theEvent.locationInWindow, fromView: nil)
             var mouseLocation = lineChart.convertPoint(theEvent.locationInWindow, toLayer: lineChart.datasets.first)
-           /*
+            
             if let point = lineChart.closestPointTo(mouseLocation) {
                 if popoverPoint == nil || popoverPoint! != point {
                     if popoverPoint != nil {
                         popoverPoint!.highlighted = false // un-highlight the previously highlighted point
                     }
                     popoverPoint = point
-
+                    
                     popover.contentViewController!.representedObject = point
                     point.highlighted = true
                     popover.contentSize = NSSize(width: 100.0, height: 45.0)
@@ -173,7 +173,8 @@ import QuartzCore
                     popover.showRelativeToRect(rect, ofView: self, preferredEdge: NSMaxYEdge)
                     popover.contentViewController!.view.window!.ignoresMouseEvents = true // to prevent mouseExited from triggering when mouse over popover
                 }
-            } */
+            }
+            
         }
     }
     
@@ -182,10 +183,10 @@ import QuartzCore
         let lineLabel = NSTextField(frame: CGRect(x: 0.0, y: 20.0, width: 100.0, height: 20.0))
         let valueLabel = NSTextField(frame: CGRect(x: 0.0, y: 0.0, width: 100.0, height: 20.0))
         /*var point: LineChart.Point? {
-            didSet {
-                valueLabel.stringValue = point == nil ? "" : point!.value.shortFormatted
-                lineLabel.stringValue = point == nil || point!.line == nil ? "" : point!.line!.label
-            }
+        didSet {
+        valueLabel.stringValue = point == nil ? "" : point!.value.shortFormatted
+        lineLabel.stringValue = point == nil || point!.line == nil ? "" : point!.line!.label
+        }
         }*/
         override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
             super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -291,7 +292,7 @@ class LineChart: CALayer {
     var animationTimingFunction = CATransaction.animationTimingFunction()
     
     /*override init!(layer: AnyObject!) {
-        super.init(layer: layer)
+    super.init(layer: layer)
     }*/
     override init() {
         super.init()
@@ -338,7 +339,7 @@ class LineChart: CALayer {
         if datasets.count == 0 {
             return
         }
-
+        
         // 1) Estimate Y-axis widths so we know graph width
         var estimatedYAxisWidths = 50.0 * CGFloat(yAxes.count)
         
@@ -478,12 +479,12 @@ extension LineChart {
                     
                     if labels != nil && index < labels!.count {
                         tick.label = labels![index]
-                    }                    
-                    tick.label = ""
+                    }
+                    
                     addSublayer(tick)
                     newTicks += [tick]
                     
-                   
+                    
                 }
                 ticks = newTicks
             }
@@ -559,7 +560,7 @@ extension LineChart {
             didSet { label = value.shortFormatted }
         }
         let labelSpacing: CGFloat = 12.0
-
+        
         var label: String {
             get { return labelLayer.string as! String }
             set {
@@ -628,7 +629,7 @@ extension LineChart {
         var data: [CGFloat] = [CGFloat]() {
             didSet {
                 updatePoints()
-
+                
                 if let delegate = delegate as? LineChart {
                     delegate.updateXAxis()
                     delegate.setNeedsLayout()
@@ -653,7 +654,7 @@ extension LineChart {
             legendMarker.path = CGPath.Rect(CGRect(x: 0.0, y: 0.0, width: 20.0, height: 15.0))
             legendMarker.fillColor = self.strokeColor
             return legendMarker
-        }()
+            }()
         lazy var legendLabel: CATextLayer = {
             let legendLabel = CATextLayer(autoScale: true)
             //legendLabel.contentsScale = UIScreen.mainScreen().scale
@@ -665,14 +666,14 @@ extension LineChart {
             legendLabel.sizeToFit()
             legendLabel.frame = CGRect(origin: CGPoint(x: 28.0, y: 0.0), size: legendLabel.frame.size)
             return legendLabel
-        }()
+            }()
         lazy var legendElement: CALayer = {
             let legendEl = CALayer()
             legendEl.addSublayer(self.legendMarker)
             legendEl.frame = CGRect(origin: CGPointZero, size: CGSize(width: self.legendLabel.frame.origin.x + self.legendLabel.frame.width, height: 15.0))
             legendEl.addSublayer(self.legendLabel)
             return legendEl
-        }()
+            }()
         override var path: CGPath! {
             didSet {
                 let fillPath = CGPathCreateMutable()
@@ -708,7 +709,7 @@ extension LineChart {
             self.data = data
             
             
-            //defaultPoint.path = CGPath.Circle(10.0)
+            defaultPoint.path = CGPath.Circle(10.0)
             defaultPoint.strokeColor = CGColorCreateFromHex(0xFFFFFF)
             
             super.init()
@@ -773,12 +774,12 @@ extension LineChart {
             
             if curve != nil {
                 switch curve! {
-                    case .Bezier(let tension):
-                        path = CGPath.SplineCurve(positions, tension: tension)
+                case .Bezier(let tension):
+                    path = CGPath.SplineCurve(positions, tension: tension)
                 }
             } else {
                 path = CGPath.Polyline(positions)
-            }            
+            }
         }
     }
     class Point : CAShapeLayer {
@@ -787,7 +788,7 @@ extension LineChart {
         
         override init!(layer: AnyObject!) {
             super.init(layer: layer)
-            //path = layer.path
+            path = layer.path
             strokeColor = layer.strokeColor
             fillColor = layer.fillColor
         }
@@ -841,7 +842,7 @@ extension CGFloat {
         let formatter = NSNumberFormatter()
         
         let prefixes = [3:"k", 6:"M"]
-
+        
         if exponent > 3 && exponent < 6 && self % 100 == 0 {
             formatter.maximumSignificantDigits = 3
             return formatter.stringFromNumber(self / 1000)! + "k"
@@ -851,7 +852,7 @@ extension CGFloat {
         }
         if exponent > 4 || exponent < -4 {
             formatter.numberStyle = NSNumberFormatterStyle.ScientificStyle
-            formatter.maximumSignificantDigits = 5            
+            formatter.maximumSignificantDigits = 5
         } else {
             formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
             formatter.maximumSignificantDigits = 5
@@ -865,7 +866,7 @@ extension CGPath {
         var path = CGPathCreateMutable()
         CGPathMoveToPoint(path, nil, start.x, start.y)
         CGPathAddLineToPoint(path, nil, end.x, end.y)
-
+        
         return CGPathCreateCopy(path)
     }
     class func Polyline(points:[CGPoint]) -> CGPath {
@@ -883,7 +884,7 @@ extension CGPath {
         return CGPathCreateWithEllipseInRect(CGRect(x: (radius / -2.0), y: (radius / -2.0), width: radius, height: radius), nil)
     }
     class func Rect(rect: CGRect) -> CGPath {
-        return CGPathCreateWithRect(rect, nil)        
+        return CGPathCreateWithRect(rect, nil)
     }
     class func SplineCurve(points: [CGPoint], tension: CGFloat = 0.3, minY: CGFloat = CGFloat.min, maxY: CGFloat = CGFloat.max) -> CGPath {
         func controlPoints(t: CGPoint, i: CGPoint, e: CGPoint, s: CGFloat) -> (inner: CGPoint, outer: CGPoint) {
@@ -925,7 +926,7 @@ extension CGPath {
         
         
     }
-
+    
 }
 extension CGAffineTransform {
     init(verticalFlipWithHeight height: CGFloat) {
@@ -939,9 +940,9 @@ extension CATextLayer {
         self.init()
         if autoScale {
             #if os(iOS)
-            contentsScale = UIScreen.mainScreen().scale
-            #else
-            contentsScale = NSScreen.mainScreen()!.backingScaleFactor
+                contentsScale = UIScreen.mainScreen().scale
+                #else
+                contentsScale = NSScreen.mainScreen()!.backingScaleFactor
             #endif
         }
     }
@@ -966,7 +967,7 @@ extension CATextLayer {
                     //layerFont = UIFont(name: fontName, size: fontSize)
                     layerFont = CTFontCreateWithName(fontName, fontSize, nil);
                 }
-            }            
+            }
             if layerFont == nil {
                 //layerFont = UIFont.systemFontOfSize(fontSize)
                 layerFont = CTFontCreateUIFontForLanguage(CTFontUIFontType.UIFontSystem, fontSize, nil)
@@ -979,9 +980,9 @@ extension CATextLayer {
     }
     func sizeToFit() {
         #if os(iOS)
-        bounds = CGRect(origin: CGPointZero, size: self.attributedString.size())
-        #else
-        bounds = CGRect(origin: CGPointZero, size: self.attributedString.size)
+            bounds = CGRect(origin: CGPointZero, size: self.attributedString.size())
+            #else
+            bounds = CGRect(origin: CGPointZero, size: self.attributedString.size)
         #endif
     }
 }
