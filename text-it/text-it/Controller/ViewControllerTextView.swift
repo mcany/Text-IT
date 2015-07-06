@@ -9,22 +9,27 @@
 import Cocoa
 
 extension ViewController: NSTextViewDelegate {
-    
+
+
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
+        
         if(textView == self.codeTextView)
         {
-            var result = self.context.evaluateScript(textView.string)
-            println(result)
-            if(!result.toString().hasPrefix("undefined"))
-            {
-                self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
-                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-            }
-            /*
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
+                
+                var result = self.context.evaluateScript(codeWithoutWhitespaceAndNewline)
+                println(result)
+                if(!result.toString().hasPrefix("undefined"))
+                {
+                    self.debugTextView.string = self.debugTextView.string! + result.toString() + "\n"
+                    self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+                }
+                
+            }
+                /*
                 var fullCode: String = codeWithoutWhitespaceAndNewline!
                 
                 let lastCodeArray = fullCode.componentsSeparatedByString(";")
@@ -38,7 +43,7 @@ extension ViewController: NSTextViewDelegate {
                     //println(context.evaluateScript(lastCode))
                     
                     
-                    //println(fullCode)
+                    //println(fullCode)De
                     var result = self.context.evaluateScript(lastCode)
                     println(result)
                     if(!result.toString().hasPrefix("undefined"))
@@ -53,6 +58,12 @@ extension ViewController: NSTextViewDelegate {
                 self.debugTextView.string = ""
             }
 */
+            
+            if (self.codeTextView.string?.isEmpty == true)
+                {
+                    self.debugTextView.string = ""
+            }
+
         }
         else if(textView == self.debugTextView)
         {
