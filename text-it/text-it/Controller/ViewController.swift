@@ -130,7 +130,7 @@ class ViewController: NSViewController {
         let loadData: @objc_block String -> [CGFloat] = { input in
             return self.dataLoader.loadAccelerometerData(input)
         }
-        self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "loadData")
+        self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "load")
         
         let display: @objc_block [CGFloat] -> () = { input in
             return self.display(input)
