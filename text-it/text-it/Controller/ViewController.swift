@@ -21,12 +21,12 @@ class ViewController: NSViewController {
     var toolBar:NSToolbar!
     var pushToolBarItem: NSToolbarItem!
     var recordToolBarItem: NSToolbarItem!
-
+    
     //code text view
     var context: JSContext!
     var lineNumberView: NoodleLineNumberView!
     var dataLoader: DataLoader!
-
+    
     //connections
     var firmataController: IFFirmata!
     var serverController: THServerController!
@@ -84,20 +84,20 @@ class ViewController: NSViewController {
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Low-Pass Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "High-Pass Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Moving Window Average Filter"))
-
+        
         //machine learning
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "k-Nearest Neighbors"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Hidden Markov Model"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
-
+        
         //test
         //let data2: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0, 2.0]
         //var peakDetect = PeakDetection()
         //peakDetect.detectPeaks(data2, peakThreshold: 1)
     }
-        
+    
     //BLE test
     func startScanning()
     {
@@ -147,7 +147,7 @@ class ViewController: NSViewController {
         TestCase.staticContext = self.context
         Parser.staticContext = self.context
         self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
-
+        
         //test
         let sendMessage: @objc_block () -> () = { input in
             return self.sendMessage()
@@ -167,22 +167,25 @@ class ViewController: NSViewController {
     
     func display(data: [CGFloat])
     {
-        if let lineChart = lineChartView.layer as? LineChart {
-            //let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-            //let count = accData.count / sizeof(CGFloat)
-            
-            // create array of appropriate length:
-            //var array = [CGFloat](count: count, repeatedValue: 0)
-            
-            // copy bytes into array
-            //accData.getBytes(&array, length:count * sizeof(CGFloat))
-            //println(array)
-            let dataset1 = LineChart.Dataset(label: "Data", data: data)
-            dataset1.color = NSColor.redColor().CGColor
-            dataset1.fillColor = nil
-            dataset1.curve = .Bezier(0.3)
-            lineChart.datasets = [dataset1]
-            //lineChart.xAxis.labels = ["January"]
+        if(data.count > 0)
+        {
+            if let lineChart = lineChartView.layer as? LineChart {
+                //let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
+                //let count = accData.count / sizeof(CGFloat)
+                
+                // create array of appropriate length:
+                //var array = [CGFloat](count: count, repeatedValue: 0)
+                
+                // copy bytes into array
+                //accData.getBytes(&array, length:count * sizeof(CGFloat))
+                //println(array)
+                let dataset1 = LineChart.Dataset(label: "Data", data: data)
+                dataset1.color = NSColor.redColor().CGColor
+                dataset1.fillColor = nil
+                dataset1.curve = .Bezier(0.3)
+                lineChart.datasets = [dataset1]
+                //lineChart.xAxis.labels = ["January"]
+            }
         }
         //return accData
     }
