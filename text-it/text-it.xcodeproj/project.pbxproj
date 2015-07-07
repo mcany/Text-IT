@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C02EB671B4571670085D44D /* PeakDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02EB661B4571670085D44D /* PeakDetection.swift */; };
+		8C23D8B91B4C04E100FEC30A /* JavascriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23D8B81B4C04E100FEC30A /* JavascriptRunner.swift */; };
 		8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */; };
 		8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */; };
 		8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CEB101B188EB600A2DB8F /* Images.xcassets */; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		8C02EB661B4571670085D44D /* PeakDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeakDetection.swift; path = "text-it/Model/Components/FeatureExtraction/PeakDetection.swift"; sourceTree = SOURCE_ROOT; };
+		8C23D8B81B4C04E100FEC30A /* JavascriptRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavascriptRunner.swift; sourceTree = "<group>"; };
 		8C2CEB071B188EB600A2DB8F /* text-it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB0B1B188EB600A2DB8F /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
 		8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */,
 				8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */,
 				8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */,
+				8C23D8B81B4C04E100FEC30A /* JavascriptRunner.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
 				8C6002561B1C5B080057892E /* DataLoader.swift in Sources */,
 				8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */,
+				8C23D8B91B4C04E100FEC30A /* JavascriptRunner.swift in Sources */,
 				8C6002591B1C71340057892E /* LineChart.swift in Sources */,
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
 				8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */,

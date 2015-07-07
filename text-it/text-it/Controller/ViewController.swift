@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import JavaScriptCore
 
 class ViewController: NSViewController {
     
@@ -26,9 +25,7 @@ class ViewController: NSViewController {
     var previosData: [CGFloat] = []
     
     //code text view
-    var context: JSContext!
     var lineNumberView: NoodleLineNumberView!
-    var dataLoader: DataLoader!
     
     //connections
     var firmataController: IFFirmata!
@@ -37,20 +34,6 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataLoader = DataLoader()
-        self.context = JSContext()
-        self.addFunctionsToJSContext()
-        self.addPreDefinedFunctionsToJSContext()
-        
-        self.context.exceptionHandler = { context, exception in
-            println("JS Error: \(exception)")
-            if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
-            {
-                self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
-                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-            }
-        }
-        
         self.codeTextView.delegate = self
         self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
         self.codeTextView.automaticQuoteSubstitutionEnabled = false
@@ -58,6 +41,9 @@ class ViewController: NSViewController {
         self.debugTextView.delegate = self
         self.debugTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
         self.debugTextView.editable = false
+        
+        JavascriptRunner.sharedInstance.exceptionHandler = self
+        self.addPreDefinedFunctionsToJSContext()
         
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
@@ -105,7 +91,7 @@ class ViewController: NSViewController {
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
     }
-    
+
     //BLE test
     func startScanning()
     {
@@ -123,44 +109,32 @@ class ViewController: NSViewController {
         
         self.serverController.sendObject(custom)
     }
-    
-    func addFunctionsToJSContext()
-    {
-        // export JS class
-        self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
-        self.context.setObject(StandardDeviation.self, forKeyedSubscript: "StandardDeviation")
-        self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
-        self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
-        self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")
-        self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
-        TestCase.staticContext = self.context
-        Parser.staticContext = self.context
-        self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
-    }
-    
+
     func addPreDefinedFunctionsToJSContext()
     {
-        let loadData: @objc_block String -> [CGFloat] = { input in
-            return self.dataLoader.loadAccelerometerData(input)
+        var dataLoader = DataLoader()
+        let load: @objc_block String -> [CGFloat] = { input in
+            return dataLoader.loadAccelerometerData(input)
         }
-        self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "load")
+        
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(load, AnyObject.self), forKeyedSubscript: "load")
         
         let display: @objc_block [CGFloat] -> () = { input in
             return self.display(input)
         }
-        self.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
         
         //test
         let sendMessage: @objc_block () -> () = { input in
             return self.sendMessage()
         }
-        self.context.setObject(unsafeBitCast(sendMessage, AnyObject.self), forKeyedSubscript: "sendMessage")
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(sendMessage, AnyObject.self), forKeyedSubscript: "sendMessage")
         
         
         let startScanning: @objc_block () -> () = { input in
             return self.startScanning()
         }
-        self.context.setObject(unsafeBitCast(startScanning, AnyObject.self), forKeyedSubscript: "startScanning")
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(startScanning, AnyObject.self), forKeyedSubscript: "startScanning")
     }
     
     func display(data: [CGFloat])

@@ -14,13 +14,7 @@ import JavaScriptCore
     @IBOutlet var codeTextView: NSTextView!
     @IBOutlet weak var funcName: NSTextField!
     
-    var context: JSContext!
     var testCase: TestCase!
-    
-    func setJSContext(context: JSContext)
-    {
-        self.context = context
-    }
     
     func settestCase(testCase: TestCase)
     {
@@ -44,13 +38,13 @@ import JavaScriptCore
     @IBAction func saveButtonTapped(sender: AnyObject) {
         var userInput = self.codeTextView.string
         var newJSFunction = "var " + self.funcName.stringValue + " = function(){" + userInput! + "}"
-        var result = self.context.evaluateScript(newJSFunction)
+        var result = JavascriptRunner.sharedInstance.execute(newJSFunction)
 
-        if(!result.toString().hasPrefix("JS Error"))
+        if(!result!.toString().hasPrefix("JS Error"))
         {
             self.testCase.code = userInput!
             self.testCase.name = self.funcName.stringValue
-            println(self.context.evaluateScript(testCase.name+"()"))
+            println(JavascriptRunner.sharedInstance.execute(testCase.name+"()"))
             ViewControllerOutlineView.sharedInstance.testCaseComponent.methodNames.append(SubComponentModel(name: self.testCase.name))
             self.close()
         }

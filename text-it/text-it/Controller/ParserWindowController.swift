@@ -12,7 +12,6 @@ import JavaScriptCore
 @objc(ParserWindowController) class ParserWindowController: NSWindowController {
 
     var parser: Parser!
-    var context: JSContext!
 
     @IBOutlet weak var view: NSView!
     @IBOutlet var codeTextView: NSTextView!
@@ -34,13 +33,13 @@ import JavaScriptCore
     @IBAction func saveButtonTapped(sender: AnyObject) {
         var userInput = self.codeTextView.string
         var newJSFunction = "var " + self.funcName.stringValue + " = function(){" + userInput! + "}"
-        var result = self.context.evaluateScript(newJSFunction)
+        var result = JavascriptRunner.sharedInstance.execute(newJSFunction)
         
-        if(!result.toString().hasPrefix("JS Error"))
+        if(!result!.toString().hasPrefix("JS Error"))
         {
             self.parser.code = userInput!
             self.parser.name = self.funcName.stringValue
-            println(self.context.evaluateScript(parser.name+"()"))
+            println(JavascriptRunner.sharedInstance.execute(parser.name+"()"))
             ViewControllerOutlineView.sharedInstance.parserComponent.methodNames.append(SubComponentModel(name: self.parser.name))
             self.close()
         }

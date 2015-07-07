@@ -26,8 +26,6 @@ class TestCase: Component, TestCaseJSExports, NSCoding {
 
     var code: String = ""
     var name: String = ""
-    static var staticContext: JSContext!
-    var context: JSContext!
     
     override init()
     {
@@ -38,14 +36,12 @@ class TestCase: Component, TestCaseJSExports, NSCoding {
     override static func new() -> TestCase {
         var testCase = TestCase()
         openTestCaseWindow(testCase)
-        testCase.context = staticContext
         return testCase
     }
     
     static func openTestCaseWindow(testCase : TestCase)
     {
         myWindowController = TestCaseWindowController(windowNibName: "TestCaseWindow")
-        myWindowController.setJSContext(staticContext)
         myWindowController.settestCase(testCase)
         myWindowController.showWindow(nil)
     }
@@ -70,7 +66,7 @@ class TestCase: Component, TestCaseJSExports, NSCoding {
     
     func evaluate()
     {
-        println(self.context.evaluateScript(self.name + "()" ))
+        println(JavascriptRunner.sharedInstance.execute(self.name + "()"))
     }
 }
 

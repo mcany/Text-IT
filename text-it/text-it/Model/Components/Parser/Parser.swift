@@ -23,15 +23,12 @@ protocol ParserJSExports : JSExport {
 @objc(Parser)
 class Parser: Component, ParserJSExports {
     static  var myWindowController: ParserWindowController!
-    static var staticContext: JSContext!
-    var context: JSContext!
     var code: String = ""
     var name: String = ""
     
     override static func new() -> Parser {
         var parser = Parser()
         openParserWindow(parser)
-        parser.context = staticContext
         return parser
     }
 
@@ -39,7 +36,6 @@ class Parser: Component, ParserJSExports {
     {
         myWindowController = ParserWindowController(windowNibName: "ParserWindow")
         myWindowController.parser = parser
-        myWindowController.context = self.staticContext
         myWindowController.showWindow(nil)
     }
     
