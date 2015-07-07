@@ -22,6 +22,9 @@ class ViewController: NSViewController {
     var pushToolBarItem: NSToolbarItem!
     var recordToolBarItem: NSToolbarItem!
     
+    //text view
+    var previosData: [CGFloat] = []
+    
     //code text view
     var context: JSContext!
     var lineNumberView: NoodleLineNumberView!
@@ -37,6 +40,16 @@ class ViewController: NSViewController {
         self.dataLoader = DataLoader()
         self.context = JSContext()
         self.addFunctionsToJSContext()
+        self.addPreDefinedFunctionsToJSContext()
+        
+        self.context.exceptionHandler = { context, exception in
+            println("JS Error: \(exception)")
+            if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
+            {
+                self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
+                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+            }
+        }
         
         self.codeTextView.delegate = self
         self.codeTextView.font = NSFont.userFixedPitchFontOfSize(NSFont.smallSystemFontSize())
@@ -91,11 +104,6 @@ class ViewController: NSViewController {
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
-        
-        //test
-        //let data2: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0, 2.0]
-        //var peakDetect = PeakDetection()
-        //peakDetect.detectPeaks(data2, peakThreshold: 1)
     }
     
     //BLE test
@@ -118,25 +126,6 @@ class ViewController: NSViewController {
     
     func addFunctionsToJSContext()
     {
-        self.context.exceptionHandler = { context, exception in
-            println("JS Error: \(exception)")
-            if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
-            {
-                self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
-                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-            }
-        }
-        
-        let loadData: @objc_block String -> [CGFloat] = { input in
-            return self.dataLoader.loadAccelerometerData(input)
-        }
-        self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "load")
-        
-        let display: @objc_block [CGFloat] -> () = { input in
-            return self.display(input)
-        }
-        self.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
-        
         // export JS class
         self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
         self.context.setObject(StandardDeviation.self, forKeyedSubscript: "StandardDeviation")
@@ -147,6 +136,19 @@ class ViewController: NSViewController {
         TestCase.staticContext = self.context
         Parser.staticContext = self.context
         self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
+    }
+    
+    func addPreDefinedFunctionsToJSContext()
+    {
+        let loadData: @objc_block String -> [CGFloat] = { input in
+            return self.dataLoader.loadAccelerometerData(input)
+        }
+        self.context.setObject(unsafeBitCast(loadData, AnyObject.self), forKeyedSubscript: "load")
+        
+        let display: @objc_block [CGFloat] -> () = { input in
+            return self.display(input)
+        }
+        self.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
         
         //test
         let sendMessage: @objc_block () -> () = { input in
@@ -159,34 +161,20 @@ class ViewController: NSViewController {
             return self.startScanning()
         }
         self.context.setObject(unsafeBitCast(startScanning, AnyObject.self), forKeyedSubscript: "startScanning")
-        
-        var co = LowPassFilter()
-        self.context.globalObject.setValue(co, forProperty: "lowPassFilter")
     }
-    
     
     func display(data: [CGFloat])
     {
-        if(data.count > 0)
-        {
-            if let lineChart = lineChartView.layer as? LineChart {
-                //let data: [CGFloat] = [3.0, 4.0, 9.0, 11.0, 13.0, 15.0]
-                //let count = accData.count / sizeof(CGFloat)
-                
-                // create array of appropriate length:
-                //var array = [CGFloat](count: count, repeatedValue: 0)
-                
-                // copy bytes into array
-                //accData.getBytes(&array, length:count * sizeof(CGFloat))
-                //println(array)
+        if let lineChart = self.lineChartView.layer as? LineChart {
+            if(data.count > 0 && self.previosData != data)
+            {
+                previosData = data
                 let dataset1 = LineChart.Dataset(label: "Data", data: data)
                 dataset1.color = NSColor.redColor().CGColor
                 dataset1.fillColor = nil
                 dataset1.curve = .Bezier(0.3)
                 lineChart.datasets = [dataset1]
-                //lineChart.xAxis.labels = ["January"]
             }
         }
-        //return accData
     }
 }

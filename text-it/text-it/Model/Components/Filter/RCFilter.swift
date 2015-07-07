@@ -12,7 +12,7 @@ import JavaScriptCore
 // Custom protocol must be declared with `@objc`
 @objc
 protocol RCFilterJSExports : JSExport {
-    func filter(accData:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
+    func filter(data:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
     func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
     static func new() -> RCFilter
 }
@@ -31,14 +31,14 @@ class RCFilter: Component,RCFilterJSExports  {
         return acc
     }
     
-    func filter(accData:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
+    func filter(data:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
     {
-        var cgFloatArray: [CGFloat] = []
+        var filteredData: [CGFloat] = []
 
         var index: Int
-        for index = 1; index < accData.count-1; ++index {
-            cgFloatArray.append((accData[index-1] / 4) + (accData[index] / 2) + (accData[index+1] / 4))
+        for index = 1; index < data.count-1; ++index {
+            filteredData.append((data[index-1] / 4) + (data[index] / 2) + (data[index+1] / 4))
         }
-        return cgFloatArray
+        return filteredData
     }
 }
