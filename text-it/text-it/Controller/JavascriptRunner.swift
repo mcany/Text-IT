@@ -26,6 +26,10 @@ class JavascriptRunner: NSObject {
     var debugDelegate : Debugger?
     var exceptionHandler : ExceptionHandler?
 
+    
+    /** Serial dispatch queue */
+    private let queue = dispatch_queue_create("serial-worker", DISPATCH_QUEUE_SERIAL)
+
     override init(){
         super.init()
         self.context = JSContext()
@@ -34,11 +38,20 @@ class JavascriptRunner: NSObject {
         self.context.exceptionHandler = {context, exception in self.exceptionHandler?.handleException(exception) }
     }
     
-    func execute(code: String ) -> JSValue?{
+    func execute(code: String, completionHandler: (JSValue) -> Void  ){
+        //var result: JSValue!
+        dispatch_async(queue) {
+            let result = self.context.evaluateScript(code)
+            dispatch_async(dispatch_get_main_queue(), {completionHandler( result)})
+        }
+    }
+    
+    
+    func executeMain(code: String) -> JSValue?{
         var result = self.context.evaluateScript(code)
         return result
     }
-    
+  
     func addFunctionsToJSContext()
     {
         // export JS class

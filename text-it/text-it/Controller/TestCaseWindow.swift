@@ -38,17 +38,23 @@ import JavaScriptCore
     @IBAction func saveButtonTapped(sender: AnyObject) {
         var userInput = self.codeTextView.string
         var newJSFunction = "var " + self.funcName.stringValue + " = function(){" + userInput! + "}"
-        var result = JavascriptRunner.sharedInstance.execute(newJSFunction)
-
+        var result = JavascriptRunner.sharedInstance.executeMain(newJSFunction)
+        self.checkIfFunctionValid(result)
+        
+        //JavascriptRunner.sharedInstance.execute(newJSFunction){result in self.checkIfFunctionValid(result)}
+    }
+    
+    func checkIfFunctionValid(result: JSValue?)
+    {
         if(!result!.toString().hasPrefix("JS Error"))
         {
-            self.testCase.code = userInput!
+            self.testCase.code = self.codeTextView.string!
             self.testCase.name = self.funcName.stringValue
-            println(JavascriptRunner.sharedInstance.execute(testCase.name+"()"))
+            JavascriptRunner.sharedInstance.execute(testCase.name+"()"){result in println (result)}
+//            println(JavascriptRunner.sharedInstance.execute(testCase.name+"()"))
             ViewControllerOutlineView.sharedInstance.testCaseComponent.methodNames.append(SubComponentModel(name: self.testCase.name))
             self.close()
         }
-
     }
 
     @IBAction func cancelButtonTapped(sender: AnyObject) {

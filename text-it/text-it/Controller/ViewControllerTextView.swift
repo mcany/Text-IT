@@ -21,6 +21,17 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
         }
     }
     
+    func printResult(result: JSValue?)
+    {
+        println(result)
+        
+        if(!result!.toString().hasPrefix("undefined"))
+        {
+            self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
+            self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+        }
+    }
+    
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
         
@@ -30,15 +41,10 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
                 
-                var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
+               // var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
                 
-                println(result)
-                
-                if(!result!.toString().hasPrefix("undefined"))
-                {
-                    self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
-                    self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-                }
+                JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!){result in self.printResult(result)}
+
                 
             }
             

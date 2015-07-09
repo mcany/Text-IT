@@ -66,7 +66,8 @@ class TestCase: Component, TestCaseJSExports, NSCoding {
     
     func evaluate()
     {
-        println(JavascriptRunner.sharedInstance.execute(self.name + "()"))
+        JavascriptRunner.sharedInstance.execute(self.name + "()"){result in println (result)}
+        //println(JavascriptRunner.sharedInstance.execute(self.name + "()"))
     }
 }
 
