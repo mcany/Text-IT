@@ -398,18 +398,18 @@ www.interactex.org
     printf("\n");
 
     
-    //if(self.communicationModule.usesFillBytes){
-    //    [self cleanAddedBytes:buffer lenght:&originalLength];
-    //}
+    if(self.communicationModule.usesFillBytes){
+        [self cleanAddedBytes:buffer lenght:&originalLength];
+    }
     
-    //NSInteger length = originalLength;
-    /*
+    NSInteger length = originalLength;
+    
     printf("receiving:\n");
     for (int i = 0 ; i < length; i++) {
         int value = buffer[i];
         printf("%d ",value);
     }
-    printf("\n");*/
+    printf("\n");
     
     
     /*

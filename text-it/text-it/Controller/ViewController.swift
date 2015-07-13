@@ -20,7 +20,7 @@ class ViewController: NSViewController {
     var toolBar:NSToolbar!
     var pushToolBarItem: NSToolbarItem!
     var recordToolBarItem: NSToolbarItem!
-    
+    var gatheringWindowController: GatheringWindowController!
     //text view
     var previosData: [CGFloat] = []
     
@@ -30,6 +30,8 @@ class ViewController: NSViewController {
     //connections
     var firmataController: IFFirmata!
     var serverController: THServerController!
+    var bleCommunicationModule:CustomBLECommunicationModule?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,8 @@ class ViewController: NSViewController {
         
         JavascriptRunner.sharedInstance.exceptionHandler = self
         self.addPreDefinedFunctionsToJSContext()
+        
+        self.gatheringWindowController = GatheringWindowController(windowNibName: "TestCaseWindow")
         
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)

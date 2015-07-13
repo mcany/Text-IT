@@ -19,12 +19,18 @@ protocol ParserJSExports : JSExport {
     func change() -> Parser
 }
 
+protocol THBandageDataDelegate
+{
+    func didReceiveSensorData(bandageData: THBandageData)
+}
 // Custom class must inherit from `NSObject`
 @objc(Parser)
 class Parser: Component, ParserJSExports {
     static  var myWindowController: ParserWindowController!
     var code: String = ""
     var name: String = ""
+    
+    var delegate: THBandageDataDelegate!
     
     override static func new() -> Parser {
         var parser = Parser()
@@ -50,18 +56,29 @@ class Parser: Component, ParserJSExports {
         
         println(data)
         
-        var shiftedDataX = (data[0] << 8)
-        var shiftedDataY = (data[2] << 8)
-        var shiftedDataZ = (data[4] << 8)
+        var shiftedDataX = (data[0] << 7) | data[1]
+        var shiftedDataY = (data[2] << 7) | data[3]
+        var shiftedDataZ = (data[4] << 7) | data[5]
         
-        var linAccelX = (CShort) (shiftedDataX | data[1])
-        var linAccelY = (CShort) (shiftedDataY | data[3])
-        var linAccelZ = (CShort) (shiftedDataZ | data[5])
+        var linAccelX = (CShort) (shiftedDataX)
+        var linAccelY = (CShort) (shiftedDataY )
+        var linAccelZ = (CShort) (shiftedDataZ )
         
         
         println(" x: " + linAccelX.description)
         println(" y: " + linAccelY.description)
         println(" z: " + linAccelZ.description)
+        
+        
+        var linearAcceleration = LinearAcceleration();
+        linearAcceleration.x = CGFloat(linAccelX)
+        linearAcceleration.y = CGFloat(linAccelY)
+        linearAcceleration.z = CGFloat(linAccelZ)
+        
+        var bandageData = THBandageData()
+        bandageData.linearAcceleration = linearAcceleration
+        self.delegate.didReceiveSensorData(bandageData)
+        
 /*
             KHSensorData *sensorData = [KHSensorData new];
             
