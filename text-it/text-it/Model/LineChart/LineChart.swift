@@ -157,7 +157,7 @@ import QuartzCore
         override func mouseMoved(theEvent: NSEvent) {
             //var mouseLocation = convertPoint(theEvent.locationInWindow, fromView: nil)
             var mouseLocation = lineChart.convertPoint(theEvent.locationInWindow, toLayer: lineChart.datasets.first)
-            
+           /*
             if let point = lineChart.closestPointTo(mouseLocation) {
                 if popoverPoint == nil || popoverPoint! != point {
                     if popoverPoint != nil {
@@ -173,8 +173,7 @@ import QuartzCore
                     popover.showRelativeToRect(rect, ofView: self, preferredEdge: NSMaxYEdge)
                     popover.contentViewController!.view.window!.ignoresMouseEvents = true // to prevent mouseExited from triggering when mouse over popover
                 }
-            }
-            
+            } */
         }
     }
     
@@ -480,7 +479,7 @@ extension LineChart {
                     if labels != nil && index < labels!.count {
                         tick.label = labels![index]
                     }                    
-                    
+                    tick.label = ""
                     addSublayer(tick)
                     newTicks += [tick]
                     
@@ -709,7 +708,7 @@ extension LineChart {
             self.data = data
             
             
-            defaultPoint.path = CGPath.Circle(10.0)
+            //defaultPoint.path = CGPath.Circle(10.0)
             defaultPoint.strokeColor = CGColorCreateFromHex(0xFFFFFF)
             
             super.init()
@@ -788,7 +787,7 @@ extension LineChart {
         
         override init!(layer: AnyObject!) {
             super.init(layer: layer)
-            path = layer.path
+            //path = layer.path
             strokeColor = layer.strokeColor
             fillColor = layer.fillColor
         }

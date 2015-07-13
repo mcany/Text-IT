@@ -9,6 +9,7 @@
 import Cocoa
 
 extension ViewController: NSWindowDelegate {
+
     
     func pushButtonTapped(toolbarItem: NSToolbarItem) {
         println("pushButtonTapped")
@@ -19,5 +20,11 @@ extension ViewController: NSWindowDelegate {
     func recordButtonTapped(toolbarItem: NSToolbarItem) {
         println("recordButtonTapped")
         self.startReceivingData()
+        openGatheringWindow()
+    }
+    
+    func openGatheringWindow()
+    {
+        self.gatheringWindowController.showWindow(nil)
     }
 }

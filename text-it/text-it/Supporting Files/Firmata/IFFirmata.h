@@ -27,6 +27,7 @@ www.interactex.org
 
 #import <Foundation/Foundation.h>
 
+
 #define IFParseBufSize 4096
 
 @class IFFirmataCommunicationModule;

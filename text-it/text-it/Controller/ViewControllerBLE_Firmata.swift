@@ -10,6 +10,7 @@ import Cocoa
 
 extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate {
     
+    
     // MARK: - BLE delegates
     
     func connectToBle()
@@ -20,7 +21,7 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         {
             for foundPeripheral in BLEDiscovery.sharedInstance().foundPeripherals
             {
-                if(foundPeripheral.name == "Biscuit")
+                if(foundPeripheral.name! == "Biscuit")
                 {
                     BLEDiscovery.sharedInstance().connectPeripheral(foundPeripheral as! CBPeripheral)
                 }
@@ -31,14 +32,17 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     func startReceivingData()
     {
         self.firmataController.sendFirmwareRequest()
-
     }
     
     func bleServiceIsReady(service: BLEService!) {
         println("bleServiceIsReady")
-        var bleCommunicationModule = CustomBLECommunicationModule()
-        bleCommunicationModule.bleService = service
-        bleCommunicationModule.firmataController = self.firmataController
+        var customBLECommunicationModule = CustomBLECommunicationModule()
+        customBLECommunicationModule.dataViewerHandler = self.gatheringWindowController
+        customBLECommunicationModule.recorder = self.gatheringWindowController
+        self.bleCommunicationModule = customBLECommunicationModule
+        bleCommunicationModule!.bleService = service
+        bleCommunicationModule!.firmataController = self.firmataController
+        bleCommunicationModule!.currentBandageDataSession = []
         service.dataDelegate = bleCommunicationModule
         self.firmataController.communicationModule = bleCommunicationModule;
         self.recordToolBarItem.enabled = true
@@ -57,7 +61,9 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     
     func bleServiceDidDisconnect(service: BLEService!) {
         println("bleServiceDidDisconnect")
+        self.bleCommunicationModule!.finishSession()
         self.recordToolBarItem.enabled = false
+        self.bleCommunicationModule = nil
         service.delegate = nil
         service.dataDelegate = nil
     }

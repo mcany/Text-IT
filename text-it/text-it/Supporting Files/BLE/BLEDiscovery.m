@@ -106,7 +106,6 @@ static BLEDiscovery * sharedInstance;
         CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)deviceUUIDString);
         if (!uuid)
             continue;
-        
         [centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
         CFRelease(uuid);
     }
