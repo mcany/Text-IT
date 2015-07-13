@@ -20,9 +20,10 @@ extension ViewController: NSWindowDelegate {
     func recordButtonTapped(toolbarItem: NSToolbarItem) {
         println("recordButtonTapped")
         self.startReceivingData()
+        openGatheringWindow()
     }
     
-    func openGatheringWindow(testCase : TestCase)
+    func openGatheringWindow()
     {
         self.gatheringWindowController.showWindow(nil)
     }

@@ -13,7 +13,7 @@ class GatheringWindowController: NSWindowController, DataViewer, Recorder {
     @IBOutlet weak var fileNameTextField: NSTextField!
     @IBOutlet weak var startButton: NSButton!
     @IBOutlet weak var stopButton: NSButton!
-    @IBOutlet weak var outputTextView: NSTextView!
+    @IBOutlet var outputTextView: NSTextView!
     
     var fileName: String = "untitled.txt"
     var isRecording: Bool = false

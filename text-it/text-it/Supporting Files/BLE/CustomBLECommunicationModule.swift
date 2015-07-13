@@ -28,11 +28,16 @@ class CustomBLECommunicationModule: IFFirmataCommunicationModule, BLEServiceData
     var dataViewerHandler: DataViewer?
     var recorder: Recorder?
     var currentBandageDataSession: [THBandageData] = []
-    var parser = Parser()
+    var parser: Parser!
         {
         didSet{
             parser.delegate = self
         }
+    }
+    
+    override init() {
+        self.parser  = Parser()
+        super.init()
     }
     
     override func sendData(bytes: UnsafeMutablePointer<UInt8>, count: Int) {
@@ -41,15 +46,22 @@ class CustomBLECommunicationModule: IFFirmataCommunicationModule, BLEServiceData
     }
     
     func didReceiveData(buffer: UnsafeMutablePointer<UInt8>, lenght originalLength: Int) {
-        if(self.recorder!.isRecording)
+        if((self.recorder) != nil)
         {
-            //println("CustomBLECommunicationModule didReceiveData: ")
-            //self.firmataController.didReceiveData(buffer, lenght: originalLength)
-            parser.parse(buffer, length: originalLength)
-        }
-        else if (self.self.recorder!.stopRecording)
-        {
-            self.finishSession()
+            if(self.parser.delegate == nil)
+            {
+                self.parser.delegate = self
+            }
+            if(self.recorder!.isRecording)
+            {
+                //println("CustomBLECommunicationModule didReceiveData: ")
+                //self.firmataController.didReceiveData(buffer, lenght: originalLength)
+                parser.parse(buffer, length: originalLength)
+            }
+            else if (self.recorder!.stopRecording)
+            {
+                self.finishSession()
+            }
         }
     }
     
@@ -60,8 +72,17 @@ class CustomBLECommunicationModule: IFFirmataCommunicationModule, BLEServiceData
     
     func finishSession() {
         //write to file
-        var writer = FileWriter()
-        writer.writeToFile(self.recorder!.fileName, data: self.currentBandageDataSession)
+        
+        if(self.currentBandageDataSession.count > 0)
+        {
+            var writer = FileWriter()
+            writer.writeToFile(self.recorder!.fileName, data: self.currentBandageDataSession)
+            self.currentBandageDataSession = []
+            self.recorder = nil
+            self.dataViewerHandler = nil
+            self.firmataController = nil
+            self.bleService = nil
+        }
     }
     
     /*

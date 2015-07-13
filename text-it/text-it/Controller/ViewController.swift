@@ -21,6 +21,7 @@ class ViewController: NSViewController {
     var pushToolBarItem: NSToolbarItem!
     var recordToolBarItem: NSToolbarItem!
     var gatheringWindowController: GatheringWindowController!
+    
     //text view
     var previosData: [CGFloat] = []
     
@@ -46,9 +47,8 @@ class ViewController: NSViewController {
         
         JavascriptRunner.sharedInstance.exceptionHandler = self
         self.addPreDefinedFunctionsToJSContext()
-        
-        self.gatheringWindowController = GatheringWindowController(windowNibName: "TestCaseWindow")
-        
+        self.gatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
+
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeScrollView.verticalRulerView = self.lineNumberView
