@@ -29,7 +29,8 @@ class GatheringWindowController: NSWindowController, DataViewer, Recorder {
     }
     
     func showData(bandageData: THBandageData) {
-        self.outputTextView.string! += THBandageData.description()
+        self.outputTextView.string! += bandageData.printData()
+        self.outputTextView.scrollRangeToVisible(NSRange(location: count(self.outputTextView.string!), length: 0))
     }
     
     @IBAction func fileNameEntered(sender: AnyObject) {
@@ -44,6 +45,8 @@ class GatheringWindowController: NSWindowController, DataViewer, Recorder {
     }
 
     @IBAction func stopButtonTapped(sender: AnyObject) {
+        self.fileName = self.fileNameTextField.stringValue
+
         self.stopButton.enabled = false
         self.startButton.enabled = true
         self.isRecording = false

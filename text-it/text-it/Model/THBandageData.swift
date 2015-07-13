@@ -27,4 +27,14 @@ class THBandageData: NSObject {
         data = [];
         super.init();
     }
+    
+    func printData() -> String
+    {
+        var returnString = ""
+        returnString += "X: " + self.linearAcceleration.x.description
+        returnString += "  Y: " + self.linearAcceleration.y.description
+        returnString += "  Z: " + self.linearAcceleration.z.description
+        returnString += "\n"
+        return returnString
+    }
 }
