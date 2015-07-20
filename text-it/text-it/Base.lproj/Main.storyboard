@@ -771,17 +771,6 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <button verticalHuggingPriority="750" id="Ens-Q7-Xnb">
-                                                            <rect key="frame" x="1" y="1" width="163" height="32"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="T5a-9q-GVE">
-                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                                <connections>
-                                                                    <action selector="refreshButtonTapped:" target="XfG-lQ-9wD" id="Bko-2P-ymL"/>
-                                                                </connections>
-                                                            </buttonCell>
-                                                        </button>
                                                         <tableCellView identifier="HeaderCell" id="z1e-cW-dp6">
                                                             <rect key="frame" x="1" y="1" width="163" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

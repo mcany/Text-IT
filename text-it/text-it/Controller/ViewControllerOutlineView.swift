@@ -81,7 +81,7 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
     
     func outlineView(outlineView: NSOutlineView, viewForTableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
         var fileSystemItem = item as! FileSystemItem
-        if(fileSystemItem.numberOfChildren() > 0 && fileSystemItem.fileName() != "Text-It")
+        if(fileSystemItem.fileName().componentsSeparatedByString(".").count == 0 && fileSystemItem.fileName() != "Text-It")
         {
             let view = outlineView.makeViewWithIdentifier("HeaderCell", owner: self) as! NSTableCellView
             if let textField = view.textField {
