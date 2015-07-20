@@ -20,6 +20,8 @@
 		8C32659E1B34B42300D958A2 /* BLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659A1B34B42300D958A2 /* BLEHelper.m */; };
 		8C32659F1B34B42300D958A2 /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C32659C1B34B42300D958A2 /* BLEService.m */; };
 		8C33CCA21B39C2AA00452DE4 /* THCustomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */; };
+		8C362B231B5D0AD3007BFC63 /* FileSystemItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C362B221B5D0AD3007BFC63 /* FileSystemItem.m */; };
+		8C362B281B5D2DD1007BFC63 /* folder.ico in Resources */ = {isa = PBXBuildFile; fileRef = 8C362B271B5D2DD1007BFC63 /* folder.ico */; };
 		8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C515AFE1B4143A4005ED4C8 /* WindowController.swift */; };
 		8C515B011B41A896005ED4C8 /* ViewControllerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C515B001B41A896005ED4C8 /* ViewControllerTextView.swift */; };
 		8C5C64D51B52998D00D3A395 /* GatheringWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C5C64D41B52998D00D3A395 /* GatheringWindow.xib */; };
@@ -91,6 +93,9 @@
 		8C32659B1B34B42300D958A2 /* BLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEService.h; sourceTree = "<group>"; };
 		8C32659C1B34B42300D958A2 /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
 		8C33CCA11B39C2AA00452DE4 /* THCustomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCustomComponent.swift; sourceTree = "<group>"; };
+		8C362B221B5D0AD3007BFC63 /* FileSystemItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSystemItem.m; sourceTree = "<group>"; };
+		8C362B241B5D0AE0007BFC63 /* FileSystemItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileSystemItem.h; sourceTree = "<group>"; };
+		8C362B271B5D2DD1007BFC63 /* folder.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = folder.ico; sourceTree = "<group>"; };
 		8C515AFE1B4143A4005ED4C8 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		8C515B001B41A896005ED4C8 /* ViewControllerTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTextView.swift; sourceTree = "<group>"; };
 		8C5C64D41B52998D00D3A395 /* GatheringWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GatheringWindow.xib; sourceTree = "<group>"; };
@@ -289,6 +294,7 @@
 		8CA303481B3D518E00002404 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8C362B271B5D2DD1007BFC63 /* folder.ico */,
 				8CA3034D1B3D52BB00002404 /* record.png */,
 				8CA3034E1B3D52BB00002404 /* record@2x.png */,
 				8CA303491B3D51B200002404 /* push.png */,
@@ -367,6 +373,8 @@
 			isa = PBXGroup;
 			children = (
 				8CD1D1F21B4EC4440063D3F9 /* FileWriter.swift */,
+				8C362B221B5D0AD3007BFC63 /* FileSystemItem.m */,
+				8C362B241B5D0AE0007BFC63 /* FileSystemItem.h */,
 			);
 			name = File;
 			sourceTree = "<group>";
@@ -509,6 +517,7 @@
 				8CA3034F1B3D52BB00002404 /* record.png in Resources */,
 				8CA3034B1B3D51B200002404 /* push.png in Resources */,
 				8CA303501B3D52BB00002404 /* record@2x.png in Resources */,
+				8C362B281B5D2DD1007BFC63 /* folder.ico in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +561,7 @@
 				8C32659D1B34B42300D958A2 /* BLEDiscovery.m in Sources */,
 				8C515AFF1B4143A4005ED4C8 /* WindowController.swift in Sources */,
 				8CD47F051B453E3D00DB7D04 /* THBandageData.swift in Sources */,
+				8C362B231B5D0AD3007BFC63 /* FileSystemItem.m in Sources */,
 				8CC1B3431B42BA8B001AC34D /* Parser.swift in Sources */,
 				8CA303401B3D4D1A00002404 /* ViewControllerBLE_Firmata.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,

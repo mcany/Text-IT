@@ -16,6 +16,9 @@ class ViewController: NSViewController {
     @IBOutlet var debugTextView: NSTextView!
     @IBOutlet weak var componentOutlineView: NSOutlineView!
     
+    @IBAction func refreshButtonTapped(sender: AnyObject) {
+        ViewControllerOutlineView.sharedInstance.outlineView.reloadData()
+    }
     //toolbar
     var toolBar:NSToolbar!
     var pushToolBarItem: NSToolbarItem!
