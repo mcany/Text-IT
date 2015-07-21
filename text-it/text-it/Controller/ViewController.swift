@@ -75,6 +75,10 @@ class ViewController: NSViewController {
         self.componentOutlineView.setDelegate(ViewControllerOutlineView.sharedInstance)
         ViewControllerOutlineView.sharedInstance.outlineView = self.componentOutlineView
         
+        //directory
+        var fileHelper = File()
+        fileHelper.checkIfFolderExistIfNotCreate()
+        
         //feature extraction
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
@@ -119,9 +123,9 @@ class ViewController: NSViewController {
 
     func addPreDefinedFunctionsToJSContext()
     {
-        var dataLoader = DataLoader()
+        var file = File()
         let load: @objc_block String -> [CGFloat] = { input in
-            return dataLoader.loadAccelerometerData(input)
+            return file.loadData(input)
         }
         
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(load, AnyObject.self), forKeyedSubscript: "load")

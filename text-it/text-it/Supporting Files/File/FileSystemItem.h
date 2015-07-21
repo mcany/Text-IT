@@ -17,7 +17,7 @@
     NSString *fileName;
 }
 
-+ (FileSystemItem *)rootItem;
++ (FileSystemItem *)rootItem: (NSString *) directoryName;
 - (NSInteger)numberOfChildren;// Returns -1 for leaf nodes
 - (FileSystemItem *)childAtIndex:(NSInteger)n; // Invalid to call on leaf nodes
 - (NSString *)fullPath;

@@ -75,8 +75,8 @@ class CustomBLECommunicationModule: IFFirmataCommunicationModule, BLEServiceData
         
         if(self.currentBandageDataSession.count > 0)
         {
-            var writer = FileWriter()
-            writer.writeToFile(self.recorder!.fileName, data: self.currentBandageDataSession)
+            var writer = File()
+            writer.write(self.recorder!.fileName, data: self.currentBandageDataSession)
             self.currentBandageDataSession = []
             self.recorder = nil
             self.dataViewerHandler = nil

@@ -30,12 +30,12 @@ static NSMutableArray *leafNode = nil;
     return self;
 }
 
-+ (FileSystemItem *)rootItem {
++ (FileSystemItem *)rootItem: (NSString *) directoryName {
     if (rootItem == nil) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"Text-It"];
-
+        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:directoryName];
+        
         rootItem = [[FileSystemItem alloc] initWithPath:filePath parent:nil];
     }
     return rootItem;

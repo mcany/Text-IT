@@ -34,7 +34,7 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
                 return self
             }
         } else {
-          return FileSystemItem.rootItem()
+          return FileSystemItem.rootItem(Constants.Path.FolderName)
         }
     }
     
