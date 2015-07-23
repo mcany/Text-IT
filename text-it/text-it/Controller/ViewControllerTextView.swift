@@ -25,27 +25,50 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
     {
         println(result)
         
-        if(!result!.toString().hasPrefix("undefined"))
+        if(!result!.toString().hasPrefix("undefined") && self.printResult)
         {
             self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
             self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+            self.printResult = false
+        }
+    }
+    
+    func readCurrentFile()
+    {
+        var file = File();
+        var savedCode = file.read(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile))
+        self.codeTextView.string = savedCode!
+    }
+    
+    func writeToCurrentFile()
+    {
+        dispatch_async(self.queue) {
+            var file = File()
+            file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
+            dispatch_async(dispatch_get_main_queue(), {self.writeToCurrentFile()})
         }
     }
     
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
-        
-        if(textView == self.codeTextView)
+                if(textView == self.codeTextView)
         {
+            
+            JavascriptRunner.sharedInstance.executionCode = textView.string!
+            
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
-                
+                self.printResult = true
                // var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
                 
-                JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!){result in self.printResult(result)}
-
+                //JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!){result in self.printResult(result)}
                 
+                
+            }
+            else
+            {
+                self.printResult = false
             }
             
             /*

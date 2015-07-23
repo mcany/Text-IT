@@ -10,7 +10,7 @@ import Foundation
 
 class File {
     
-    func checkIfFolderExistIfNotCreate()
+    func folderExists() -> Bool
     {
         var fullPath = Constants.Path.FullPath
         var isDir : ObjCBool = false
@@ -18,13 +18,15 @@ class File {
             if isDir {
                 // file exists and is a directory
                 println("exists")
+                return true
             } else {
                 // file exists and is not a directory
+                return false
             }
         } else {
             // file does not exist
             println("does not exist")
-            self.createFolder()
+            return false
         }
     }
     
@@ -48,23 +50,31 @@ class File {
         return NSFileManager().fileExistsAtPath(path)
     }
     
-    func write(fileName: String, data: [THBandageData]) -> Bool
+    func write(filePath: String, data: AnyObject?) -> Bool
     {
-        println("write to file")
-        
-        let file = fileName
         var error: NSError?
+        let path = filePath
+        var text = ""
 
-        let dir = Constants.Path.Documents
-            let path = dir.stringByAppendingPathComponent(file);
-            var text = ""
-            for aData in data
-            {
-                text  += aData.printData()
-                
+        if let myData: AnyObject = data {
+            switch myData {
+            case let c as [THBandageData]:
+                for aData in c
+                {
+                    text  += aData.printData()
+                    
+                }
+                break
+            case let c as String:
+                text += c
+                break
+            default:
+                break
             }
-            text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
-
+        }
+       
+        text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
+        
         if(error == nil)
         {
             return true
@@ -72,6 +82,13 @@ class File {
         
         println(error)
         return false
+    }
+    
+    func read (path: String) -> String? {
+        if self.fileExists(path) {
+            return String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)
+        }
+        return nil
     }
     
     func loadData(fileName: String) -> [CGFloat]

@@ -30,6 +30,10 @@ class ViewController: NSViewController {
     
     //code text view
     var lineNumberView: NoodleLineNumberView!
+    var printResult: Bool = false
+    let queue = dispatch_queue_create("serial-worker", DISPATCH_QUEUE_SERIAL)
+    var currentFile: String = "main.txt"
+    
     
     //connections
     var firmataController: IFFirmata!
@@ -49,6 +53,7 @@ class ViewController: NSViewController {
         self.debugTextView.editable = false
         
         JavascriptRunner.sharedInstance.exceptionHandler = self
+        JavascriptRunner.sharedInstance.executeLoop(){result in self.printResult(result)}
         self.addPreDefinedFunctionsToJSContext()
         self.gatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
 
@@ -77,7 +82,17 @@ class ViewController: NSViewController {
         
         //directory
         var fileHelper = File()
-        fileHelper.checkIfFolderExistIfNotCreate()
+        if ( !fileHelper.folderExists())
+        {
+            fileHelper.createFolder()
+        }
+        var currentFilePath = Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile)
+        if ( !fileHelper.fileExists(currentFilePath) )
+        {
+            fileHelper.write(currentFilePath,data: "")
+        }
+        self.readCurrentFile()
+        
         
         //feature extraction
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
