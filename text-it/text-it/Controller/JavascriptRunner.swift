@@ -54,7 +54,7 @@ class JavascriptRunner: NSObject {
     func executeLoop(completionHandler: (JSValue) -> Void )
     {
         
-        let seconds = 4.0
+        let seconds = 2.0
         let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
         var dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         
@@ -82,8 +82,12 @@ class JavascriptRunner: NSObject {
     func addFunctionsToJSContext()
     {
         // export JS class
+        self.context.setObject(FastFourierTransform.self, forKeyedSubscript: "FastFourierTransform")
+        self.context.setObject(Median.self, forKeyedSubscript: "Median")
+        self.context.setObject(Mean.self, forKeyedSubscript: "Mean")
         self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
         self.context.setObject(StandardDeviation.self, forKeyedSubscript: "StandardDeviation")
+        self.context.setObject(HighPassFilter.self, forKeyedSubscript: "HighPassFilter")
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
         self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")

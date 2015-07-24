@@ -26,14 +26,14 @@ class ViewController: NSViewController {
     var gatheringWindowController: GatheringWindowController!
     
     //text view
-    var previosData: [CGFloat] = []
+    var previousData: [CGFloat] = []
     
     //code text view
     var lineNumberView: NoodleLineNumberView!
     var printResult: Bool = false
     let queue = dispatch_queue_create("serial-worker", DISPATCH_QUEUE_SERIAL)
     var currentFile: String = "main.txt"
-    
+    var codeChanged: Bool = false
     
     //connections
     var firmataController: IFFirmata!
@@ -92,6 +92,7 @@ class ViewController: NSViewController {
             fileHelper.write(currentFilePath,data: "")
         }
         self.readCurrentFile()
+        self.writeToCurrentFile()
         
         
         //feature extraction
@@ -166,9 +167,9 @@ class ViewController: NSViewController {
     func display(data: [CGFloat])
     {
         if let lineChart = self.lineChartView.layer as? LineChart {
-            if(data.count > 0 && self.previosData != data)
+            if(data.count > 0 && self.previousData != data)
             {
-                previosData = data
+                self.previousData = data
                 let dataset1 = LineChart.Dataset(label: "Data", data: data)
                 dataset1.color = NSColor.redColor().CGColor
                 dataset1.fillColor = nil

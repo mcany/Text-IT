@@ -42,25 +42,31 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
     
     func writeToCurrentFile()
     {
-        dispatch_async(self.queue) {
-            var file = File()
-            file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
-            dispatch_async(dispatch_get_main_queue(), {self.writeToCurrentFile()})
+        if (self.codeChanged)
+        {
+            dispatch_async(self.queue) {
+                var file = File()
+                file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
+                dispatch_async(dispatch_get_main_queue(), {self.writeToCurrentFile()})
+            }
+            self.codeChanged = false
         }
     }
     
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
-                if(textView == self.codeTextView)
+        if(textView == self.codeTextView)
         {
             
             JavascriptRunner.sharedInstance.executionCode = textView.string!
+            self.codeChanged = true
+            self.writeToCurrentFile()
             
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
                 self.printResult = true
-               // var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
+                // var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
                 
                 //JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!){result in self.printResult(result)}
                 
