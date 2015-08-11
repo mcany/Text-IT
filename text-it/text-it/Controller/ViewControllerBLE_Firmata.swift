@@ -64,8 +64,8 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         self.bleCommunicationModule!.finishSession()
         self.recordToolBarItem.enabled = false
         self.bleCommunicationModule = nil
-        service.delegate = nil
-        service.dataDelegate = nil
+        //service.delegate = nil
+        //service.dataDelegate = nil
     }
     
     func bleServiceDidReset() {

@@ -47,15 +47,14 @@ class File {
     
     func fileExists(path: String) -> Bool
     {
-        return NSFileManager().fileExistsAtPath(path)
-    }
+        return NSFileManager().fileExistsAtPath(path)    }
     
     func write(filePath: String, data: AnyObject?) -> Bool
     {
         var error: NSError?
         let path = filePath
         var text = ""
-
+        
         if let myData: AnyObject = data {
             switch myData {
             case let c as [THBandageData]:
@@ -69,10 +68,11 @@ class File {
                 text += c
                 break
             default:
+                text += myData.description
                 break
             }
         }
-       
+        
         text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: &error)
         
         if(error == nil)
@@ -85,8 +85,52 @@ class File {
     }
     
     func read (path: String) -> String? {
-        if self.fileExists(path) {
-            return String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)
+        var text: String = ""
+        
+        if path.rangeOfString(Constants.Path.FolderName) != nil{
+            if self.fileExists(path) {
+                text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
+            }
+        }
+        else
+        {
+            var appFile: String = Constants.Path.FullPath.stringByAppendingPathComponent(path)
+            if self.fileExists(appFile)
+            {
+                text = String(contentsOfFile:appFile, encoding: NSUTF8StringEncoding, error: nil)!
+            }
+        }
+        
+        if(text != "")
+        {
+            return text
+        }
+        
+        return nil
+    }
+    
+    func sringToBandageData(text: String) -> [THBandageData]?
+    {
+        if(text != "undefined")
+        {
+            var textWithoutNewLines: [String] = text.componentsSeparatedByString("\n")
+            var bandageDataSession = [THBandageData]()
+            for textLine in textWithoutNewLines
+            {
+                //X: 0.77734375 Y: 0.69757080078125 Z: 0.090728759765625
+                if(textLine != "")
+                {
+                    var textWithoutCapitalLetters = textLine.componentsSeparatedByString(" ")
+                    var linearAcceleration = LinearAcceleration()
+                    linearAcceleration.x = CGFloat(((textWithoutCapitalLetters[1] as NSString).doubleValue))
+                    linearAcceleration.y = CGFloat(((textWithoutCapitalLetters[3] as NSString).doubleValue))
+                    linearAcceleration.z = CGFloat(((textWithoutCapitalLetters[5] as NSString).doubleValue))
+                    var bandageData =  THBandageData()
+                    bandageData.linearAcceleration = linearAcceleration
+                    bandageDataSession.append(bandageData)
+                }
+            }
+            return bandageDataSession
         }
         return nil
     }

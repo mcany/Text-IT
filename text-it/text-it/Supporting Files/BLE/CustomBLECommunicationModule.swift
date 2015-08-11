@@ -76,12 +76,13 @@ class CustomBLECommunicationModule: IFFirmataCommunicationModule, BLEServiceData
         if(self.currentBandageDataSession.count > 0)
         {
             var writer = File()
-            writer.write(self.recorder!.fileName, data: self.currentBandageDataSession)
+            var currentFilePath = Constants.Path.FullPath.stringByAppendingPathComponent(self.recorder!.fileName)
+            writer.write(currentFilePath, data: self.currentBandageDataSession)
             self.currentBandageDataSession = []
-            self.recorder = nil
-            self.dataViewerHandler = nil
-            self.firmataController = nil
-            self.bleService = nil
+            //self.recorder = nil
+            //self.dataViewerHandler = nil
+            //self.firmataController = nil
+            //self.bleService = nil
         }
     }
     

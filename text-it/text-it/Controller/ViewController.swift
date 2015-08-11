@@ -99,24 +99,24 @@ class ViewController: NSViewController {
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Deviation"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Correlation"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Threshold"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Correlation"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Threshold"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "PeakDetection"))
         ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "FFT"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Energy"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Energy"))
         
         //filter
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Low-Pass Filter"))
         ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "High-Pass Filter"))
-        ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Moving Window Average Filter"))
+        //ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Moving Window Average Filter"))
         
         //machine learning
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "k-Nearest Neighbors"))
-        ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Hidden Markov Model"))
+        //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Hidden Markov Model"))
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
-        ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
-        ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
+        //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
+        //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
     }
 
     //BLE test
@@ -145,6 +145,18 @@ class ViewController: NSViewController {
         }
         
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(load, AnyObject.self), forKeyedSubscript: "load")
+        
+        let read: @objc_block String -> String? = { input in
+            return file.read(input)
+        }
+        
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(read, AnyObject.self), forKeyedSubscript: "read")
+        
+        let sringToBandageData: @objc_block String -> [THBandageData]? = { input in
+            return file.sringToBandageData(input)
+        }
+        
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(sringToBandageData, AnyObject.self), forKeyedSubscript: "sringToBandageData")
         
         let display: @objc_block [CGFloat] -> () = { input in
             return self.display(input)

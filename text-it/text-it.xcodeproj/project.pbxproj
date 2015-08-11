@@ -231,6 +231,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8C2D169A1B6F72160077561B /* MachineLearning */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MachineLearning;
+			sourceTree = "<group>";
+		};
 		8C32658B1B34B22800D958A2 /* Firmata */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,11 +424,12 @@
 			children = (
 				8CA733871B299937005243A1 /* Component.swift */,
 				8C75C6FC1B2EFF19009CAE62 /* ComponentModel.swift */,
-				8CC1B3411B42BA6D001AC34D /* Parser */,
 				8CD97D041B38A0550076C8C9 /* FeatureExtraction */,
+				8C701D0E1B24861B002BEED5 /* Filter */,
+				8C2D169A1B6F72160077561B /* MachineLearning */,
+				8CC1B3411B42BA6D001AC34D /* Parser */,
 				8CA7338D1B29A1EA005243A1 /* Evaluator */,
 				8CDAAAAC1B285480002CE2F2 /* TestCase */,
-				8C701D0E1B24861B002BEED5 /* Filter */,
 			);
 			path = Components;
 			sourceTree = "<group>";
