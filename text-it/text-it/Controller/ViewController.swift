@@ -178,6 +178,7 @@ class ViewController: NSViewController {
     
     func display(data: [CGFloat])
     {
+        dispatch_async(dispatch_get_main_queue(), {
         if let lineChart = self.lineChartView.layer as? LineChart {
             if(data.count > 0 && self.previousData != data)
             {
@@ -189,5 +190,6 @@ class ViewController: NSViewController {
                 lineChart.datasets = [dataset1]
             }
         }
+        })
     }
 }

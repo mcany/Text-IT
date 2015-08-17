@@ -64,7 +64,10 @@ class JavascriptRunner: NSObject {
                 dispatch_async(self.queue) {
                     self.codeChanged = false
                     let result = self.context.evaluateScript(self.executionCode)
-                    dispatch_async(dispatch_get_main_queue(), {completionHandler(result); self.executeLoop(){result in  completionHandler(result)}})
+                    dispatch_async(dispatch_get_main_queue(), {
+                        completionHandler(result);
+                        self.executeLoop(){result in  completionHandler(result)}
+                    })
                 }
             }
             else
@@ -93,5 +96,7 @@ class JavascriptRunner: NSObject {
         self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")
         self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
         self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
+        self.context.setObject(LinearAcceleration.self, forKeyedSubscript: "LinearAcceleration")
+        self.context.setObject(THBandageData.self, forKeyedSubscript: "THBandageData")
     }
 }
