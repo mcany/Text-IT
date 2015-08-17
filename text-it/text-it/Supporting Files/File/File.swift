@@ -109,12 +109,13 @@ class File {
         return nil
     }
     
-    func sringToBandageData(text: String) -> [THBandageData]?
+    func sringToBandageData(text: String) -> BandageDataArray?
     {
         if(text != "undefined")
         {
             var textWithoutNewLines: [String] = text.componentsSeparatedByString("\n")
             var bandageDataSession = [THBandageData]()
+            var bandageDataArray = BandageDataArray()
             for textLine in textWithoutNewLines
             {
                 //X: 0.77734375 Y: 0.69757080078125 Z: 0.090728759765625
@@ -128,9 +129,13 @@ class File {
                     var bandageData =  THBandageData()
                     bandageData.linearAcceleration = linearAcceleration
                     bandageDataSession.append(bandageData)
+                    bandageDataArray.x.append(linearAcceleration.x)
+                    bandageDataArray.y.append(linearAcceleration.y)
+                    bandageDataArray.z.append(linearAcceleration.z)
                 }
             }
-            return bandageDataSession
+            bandageDataArray.bandageDataSession = bandageDataSession
+            return bandageDataArray
         }
         return nil
     }

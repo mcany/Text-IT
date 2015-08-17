@@ -98,5 +98,7 @@ class JavascriptRunner: NSObject {
         self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
         self.context.setObject(LinearAcceleration.self, forKeyedSubscript: "LinearAcceleration")
         self.context.setObject(THBandageData.self, forKeyedSubscript: "THBandageData")
+        self.context.setObject(BandageDataArray.self, forKeyedSubscript: "BandageDataArray")
+
     }
 }

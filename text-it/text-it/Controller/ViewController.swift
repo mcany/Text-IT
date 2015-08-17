@@ -39,7 +39,7 @@ class ViewController: NSViewController {
     var firmataController: IFFirmata!
     var serverController: THServerController!
     var bleCommunicationModule:CustomBLECommunicationModule?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class ViewController: NSViewController {
         JavascriptRunner.sharedInstance.executeLoop(){result in self.printResult(result)}
         self.addPreDefinedFunctionsToJSContext()
         self.gatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
-
+        
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
         self.codeScrollView.verticalRulerView = self.lineNumberView
@@ -118,7 +118,7 @@ class ViewController: NSViewController {
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
     }
-
+    
     //BLE test
     func startScanning()
     {
@@ -136,7 +136,7 @@ class ViewController: NSViewController {
         
         self.serverController.sendObject(custom)
     }
-
+    
     func addPreDefinedFunctionsToJSContext()
     {
         var file = File()
@@ -152,13 +152,13 @@ class ViewController: NSViewController {
         
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(read, AnyObject.self), forKeyedSubscript: "read")
         
-        let sringToBandageData: @objc_block String -> [THBandageData]? = { input in
+        let sringToBandageData: @objc_block String -> BandageDataArray? = { input in
             return file.sringToBandageData(input)
         }
         
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(sringToBandageData, AnyObject.self), forKeyedSubscript: "sringToBandageData")
         
-        let display: @objc_block [CGFloat] -> () = { input in
+        let display: @objc_block AnyObject? -> () = { input in
             return self.display(input)
         }
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
@@ -176,20 +176,46 @@ class ViewController: NSViewController {
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(startScanning, AnyObject.self), forKeyedSubscript: "startScanning")
     }
     
-    func display(data: [CGFloat])
+    func display(data: AnyObject?)
     {
         dispatch_async(dispatch_get_main_queue(), {
-        if let lineChart = self.lineChartView.layer as? LineChart {
-            if(data.count > 0 && self.previousData != data)
-            {
-                self.previousData = data
-                let dataset1 = LineChart.Dataset(label: "Data", data: data)
-                dataset1.color = NSColor.redColor().CGColor
-                dataset1.fillColor = nil
-                dataset1.curve = .Bezier(0.3)
-                lineChart.datasets = [dataset1]
+            if let myData: AnyObject = data {
+                switch myData {
+                case let floatArray as [CGFloat]:
+                    if let lineChart = self.lineChartView.layer as? LineChart {
+                        if(floatArray.count > 0 && self.previousData != floatArray)
+                        {
+                            self.previousData = floatArray
+                            let dataset1 = LineChart.Dataset(label: "Data", data: floatArray)
+                            dataset1.color = NSColor.redColor().CGColor
+                            dataset1.fillColor = nil
+                            dataset1.curve = .Bezier(0.3)
+                            lineChart.datasets = [dataset1]
+                        }
+                    }
+                    break
+                case let bandageDataArray as BandageDataArray:
+                    if let lineChart = self.lineChartView.layer as? LineChart {
+                        let dataset1 = LineChart.Dataset(label: "X", data: bandageDataArray.x)
+                        dataset1.color = NSColor.redColor().CGColor
+                        dataset1.fillColor = nil
+                        dataset1.curve = .Bezier(0.3)
+                        
+                        let dataset2 = LineChart.Dataset(label: "Y", data: bandageDataArray.y)
+                        dataset2.color = NSColor.blueColor().CGColor
+                        dataset2.curve = .Bezier(0.3)
+                        
+                        let dataset3 = LineChart.Dataset(label: "Z", data: bandageDataArray.z)
+                        dataset2.color = NSColor.greenColor().CGColor
+                        dataset2.curve = .Bezier(0.3)
+                        
+                        lineChart.datasets = [ dataset1, dataset2, dataset3 ]
+                    }
+                    break
+                default:
+                    break
+                }
             }
-        }
         })
     }
 }

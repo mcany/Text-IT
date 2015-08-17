@@ -56,6 +56,7 @@
 		8CA303521B3D573B00002404 /* ViewControllerToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */; };
 		8CA733881B299937005243A1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA733871B299937005243A1 /* Component.swift */; };
 		8CA7338C1B29A1E5005243A1 /* Evaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA7338B1B29A1E5005243A1 /* Evaluator.swift */; };
+		8CAAA3F51B81E11C00C703C2 /* BandageDataArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAAA3F41B81E11C00C703C2 /* BandageDataArray.swift */; };
 		8CC1B3431B42BA8B001AC34D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B3421B42BA8B001AC34D /* Parser.swift */; };
 		8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */; };
 		8CC1B3471B42BBC8001AC34D /* ParserWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */; };
@@ -137,6 +138,7 @@
 		8CA303511B3D573B00002404 /* ViewControllerToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerToolbar.swift; sourceTree = "<group>"; };
 		8CA733871B299937005243A1 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		8CA7338B1B29A1E5005243A1 /* Evaluator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluator.swift; sourceTree = "<group>"; };
+		8CAAA3F41B81E11C00C703C2 /* BandageDataArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BandageDataArray.swift; sourceTree = "<group>"; };
 		8CC1B3421B42BA8B001AC34D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserWindowController.swift; sourceTree = "<group>"; };
 		8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParserWindow.xib; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 			children = (
 				8CD47F071B45416E00DB7D04 /* DataModel */,
 				8CD47F041B453E3D00DB7D04 /* THBandageData.swift */,
+				8CAAA3F41B81E11C00C703C2 /* BandageDataArray.swift */,
 			);
 			name = ETextileData;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				8C84C2071B62396900AE42F9 /* Median.swift in Sources */,
 				8C75C6FD1B2EFF19009CAE62 /* ComponentModel.swift in Sources */,
 				8C701D101B2486EB002BEED5 /* LowPassFilter.swift in Sources */,
+				8CAAA3F51B81E11C00C703C2 /* BandageDataArray.swift in Sources */,
 				8C84C20D1B62501200AE42F9 /* Mean.swift in Sources */,
 				8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */,
 				8C6002501B1C460A0057892E /* NoodleLineNumberMarker.m in Sources */,
