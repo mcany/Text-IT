@@ -67,6 +67,8 @@
 		8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */; };
 		8CDAAAAA1B284AC4002CE2F2 /* TestCaseWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */; };
 		8CDAAAAE1B2854B7002CE2F2 /* TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */; };
+		8CFB86621B85DA0800D0D18E /* ETextileCommunicationSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CFB86611B85DA0800D0D18E /* ETextileCommunicationSelection.xib */; };
+		8CFB86641B85DE5300D0D18E /* ETextileCommunicationSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFB86631B85DE5300D0D18E /* ETextileCommunicationSelectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,8 @@
 		8CDAAAA71B284AC4002CE2F2 /* TestCaseWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCaseWindow.swift; sourceTree = "<group>"; };
 		8CDAAAA81B284AC4002CE2F2 /* TestCaseWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCaseWindow.xib; sourceTree = "<group>"; };
 		8CDAAAAD1B2854B7002CE2F2 /* TestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCase.swift; sourceTree = "<group>"; };
+		8CFB86611B85DA0800D0D18E /* ETextileCommunicationSelection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ETextileCommunicationSelection.xib; sourceTree = "<group>"; };
+		8CFB86631B85DE5300D0D18E /* ETextileCommunicationSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETextileCommunicationSelectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +338,7 @@
 				8C2CEB121B188EB600A2DB8F /* Main.storyboard */,
 				8CC1B3461B42BBC8001AC34D /* ParserWindow.xib */,
 				8C5C64D41B52998D00D3A395 /* GatheringWindow.xib */,
+				8CFB86611B85DA0800D0D18E /* ETextileCommunicationSelection.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 				8CC1B3441B42BB82001AC34D /* ParserWindowController.swift */,
 				8C23D8B81B4C04E100FEC30A /* JavascriptRunner.swift */,
 				8C5C64D61B5299AB00D3A395 /* GatheringWindowController.swift */,
+				8CFB86631B85DE5300D0D18E /* ETextileCommunicationSelectionController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -530,6 +536,7 @@
 				8CC1B3471B42BBC8001AC34D /* ParserWindow.xib in Resources */,
 				8CA3034C1B3D51B200002404 /* push@2x.png in Resources */,
 				8C2CEB111B188EB600A2DB8F /* Images.xcassets in Resources */,
+				8CFB86621B85DA0800D0D18E /* ETextileCommunicationSelection.xib in Resources */,
 				8C2CEB141B188EB600A2DB8F /* Main.storyboard in Resources */,
 				8CDAAAAA1B284AC4002CE2F2 /* TestCaseWindow.xib in Resources */,
 				8CA3034F1B3D52BB00002404 /* record.png in Resources */,
@@ -558,6 +565,7 @@
 				8CC1B3451B42BB83001AC34D /* ParserWindowController.swift in Sources */,
 				8C6002531B1C4F7A0057892E /* MarkerLineNumberView.m in Sources */,
 				8C02EB671B4571670085D44D /* PeakDetection.swift in Sources */,
+				8CFB86641B85DE5300D0D18E /* ETextileCommunicationSelectionController.swift in Sources */,
 				8C9DD2381B49A08F0055DB65 /* StandardDeviation.swift in Sources */,
 				8CA733881B299937005243A1 /* Component.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,

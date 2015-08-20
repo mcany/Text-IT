@@ -24,6 +24,7 @@ class ViewController: NSViewController {
     var pushToolBarItem: NSToolbarItem!
     var recordToolBarItem: NSToolbarItem!
     var gatheringWindowController: GatheringWindowController!
+    var eTextileCommunicationSelectionController: ETextileCommunicationSelectionController!
     
     //text view
     var previousData: [CGFloat] = []
@@ -56,6 +57,7 @@ class ViewController: NSViewController {
         JavascriptRunner.sharedInstance.executeLoop(){result in self.printResult(result)}
         self.addPreDefinedFunctionsToJSContext()
         self.gatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
+        self.eTextileCommunicationSelectionController = ETextileCommunicationSelectionController(windowNibName: "ETextileCommunicationSelection")
         
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
@@ -117,6 +119,9 @@ class ViewController: NSViewController {
         ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
+        
+        //test
+        self.eTextileCommunicationSelectionController.showWindow(nil)
     }
     
     //BLE test
@@ -163,6 +168,11 @@ class ViewController: NSViewController {
         }
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(display, AnyObject.self), forKeyedSubscript: "display")
         
+        let addCircles: @objc_block [CGFloat]? -> () = { input in
+            return self.addCircles(input)
+        }
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(addCircles, AnyObject.self), forKeyedSubscript: "addCircles")
+        
         //test
         let sendMessage: @objc_block () -> () = { input in
             return self.sendMessage()
@@ -174,6 +184,18 @@ class ViewController: NSViewController {
             return self.startScanning()
         }
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(startScanning, AnyObject.self), forKeyedSubscript: "startScanning")
+    }
+    
+    func addCircles(data: [CGFloat]?)
+    {
+        if let myData: [CGFloat] = data {
+            if let lineChart = self.lineChartView.layer as? LineChart {
+                if(data!.count > 0 && lineChart.datasets.count > 0 )
+                {
+                    lineChart.datasets[0].addCircle(data!)
+                }
+            }
+        }
     }
     
     func display(data: AnyObject?)
