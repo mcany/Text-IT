@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class WindowController: NSWindowController, NSToolbarDelegate {
+class WindowController: NSWindowController, NSToolbarDelegate, NSMenuDelegate {
 
     @IBOutlet weak var toolBar: NSToolbar!
     @IBOutlet weak var pushToolBarItem: NSToolbarItem!
@@ -38,5 +38,10 @@ class WindowController: NSWindowController, NSToolbarDelegate {
             return false
         }
         return true
+    }
+    
+    
+    @IBAction func buttonPressed(sender: NSButton) {
+        println(sender)
     }
 }

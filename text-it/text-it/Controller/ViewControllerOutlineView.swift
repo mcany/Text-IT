@@ -8,50 +8,53 @@
 
 import Cocoa
 
-class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewDataSource {
+extension ViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     
-    static let sharedInstance = ViewControllerOutlineView()
+    //static let sharedInstance = ViewControllerOutlineView()
     
-    //test
-    let featurExtractionComponent: ComponentModel = ComponentModel(name: "Feature Extraction")
-    let filterComponent: ComponentModel = ComponentModel(name: "Filter")
-    let testCaseComponent: ComponentModel = ComponentModel(name: "Test Case")
-    let parserComponent: ComponentModel = ComponentModel(name: "Parser")
-    let machineLearningComponent: ComponentModel = ComponentModel(name: "Machine Learning")
-    
-    var outlineView: NSOutlineView!
     //MARK: - NSOutlineView component
     
+    func textView(textView: NSTextView, doubleClickedOnCell cell: NSTextAttachmentCellProtocol!, inRect cellFrame: NSRect) {
+        <#code#>
+    }
+    
+    func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
+        if let fileSystemItem = item as? FileSystemItem {
+            var file = File()
+            if(file.fileExists(fileSystemItem.fullPath()))
+            {
+                self.currentFile = fileSystemItem.fullPath()
+            }
+        }
+        return true
+    }
+    
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-        //println("child:ofItem")
-        
         if let it: AnyObject = item {
             switch it {
-            case let c as FileSystemItem: // This works even though NSMutableArray is more accurate
+            case let c as FileSystemItem:
                 return c.childAtIndex(index)
             default:
                 assert(false, "outlineView:index:item: gave a dud item")
                 return self
             }
         } else {
-          return FileSystemItem.rootItem(Constants.Path.FolderName)
+            return FileSystemItem.rootItem(Constants.Path.FolderName)
         }
     }
     
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-        //println("isItemExpandable")
         switch item {
         case let c as FileSystemItem:
-            return (c.numberOfChildren() > 0) ? true : false
+            var file = File()
+            return file.folderExists(c.fullPath())
         default:
             return false
         }
     }
     
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-        //println("numberOfChildrenOfItem")
         if let it: AnyObject = item {
-            //println("\(it)")
             switch it {
             case let c as FileSystemItem:
                 return c.numberOfChildren()
@@ -62,8 +65,6 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
             return 1 // 5 categories
         }
     }
-    
-    
     
     func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
         if let it: AnyObject = item {
@@ -100,12 +101,12 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
         /*
         switch item {
         case let c as FileSystemItem:
-            let view = outlineView.makeViewWithIdentifier("HeaderCell", owner: self) as! NSTableCellView
-            if let textField = view.textField {
-                textField.stringValue = c.fileName()
-            }
-            return view
-
+        let view = outlineView.makeViewWithIdentifier("HeaderCell", owner: self) as! NSTableCellView
+        if let textField = view.textField {
+        textField.stringValue = c.fileName()
+        }
+        return view
+        
         //case let s as SubComponentModel:
         //    let view = outlineView.makeViewWithIdentifier("DataCell", owner: self) as! NSTableCellView
         //    if let textField = view.textField {
@@ -113,12 +114,11 @@ class ViewControllerOutlineView: NSObject, NSOutlineViewDelegate, NSOutlineViewD
         //    }
         //    return view
         default:
-            return nil
+        return nil
         }
-*/
+        */
     }
     
-
     func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
         if ((outlineView.parentForItem(item)) != nil) {
             // If not nil; then the item has a parent.

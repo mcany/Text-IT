@@ -52,7 +52,7 @@ import JavaScriptCore
             self.testCase.name = self.funcName.stringValue
             JavascriptRunner.sharedInstance.execute(testCase.name+"()"){result in println (result)}
 //            println(JavascriptRunner.sharedInstance.execute(testCase.name+"()"))
-            ViewControllerOutlineView.sharedInstance.testCaseComponent.methodNames.append(SubComponentModel(name: self.testCase.name))
+            //ViewControllerOutlineView.sharedInstance.testCaseComponent.methodNames.append(SubComponentModel(name: self.testCase.name))
             self.close()
         }
     }

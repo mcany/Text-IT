@@ -36,7 +36,8 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
     func readCurrentFile()
     {
         var file = File();
-        var savedCode = file.read(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile))
+        //var savedCode = file.read(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile))
+        var savedCode = file.read(self.currentFile)
         self.codeTextView.string = savedCode!
     }
     
@@ -46,7 +47,8 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
         {
             dispatch_async(self.queue) {
                 var file = File()
-                file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
+                //file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
+                file.write((self.currentFile), data: self.codeTextView.string)
                 dispatch_async(dispatch_get_main_queue(), {self.writeToCurrentFile()})
             }
             self.codeChanged = false

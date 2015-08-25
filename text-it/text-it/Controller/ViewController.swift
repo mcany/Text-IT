@@ -16,9 +16,6 @@ class ViewController: NSViewController {
     @IBOutlet var debugTextView: NSTextView!
     @IBOutlet weak var componentOutlineView: NSOutlineView!
     
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
-        ViewControllerOutlineView.sharedInstance.outlineView.reloadData()
-    }
     //toolbar
     var toolBar:NSToolbar!
     var pushToolBarItem: NSToolbarItem!
@@ -35,7 +32,11 @@ class ViewController: NSViewController {
     var lineNumberView: NoodleLineNumberView!
     var printResult: Bool = false
     let queue = dispatch_queue_create("serial-worker", DISPATCH_QUEUE_SERIAL)
-    var currentFile: String = "main.txt"
+    var currentFile: String = "main.txt"{
+        didSet{
+            self.readCurrentFile()
+        }
+    }
     var codeChanged: Bool = false
     
     //connections
@@ -82,13 +83,13 @@ class ViewController: NSViewController {
         self.serverController.startServer()
         
         //outlineview items
-        self.componentOutlineView.setDataSource(ViewControllerOutlineView.sharedInstance)
-        self.componentOutlineView.setDelegate(ViewControllerOutlineView.sharedInstance)
-        ViewControllerOutlineView.sharedInstance.outlineView = self.componentOutlineView
+        self.componentOutlineView.setDataSource(self)
+        self.componentOutlineView.setDelegate(self)
+        //ViewControllerOutlineView.sharedInstance.outlineView = self.componentOutlineView
         
         //directory
         var fileHelper = File()
-        if ( !fileHelper.folderExists())
+        if ( !fileHelper.folderExists(Constants.Path.FullPath))
         {
             fileHelper.createFolder()
         }
@@ -102,25 +103,25 @@ class ViewController: NSViewController {
         
         
         //feature extraction
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Deviation"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Mean"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Median"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Deviation"))
         //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Correlation"))
         //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Threshold"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "PeakDetection"))
-        ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "FFT"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "PeakDetection"))
+        //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "FFT"))
         //ViewControllerOutlineView.sharedInstance.featurExtractionComponent.methodNames.append(SubComponentModel(name: "Energy"))
         
         //filter
-        ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
-        ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Low-Pass Filter"))
-        ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "High-Pass Filter"))
+        //ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "RC Filter"))
+        //ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Low-Pass Filter"))
+        //ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "High-Pass Filter"))
         //ViewControllerOutlineView.sharedInstance.filterComponent.methodNames.append(SubComponentModel(name: "Moving Window Average Filter"))
         
         //machine learning
-        ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "k-Nearest Neighbors"))
+        //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "k-Nearest Neighbors"))
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Hidden Markov Model"))
-        ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
+        //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Support Vector Machine"))
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Principal Component Analysis"))
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
         

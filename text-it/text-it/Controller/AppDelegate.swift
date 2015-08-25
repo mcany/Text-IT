@@ -10,17 +10,25 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-
-
+    
+    
+    @IBOutlet weak var newFileMenuItem: NSMenuItem!
+    @IBOutlet weak var newFolderMenuItem: NSMenuItem!
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
     }
-
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
-
-
+    
+    @IBAction func menuItemPressed(sender: AnyObject) {
+        if let window = NSApplication.sharedApplication().mainWindow {
+            if let viewController = window.contentViewController as? ViewController {
+                // do stuff
+            }
+        }
+    }
 }
 

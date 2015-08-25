@@ -10,14 +10,12 @@ import Foundation
 
 class File {
     
-    func folderExists() -> Bool
+    func folderExists(path: String) -> Bool
     {
-        var fullPath = Constants.Path.FullPath
         var isDir : ObjCBool = false
-        if NSFileManager.defaultManager().fileExistsAtPath(fullPath, isDirectory:&isDir) {
+        if NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory:&isDir) {
             if isDir {
                 // file exists and is a directory
-                println("exists")
                 return true
             } else {
                 // file exists and is not a directory
@@ -25,7 +23,6 @@ class File {
             }
         } else {
             // file does not exist
-            println("does not exist")
             return false
         }
     }
@@ -47,7 +44,20 @@ class File {
     
     func fileExists(path: String) -> Bool
     {
-        return NSFileManager().fileExistsAtPath(path)    }
+        var isDir : ObjCBool = false
+        if NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory:&isDir) {
+            if isDir {
+                // file exists and is a directory
+                return false
+            } else {
+                // file exists and is not a directory
+                return true
+            }
+        } else {
+            // file does not exist
+            return false
+        }
+    }
     
     func write(filePath: String, data: AnyObject?) -> Bool
     {
@@ -88,10 +98,10 @@ class File {
         var text: String = ""
         // if full path is given open directly
         //if path.rangeOfString(Constants.Path.FolderName) != nil{
-            if self.fileExists(path) {
-                text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
-            }
-        //}
+        if self.fileExists(path) {
+            text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
+        }
+            //}
         else
         {
             var appFile: String = Constants.Path.FullPath.stringByAppendingPathComponent(path)
@@ -100,11 +110,11 @@ class File {
             {
                 text = String(contentsOfFile:appFile, encoding: NSUTF8StringEncoding, error: nil)!
             }
-//            // if direct path is given
-//            else if self.fileExists(path)
-//            {
-//                text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
-//            }
+            //            // if direct path is given
+            //            else if self.fileExists(path)
+            //            {
+            //                text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
+            //            }
         }
         
         if(text != "")

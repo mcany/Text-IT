@@ -65,7 +65,10 @@ static NSMutableArray *leafNode = nil;
             {
                 FileSystemItem *newChild = [[FileSystemItem alloc]
                                             initWithPath:[array objectAtIndex:i] parent:self];
-                [children addObject:newChild];
+                if (![newChild.fileName hasPrefix:@"."])
+                {
+                    [children addObject:newChild];
+                }
             }
         }
         else {

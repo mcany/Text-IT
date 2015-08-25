@@ -58,7 +58,23 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
+                                        <menuItem title="New" id="Was-JA-tGl">
+                                            <menu key="submenu" title="Menu" id="h7d-kz-Odt">
+                                                <items>
+                                                    <menuItem title="File" id="iqg-F3-Dbn">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="menuItemPressed:" target="Voe-Tx-rLC" id="Pa9-kw-ZRc"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Folder" id="AvQ-Px-mPZ">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="menuItemPressed:" target="Voe-Tx-rLC" id="JSL-E0-lJ6"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
                                             <connections>
                                                 <action selector="newDocument:" target="Ady-hI-5gd" id="4Si-XN-c54"/>
                                             </connections>
@@ -641,7 +657,12 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="text_it" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="text_it" customModuleProvider="target">
+                    <connections>
+                        <outlet property="newFileMenuItem" destination="iqg-F3-Dbn" id="XY0-8y-mnO"/>
+                        <outlet property="newFolderMenuItem" destination="AvQ-Px-mPZ" id="eom-kf-C5R"/>
+                    </connections>
+                </customObject>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="65.5" y="-88"/>
@@ -726,10 +747,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="51"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="150" height="51"/>
+                                            <size key="minSize" width="120" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="150" height="51"/>
+                                            <size key="minSize" width="120" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -801,7 +822,7 @@
                                                                 <textField verticalHuggingPriority="750" id="bji-KL-msd">
                                                                     <rect key="frame" x="1" y="0.0" width="120" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="DATA CELL" id="mCC-7O-qPn">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="DATA CELL" id="mCC-7O-qPn">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -839,10 +860,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="214"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="150" height="214"/>
+                                            <size key="minSize" width="120" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="150" height="214"/>
+                                            <size key="minSize" width="120" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
