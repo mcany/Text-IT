@@ -11,7 +11,7 @@ import JavaScriptCore
 
 @objc(ParserWindowController) class ParserWindowController: NSWindowController {
 
-    var parser: Parser!
+    var parser: CustomParser!
 
     @IBOutlet weak var view: NSView!
     @IBOutlet var codeTextView: NSTextView!

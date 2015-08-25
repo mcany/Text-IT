@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8C02EB671B4571670085D44D /* PeakDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02EB661B4571670085D44D /* PeakDetection.swift */; };
+		8C1F1C371B8B50E500E934A1 /* GeneralParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F1C361B8B50E500E934A1 /* GeneralParser.swift */; };
+		8C1F1C391B8B52AF00E934A1 /* AccelerationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1F1C381B8B52AF00E934A1 /* AccelerationParser.swift */; };
 		8C23D8B91B4C04E100FEC30A /* JavascriptRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23D8B81B4C04E100FEC30A /* JavascriptRunner.swift */; };
 		8C2CEB0D1B188EB600A2DB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB0C1B188EB600A2DB8F /* AppDelegate.swift */; };
 		8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CEB0E1B188EB600A2DB8F /* ViewController.swift */; };
@@ -87,6 +89,8 @@
 
 /* Begin PBXFileReference section */
 		8C02EB661B4571670085D44D /* PeakDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeakDetection.swift; path = "text-it/Model/Components/FeatureExtraction/PeakDetection.swift"; sourceTree = SOURCE_ROOT; };
+		8C1F1C361B8B50E500E934A1 /* GeneralParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralParser.swift; sourceTree = "<group>"; };
+		8C1F1C381B8B52AF00E934A1 /* AccelerationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerationParser.swift; sourceTree = "<group>"; };
 		8C23D8B81B4C04E100FEC30A /* JavascriptRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JavascriptRunner.swift; sourceTree = "<group>"; };
 		8C2CEB071B188EB600A2DB8F /* text-it.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "text-it.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C2CEB0B1B188EB600A2DB8F /* .. */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ..; sourceTree = "<group>"; };
@@ -182,6 +186,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C1F1C351B8B4EA400E934A1 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				8CC1955F1B8766A70073620E /* I2CReply.swift */,
+				8CC195611B8766E40073620E /* DigitalMessage.swift */,
+				8CC195631B8766F90073620E /* AnalogMessage.swift */,
+				8CC195651B8767390073620E /* CommunicationType.swift */,
+			);
+			path = Communication;
+			sourceTree = "<group>";
+		};
 		8C2CEAFE1B188EB600A2DB8F = {
 			isa = PBXGroup;
 			children = (
@@ -333,12 +348,9 @@
 		8CA733841B298E95005243A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8C1F1C351B8B4EA400E934A1 /* Communication */,
 				8CD47F061B45414C00DB7D04 /* ETextileData */,
 				8CDAAAAB1B285476002CE2F2 /* Components */,
-				8CC1955F1B8766A70073620E /* I2CReply.swift */,
-				8CC195611B8766E40073620E /* DigitalMessage.swift */,
-				8CC195631B8766F90073620E /* AnalogMessage.swift */,
-				8CC195651B8767390073620E /* CommunicationType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -387,6 +399,8 @@
 			isa = PBXGroup;
 			children = (
 				8CC1B3421B42BA8B001AC34D /* Parser.swift */,
+				8C1F1C361B8B50E500E934A1 /* GeneralParser.swift */,
+				8C1F1C381B8B52AF00E934A1 /* AccelerationParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -417,7 +431,7 @@
 				8CD47F041B453E3D00DB7D04 /* THBandageData.swift */,
 				8CAAA3F41B81E11C00C703C2 /* BandageDataArray.swift */,
 			);
-			name = ETextileData;
+			path = ETextileData;
 			sourceTree = "<group>";
 		};
 		8CD47F071B45416E00DB7D04 /* DataModel */ = {
@@ -583,10 +597,12 @@
 				8CC195641B8766F90073620E /* AnalogMessage.swift in Sources */,
 				8C60024D1B1C45C30057892E /* NoodleLineNumberView.m in Sources */,
 				8C2CEB0F1B188EB600A2DB8F /* ViewController.swift in Sources */,
+				8C1F1C371B8B50E500E934A1 /* GeneralParser.swift in Sources */,
 				8C23D8B91B4C04E100FEC30A /* JavascriptRunner.swift in Sources */,
 				8C6002591B1C71340057892E /* LineChart.swift in Sources */,
 				8C4702EB1B5E68D20088F1DD /* GlobalConstants.swift in Sources */,
 				8CDAAAA91B284AC4002CE2F2 /* TestCaseWindow.swift in Sources */,
+				8C1F1C391B8B52AF00E934A1 /* AccelerationParser.swift in Sources */,
 				8CD97D0F1B39AB7D0076C8C9 /* THServerController.m in Sources */,
 				8C32659F1B34B42300D958A2 /* BLEService.m in Sources */,
 				8CA303421B3D4E9100002404 /* ViewControllerServer.swift in Sources */,

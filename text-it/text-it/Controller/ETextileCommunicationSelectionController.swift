@@ -8,6 +8,11 @@
 
 import Cocoa
 
+protocol ETextileCommunicationSelectionControllerHandler
+{
+    func communicationTypesSelected(communicationTypes: [CommunicationType])
+}
+
 class ETextileCommunicationSelectionController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource  {
     
     @IBOutlet weak var sourceTableView: NSTableView!
@@ -21,11 +26,14 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
     @IBOutlet weak var registerTextField: NSTextField!
     @IBOutlet weak var sizeTextField: NSTextField!
     @IBOutlet weak var pinTextField: NSTextField!
+    @IBOutlet weak var continueButton: NSButton!
+    
     
     var sourceDataArray : [String] = ["I2CReply", "AnalogMessage", "DigitalMessage"]
     var targetDataArray : [String] = []
     var inputDataArray : [CommunicationType] = []
     var currentRow: Int = -1
+    var handler: ETextileCommunicationSelectionControllerHandler!
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -44,7 +52,15 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
         self.sizeTextField.hidden = true
         self.pinTextField.hidden = true
     }
-
+    
+    @IBAction func buttonPressed(sender: AnyObject) {
+        if(sender as! NSObject == self.continueButton)
+        {
+            self.close()
+            self.handler.communicationTypesSelected(self.inputDataArray)
+        }
+    }
+    
     @IBAction func textFieldEntered(sender: AnyObject) {
         var comm = self.inputDataArray[currentRow]
         if(sender as! NSObject == self.pinTextField)

@@ -23,11 +23,13 @@ class ViewController: NSViewController {
     var toolBar:NSToolbar!
     var pushToolBarItem: NSToolbarItem!
     var recordToolBarItem: NSToolbarItem!
-    var gatheringWindowController: GatheringWindowController!
+    lazy var gatheringWindowController: GatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
     var eTextileCommunicationSelectionController: ETextileCommunicationSelectionController!
     
     //text view
     var previousData: [CGFloat] = []
+    var previousCircles: [CGFloat] = []
+    var circlesChanged: Bool = true
     
     //code text view
     var lineNumberView: NoodleLineNumberView!
@@ -40,6 +42,7 @@ class ViewController: NSViewController {
     var firmataController: IFFirmata!
     var serverController: THServerController!
     var bleCommunicationModule:CustomBLECommunicationModule?
+    var currentCommunicationTypes = [CommunicationType]()
     
     
     override func viewDidLoad() {
@@ -56,8 +59,9 @@ class ViewController: NSViewController {
         JavascriptRunner.sharedInstance.exceptionHandler = self
         JavascriptRunner.sharedInstance.executeLoop(){result in self.printResult(result)}
         self.addPreDefinedFunctionsToJSContext()
-        self.gatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
+        //self.gatheringWindowController = GatheringWindowController(windowNibName: "GatheringWindow")
         self.eTextileCommunicationSelectionController = ETextileCommunicationSelectionController(windowNibName: "ETextileCommunicationSelection")
+        self.eTextileCommunicationSelectionController.handler = self
         
         //line number view
         self.lineNumberView = MarkerLineNumberView(scrollView: self.codeScrollView)
@@ -121,7 +125,7 @@ class ViewController: NSViewController {
         //ViewControllerOutlineView.sharedInstance.machineLearningComponent.methodNames.append(SubComponentModel(name: "Linear Discriminant Analysis"))
         
         //test
-        self.eTextileCommunicationSelectionController.showWindow(nil)
+        //self.eTextileCommunicationSelectionController.showWindow(nil)
     }
     
     //BLE test
@@ -190,9 +194,11 @@ class ViewController: NSViewController {
     {
         if let myData: [CGFloat] = data {
             if let lineChart = self.lineChartView.layer as? LineChart {
-                if(data!.count > 0 && lineChart.datasets.count > 0 )
+                if(data!.count > 0 && lineChart.datasets.count > 0 && self.previousCircles != data! )
                 {
                     lineChart.datasets[0].addCircle(data!)
+                    self.previousCircles = data!
+                    self.circlesChanged = true
                 }
             }
         }
@@ -205,8 +211,9 @@ class ViewController: NSViewController {
                 switch myData {
                 case let floatArray as [CGFloat]:
                     if let lineChart = self.lineChartView.layer as? LineChart {
-                        if(floatArray.count > 0 && self.previousData != floatArray)
+                        if(floatArray.count > 0 && self.previousData != floatArray && self.circlesChanged)
                         {
+                            self.circlesChanged = false
                             self.previousData = floatArray
                             let dataset1 = LineChart.Dataset(label: "Data", data: floatArray)
                             dataset1.color = NSColor.redColor().CGColor

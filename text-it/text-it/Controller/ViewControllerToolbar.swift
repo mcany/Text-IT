@@ -19,12 +19,12 @@ extension ViewController: NSWindowDelegate {
     
     func recordButtonTapped(toolbarItem: NSToolbarItem) {
         println("recordButtonTapped")
-        self.startReceivingData()
-        openGatheringWindow()
+        //self.startReceivingData()
+        openETextileCommunicationSelectionWindow()
     }
     
-    func openGatheringWindow()
+    func openETextileCommunicationSelectionWindow()
     {
-        self.gatheringWindowController.showWindow(nil)
+        self.eTextileCommunicationSelectionController.showWindow(nil)
     }
 }

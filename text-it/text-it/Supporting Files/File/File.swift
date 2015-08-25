@@ -86,19 +86,25 @@ class File {
     
     func read (path: String) -> String? {
         var text: String = ""
-        
-        if path.rangeOfString(Constants.Path.FolderName) != nil{
+        // if full path is given open directly
+        //if path.rangeOfString(Constants.Path.FolderName) != nil{
             if self.fileExists(path) {
                 text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
             }
-        }
+        //}
         else
         {
             var appFile: String = Constants.Path.FullPath.stringByAppendingPathComponent(path)
+            // if only file name is given, check if it is in Documents/Text-It folder
             if self.fileExists(appFile)
             {
                 text = String(contentsOfFile:appFile, encoding: NSUTF8StringEncoding, error: nil)!
             }
+//            // if direct path is given
+//            else if self.fileExists(path)
+//            {
+//                text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
+//            }
         }
         
         if(text != "")

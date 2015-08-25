@@ -8,9 +8,14 @@
 
 import Cocoa
 
-extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate {
+extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate, ETextileCommunicationSelectionControllerHandler {
     
-    
+    func communicationTypesSelected(communicationTypes: [CommunicationType])
+    {
+        self.currentCommunicationTypes = communicationTypes
+        self.gatheringWindowController.showWindow(nil)
+        self.startReceivingData()
+    }
     // MARK: - BLE delegates
     
     func connectToBle()
@@ -31,13 +36,13 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     
     func startReceivingData()
     {
+        println("sendFirmwareRequest")
         self.firmataController.sendFirmwareRequest()
     }
     
     func bleServiceIsReady(service: BLEService!) {
         println("bleServiceIsReady")
         var customBLECommunicationModule = CustomBLECommunicationModule()
-        customBLECommunicationModule.dataViewerHandler = self.gatheringWindowController
         customBLECommunicationModule.recorder = self.gatheringWindowController
         self.bleCommunicationModule = customBLECommunicationModule
         bleCommunicationModule!.bleService = service
@@ -61,7 +66,6 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     
     func bleServiceDidDisconnect(service: BLEService!) {
         println("bleServiceDidDisconnect")
-        self.bleCommunicationModule!.finishSession()
         self.recordToolBarItem.enabled = false
         self.bleCommunicationModule = nil
         //service.delegate = nil
@@ -96,7 +100,24 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     func firmataController(firmataController: IFFirmata!, didReceiveFirmwareName name: String!) {
         println("didReceiveFirmwareName")
         
-        self.sendI2CRequests()
+        for commType in self.currentCommunicationTypes
+        {
+            if commType is I2CReply
+            {
+                let i2cReply = commType as? I2CReply
+                self.firmataController.sendI2CStartReadingAddress(i2cReply!.address, reg: i2cReply!.register, size: i2cReply!.size)
+            }
+            else if commType is DigitalMessage
+            {
+                let digitalMessage = commType as? DigitalMessage
+                self.firmataController.sendReportRequestsForDigitalPin(digitalMessage!.pin, reports: true)
+            }
+            else if commType is AnalogMessage
+            {
+                let analogMessage = commType as? AnalogMessage
+                self.firmataController.sendReportRequestForAnalogPin(analogMessage!.pin, reports: true)
+            }
+        }
     }
     
     func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
@@ -114,19 +135,23 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         else
         {
             println(buffer)
+            var parser = GeneralParser()
+            var parsedValues = parser.parse(buffer+6, length: length-6)
+            self.gatheringWindowController.showDataArray(parsedValues)
         }
     }
     
     func firmataController(firmataController: IFFirmata!, didReceiveAnalogMessageOnChannel channel: Int, value: Int) {
-        println("didReceiveAnalogMessageOnChannel")
+        println("didReceiveAnalogMessageOnChannel : %d, value: %d", channel, value)
+        self.gatheringWindowController.showDataNumber(value)
     }
     
     func firmataController(firmataController: IFFirmata!, didReceiveDigitalMessageForPort port: Int, value: Int) {
-        println("didReceiveDigitalMessageForPort")
+        println("didReceiveDigitalMessageForPort : %d value: %d", port, value)
+        self.gatheringWindowController.showDataNumber(value)
     }
     
     func firmataController(firmataController: IFFirmata!, didReceivePinStateResponse buffer: UnsafeMutablePointer<UInt8>, length: Int) {
         println("didReceivePinStateResponse")
     }
-
 }
