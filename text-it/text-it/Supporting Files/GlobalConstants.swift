@@ -14,6 +14,10 @@ struct Constants {
         static let Welcome = "kWelcomeNotif"
     }
     
+    struct BLEConstanst {
+        static let peripheralName = "Biscuit"
+    }
+    
     struct Path {
         static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         static let FolderName = "Text-It"

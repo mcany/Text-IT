@@ -230,8 +230,8 @@
 		8C2CEB0A1B188EB600A2DB8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8C6002571B1C711E0057892E /* LineChart */,
 				8C4702EA1B5E68D20088F1DD /* GlobalConstants.swift */,
+				8C6002571B1C711E0057892E /* LineChart */,
 				8CD1D1F11B4EC3FF0063D3F9 /* File */,
 				8CA303471B3D516B00002404 /* Resources */,
 				8CC60E8C1B3C2A4A00A545AC /* TangoHappServerController */,

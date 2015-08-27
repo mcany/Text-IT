@@ -8,6 +8,6 @@
 
 import Cocoa
 
-class CommunicationType: NSObject {
-
+class CommunicationType: NSObject, Printable {
+    var name: String!
 }

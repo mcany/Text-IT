@@ -8,14 +8,64 @@
 
 import Cocoa
 
-extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate, ETextileCommunicationSelectionControllerHandler {
+extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataControllerDelegate, ETextileCommunicationSelectionControllerHandler, GatheringWindowClosedHandler {
+    
+    // MARK: - Text-It delegates
     
     func communicationTypesSelected(communicationTypes: [CommunicationType])
     {
         self.currentCommunicationTypes = communicationTypes
+        self.gatheringWindowController.handler = self
         self.gatheringWindowController.showWindow(nil)
         self.startReceivingData()
     }
+    
+    func gatheringWindowClosed(save:Bool, fileName: String?)
+    {
+        if(save)
+        {
+            for currentCommunicationType in self.currentCommunicationTypes
+            {
+                if let comm = currentCommunicationType as? I2CReply
+                {
+                    var dictionaryString:String = comm.address.description+"/"+comm.register.description
+                    comm.data = self.i2cReplyDictionary[dictionaryString]!
+                    self.firmataController.sendI2CStopReadingAddress(comm.address)
+                }
+                else if let comm = currentCommunicationType as? DigitalMessage
+                {
+                    comm.data = self.digitalDictionary[comm.pin.description]!
+                    self.firmataController.sendReportRequestsForDigitalPin(comm.pin, reports: false)
+                }
+                else if let comm = currentCommunicationType as? AnalogMessage
+                {
+                    comm.data = self.analogDictionary[comm.pin.description]!
+                    self.firmataController.sendReportRequestForAnalogPin(comm.pin, reports: false)
+                }
+            }
+            
+            //test
+            var analog = AnalogMessage()
+            analog.name = "analog"
+            analog.pin = 0
+            analog.data = [1,2,3,4]
+            
+            var digital = DigitalMessage()
+            digital.name = "digital"
+            digital.pin = 0
+            digital.data = [1,2,3,4]
+            
+            self.currentCommunicationTypes.append(analog)
+            self.currentCommunicationTypes.append(digital)
+            //test
+            
+            var writer = File()
+            var currentFilePath = Constants.Path.FullPath.stringByAppendingPathComponent(fileName!)
+            writer.write(currentFilePath, data: self.currentCommunicationTypes)
+        }
+        self.firmataController.reset()
+    }
+    
     // MARK: - BLE delegates
     
     func connectToBle()
@@ -26,7 +76,7 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         {
             for foundPeripheral in BLEDiscovery.sharedInstance().foundPeripherals
             {
-                if(foundPeripheral.name! == "Biscuit")
+                if(foundPeripheral.name! == Constants.BLEConstanst.peripheralName)
                 {
                     BLEDiscovery.sharedInstance().connectPeripheral(foundPeripheral as! CBPeripheral)
                 }
@@ -122,10 +172,9 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
     
     func firmataController(firmataController: IFFirmata!, didReceiveI2CReply buffer: UnsafeMutablePointer<UInt8>, length: Int)
     {
-        println("didReceiveI2CReply")
-        
+        //println("didReceiveI2CReply")
         var address = buffer[2] + (buffer[3] << 7)
-        var registerNumber = buffer[4]
+        var register = buffer[4]
         
         if !(self.firmataController.startedI2C)
         {
@@ -134,20 +183,63 @@ extension ViewController: BLEDiscoveryDelegate, BLEServiceDelegate, IFFirmataCon
         }
         else
         {
-            println(buffer)
-            var parser = GeneralParser()
-            var parsedValues = parser.parse(buffer+6, length: length-6)
+            var parsedValues = self.shifter(buffer+6, length: length-6)
+            var dictionaryString:String = address.description+"/"+register.description
+            if self.i2cReplyDictionary[dictionaryString] == nil
+            {
+               self.i2cReplyDictionary[dictionaryString] = [[CGFloat]]()
+            }
+            self.i2cReplyDictionary[dictionaryString]?.append(parsedValues)
             self.gatheringWindowController.showDataArray(parsedValues)
         }
     }
     
+    func shifter(data: UnsafeMutablePointer<UInt8>, length: Int) -> [CGFloat]
+    {
+        var size = length;
+        var bufCount = 0;
+        var rawValues: [UInt16] = []
+        var values: [CGFloat] = []
+        
+        for (var i = 0; i < size; i++) {
+            //firmata sends as two seven bit bytes
+            var byte1: UInt16 = UInt16(data[bufCount++])
+            var bufValue: UInt16 = UInt16 (data[bufCount++])
+            var shiftValue: UInt16 = ( bufValue << 7)
+            var value: UInt16 = byte1 + shiftValue
+            rawValues.append(value)
+        }
+        
+        for var y = 0; y < rawValues.count-1;
+        {
+            var value = Float((rawValues[y+1] << 8 | rawValues[y])) / Float(65536.0)
+            values.append(CGFloat(value))
+            y += 2
+        }
+        
+        return values
+        //var linAccelX = Float((values[1] << 8 | values[0])) / Float(65536.0)
+        //var linAccelY = Float((values[3] << 8 | values[2])) / Float(65536.0)
+        //var linAccelZ = Float((values[5] << 8 | values[4])) / Float(65536.0)
+    }
+    
     func firmataController(firmataController: IFFirmata!, didReceiveAnalogMessageOnChannel channel: Int, value: Int) {
         println("didReceiveAnalogMessageOnChannel : %d, value: %d", channel, value)
+        if self.analogDictionary[channel.description] == nil
+        {
+            self.analogDictionary[channel.description] = [CGFloat]()
+        }
+        self.analogDictionary[channel.description]?.append(CGFloat(value))
         self.gatheringWindowController.showDataNumber(value)
     }
     
     func firmataController(firmataController: IFFirmata!, didReceiveDigitalMessageForPort port: Int, value: Int) {
         println("didReceiveDigitalMessageForPort : %d value: %d", port, value)
+        if self.digitalDictionary[port.description] == nil
+        {
+            self.digitalDictionary[port.description] = [CGFloat]()
+        }
+        self.digitalDictionary[port.description]?.append(CGFloat(value))
         self.gatheringWindowController.showDataNumber(value)
     }
     

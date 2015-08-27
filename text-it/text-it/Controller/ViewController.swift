@@ -45,6 +45,9 @@ class ViewController: NSViewController {
     var bleCommunicationModule:CustomBLECommunicationModule?
     var currentCommunicationTypes = [CommunicationType]()
     
+    lazy var i2cReplyDictionary = [String:[[CGFloat]]]()
+    lazy var analogDictionary = [String:[CGFloat]]()
+    lazy var digitalDictionary = [String:[CGFloat]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

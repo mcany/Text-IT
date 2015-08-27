@@ -8,8 +8,13 @@
 
 import Cocoa
 
-class GatheringWindowController: NSWindowController, Recorder {
+protocol GatheringWindowClosedHandler
+{
+    func gatheringWindowClosed(save:Bool, fileName: String?)
+}
 
+class GatheringWindowController: NSWindowController, Recorder {
+    
     @IBOutlet weak var fileNameTextField: NSTextField!
     @IBOutlet weak var exitButton: NSButton!
     @IBOutlet weak var saveButton: NSButton!
@@ -19,10 +24,11 @@ class GatheringWindowController: NSWindowController, Recorder {
     var isRecording: Bool = true
     var stopRecording: Bool = false
     var data: String = ""
+    var handler:GatheringWindowClosedHandler!
     
     override func windowDidLoad() {
         super.windowDidLoad()
-    
+        
         self.fileNameTextField.stringValue = fileName
         self.exitButton.enabled = true
         self.saveButton.enabled = true
@@ -71,18 +77,17 @@ class GatheringWindowController: NSWindowController, Recorder {
         self.exitButton.enabled = false
         self.isRecording = true
         self.stopRecording = false
+        self.handler.gatheringWindowClosed(false, fileName: nil)
         self.close()
     }
-
+    
     @IBAction func saveButtonTapped(sender: AnyObject) {
         self.fileName = self.fileNameTextField.stringValue
-        self.saveButton.enabled = false
+        self.saveButton.enabled = true
         self.exitButton.enabled = true
         self.isRecording = false
         self.stopRecording = true
         
-        var writer = File()
-        var currentFilePath = Constants.Path.FullPath.stringByAppendingPathComponent(self.fileName)
-        writer.write(currentFilePath, data: self.data)
+        self.handler.gatheringWindowClosed(true, fileName: self.fileName)
     }
 }

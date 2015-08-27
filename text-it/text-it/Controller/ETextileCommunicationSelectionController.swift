@@ -27,6 +27,8 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
     @IBOutlet weak var sizeTextField: NSTextField!
     @IBOutlet weak var pinTextField: NSTextField!
     @IBOutlet weak var continueButton: NSButton!
+    @IBOutlet weak var dataNameTextField: NSTextField!
+    @IBOutlet weak var dataNameLabel: NSTextField!
     
     
     var sourceDataArray : [String] = ["I2CReply", "AnalogMessage", "DigitalMessage"]
@@ -51,6 +53,8 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
         self.registerTextField.hidden = true
         self.sizeTextField.hidden = true
         self.pinTextField.hidden = true
+        self.dataNameTextField.hidden = true
+        self.dataNameLabel.hidden = true
     }
     
     @IBAction func buttonPressed(sender: AnyObject) {
@@ -85,26 +89,10 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
             var commType = comm as? I2CReply
             commType!.size = self.sizeTextField.stringValue.toInt()!
         }
-
-    }
-    
-    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        self.currentRow = row
-        if (tableView == targetTableView)
+        else if(sender as! NSObject == self.dataNameTextField)
         {
-            switch inputDataArray[row].className
-            {
-            case I2CReply.className():
-                self.I2CReplyselected()
-            case AnalogMessage.className():
-                self.DigitalAnalogMessageSelected("AnalogMessage")
-            case DigitalMessage.className():
-                self.DigitalAnalogMessageSelected("DigitalMessage")
-            default:
-                break
-            }
+            comm.name = self.dataNameTextField.stringValue
         }
-        return true
     }
     
     func DigitalAnalogMessageSelected (name:String)
@@ -127,8 +115,11 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
         self.registerTextField.hidden = true
         self.sizeTextField.hidden = true
         self.pinTextField.hidden = false
+        self.dataNameTextField.hidden = false
+        self.dataNameLabel.hidden = false
+        self.dataNameTextField.stringValue = comm.name
     }
-
+    
     func I2CReplyselected()
     {
         var comm = self.inputDataArray[currentRow]
@@ -146,7 +137,31 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
             self.registerTextField.hidden = false
             self.sizeTextField.hidden = false
             self.pinTextField.hidden = true
+            self.dataNameTextField.hidden = false
+            self.dataNameLabel.hidden = false
+            self.dataNameTextField.stringValue = comm.name
         }
+    }
+    
+    // MARK: - Tableview Delegates
+
+    func tableView(tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        self.currentRow = row
+        if (tableView == targetTableView)
+        {
+            switch inputDataArray[row].className
+            {
+            case I2CReply.className():
+                self.I2CReplyselected()
+            case AnalogMessage.className():
+                self.DigitalAnalogMessageSelected("AnalogMessage")
+            case DigitalMessage.className():
+                self.DigitalAnalogMessageSelected("DigitalMessage")
+            default:
+                break
+            }
+        }
+        return true
     }
     
     func numberOfRowsInTableView(aTableView: NSTableView) -> Int
@@ -232,6 +247,7 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
             //sourceDataArray.removeAtIndex(rowIndexes.firstIndex)
             targetDataArray.append(value)
             var comm :CommunicationType
+            var numberOfOccurenses = 0
             switch(value)
             {
             case "I2CReply":
@@ -243,7 +259,16 @@ class ETextileCommunicationSelectionController: NSWindowController, NSTableViewD
             default:
                 comm = CommunicationType()
             }
-            inputDataArray.append(comm )
+            numberOfOccurenses = self.targetDataArray.filter(
+                {
+                    if $0 == value{
+                        return true
+                    }else{
+                        return false
+                    }
+            }).count
+            comm.name = value + numberOfOccurenses.description
+            inputDataArray.append(comm)
             
             sourceTableView.reloadData()
             targetTableView.reloadData()

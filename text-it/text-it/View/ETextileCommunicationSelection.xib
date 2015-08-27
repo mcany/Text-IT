@@ -10,6 +10,8 @@
                 <outlet property="addressTextField" destination="sP2-jc-ISR" id="hE8-4M-9hL"/>
                 <outlet property="communicationLabel" destination="Gvu-5b-KEZ" id="ztO-Qp-lkI"/>
                 <outlet property="continueButton" destination="tZT-rZ-XbB" id="CdD-oh-AwW"/>
+                <outlet property="dataNameLabel" destination="bn8-ME-uma" id="Udf-3v-7qw"/>
+                <outlet property="dataNameTextField" destination="zTe-h7-0G4" id="RIe-1Z-Prp"/>
                 <outlet property="pin" destination="OVS-je-7Og" id="9M4-Cp-qUZ"/>
                 <outlet property="pinTextField" destination="hGQ-sW-PsH" id="orH-kR-t2i"/>
                 <outlet property="register" destination="wDT-js-2mV" id="bnD-wo-Rdg"/>
@@ -242,6 +244,25 @@
                             <action selector="buttonPressed:" target="-2" id="l6d-r3-7qb"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bn8-ME-uma">
+                        <rect key="frame" x="491" y="192" width="77" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Data Name:" id="2h3-d5-wJV">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zTe-h7-0G4">
+                        <rect key="frame" x="579" y="187" width="158" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="OzN-kJ-098">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="textFieldEntered:" target="-2" id="z1c-hN-yiQ"/>
+                        </connections>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="pnw-cC-Lay" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="17" id="4JY-Fi-eJ1"/>

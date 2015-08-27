@@ -15,7 +15,7 @@ extension ViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
     //MARK: - NSOutlineView component
     
     func textView(textView: NSTextView, doubleClickedOnCell cell: NSTextAttachmentCellProtocol!, inRect cellFrame: NSRect) {
-        <#code#>
+        //TO DO:
     }
     
     func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
