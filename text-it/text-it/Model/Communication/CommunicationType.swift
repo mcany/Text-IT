@@ -7,7 +7,16 @@
 //
 
 import Cocoa
+import JavaScriptCore
 
-class CommunicationType: NSObject, Printable {
-    var name: String!
+// Custom protocol must be declared with `@objc`
+@objc
+protocol CommunicationTypeJSExports : JSExport {
+    //static func new() -> I2CReply
+    var name: String {get set}
+}
+
+@objc(CommunicationType)
+class CommunicationType: NSObject, Printable, CommunicationTypeJSExports {
+    var name: String = "NoName"
 }

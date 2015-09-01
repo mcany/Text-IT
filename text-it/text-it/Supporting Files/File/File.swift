@@ -96,10 +96,11 @@ class File {
     
     func read (path: String) -> String? {
         var text: String = ""
+        var error: NSError?
         // if full path is given open directly
         //if path.rangeOfString(Constants.Path.FolderName) != nil{
         if self.fileExists(path) {
-            text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: nil)!
+            text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: &error)!
         }
             //}
         else
@@ -122,9 +123,59 @@ class File {
             return text
         }
         
-        return nil
+        return ""
     }
     
+    func stringToMessages (text: String)
+    {
+        var stringArraywithoutNewLine = text.componentsSeparatedByString("\n")
+        var messages = [CommunicationType]()
+        for element in stringArraywithoutNewLine
+        {
+            if(count(element) > 1)
+            {
+                var stringArrayWithoutQuotes = element.componentsSeparatedByString("\"")
+                var variableData = stringArrayWithoutQuotes[1].componentsSeparatedByString("[[")
+                var data = variableData[0].componentsSeparatedByString(" ")
+                switch (data[1])
+                {
+                case "I2CReply":
+                    var i2cReply = I2CReply()
+                    i2cReply.name = data[4]
+                    i2cReply.address = (data[6] as NSString).integerValue
+                    i2cReply.register = (data[8] as NSString).integerValue
+                    //i2cReply.data = ("[[" + variableData[1] as NSString).value() as! [[CGFloat]]
+                    messages.append(i2cReply)
+                    JavascriptRunner.sharedInstance.context.globalObject.setValue(i2cReply, forProperty: i2cReply.name)
+                    var JSCode = i2cReply.name + ".data = " + "[[" + variableData[1]
+                    JavascriptRunner.sharedInstance.executeMain(JSCode)
+                    break;
+                case "AnalogMessage":
+                    var analog = AnalogMessage()
+                    analog.name = data[4]
+                    analog.pin = (data[6] as NSString).integerValue
+                    //analog.data = (data[7] as NSString).value() as! [CGFloat]
+                    messages.append(analog)
+                    JavascriptRunner.sharedInstance.context.globalObject.setValue(analog, forProperty: analog.name)
+                    var JSCode = analog.name + ".data = " + "[" + stringArrayWithoutQuotes[1].componentsSeparatedByString("[")[1]
+                    JavascriptRunner.sharedInstance.executeMain(JSCode)
+                    break
+                case "DigitalMessage":
+                    var digital = DigitalMessage()
+                    digital.name = data[4]
+                    digital.pin = (data[6] as NSString).integerValue
+                    //digital.data = (data[7] as NSString).value() as! [CGFloat]
+                    messages.append(digital)
+                    JavascriptRunner.sharedInstance.context.globalObject.setValue(digital, forProperty: digital.name)
+                    var JSCode = digital.name + ".data = " + "[" + stringArrayWithoutQuotes[1].componentsSeparatedByString("[")[1]
+                    JavascriptRunner.sharedInstance.executeMain(JSCode)
+                    break
+                default:
+                    break
+                }
+            }
+        }
+    }
     func sringToBandageData(text: String) -> BandageDataArray?
     {
         if(text != "undefined")

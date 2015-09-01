@@ -749,15 +749,15 @@ extension LineChart {
             var newPoints = [Point]()
             for var i = 0; i < data.count; i++ {
                 defaultPoint.path = nil
-                if circlePoints.filter({ el in el == self.points[i].value }).count > 0 {
-                    defaultPoint.path = CGPath.Circle(10.0)
-                }
+                //if circlePoints.filter({ el in el == CGFloat(i) }).count > 0 {
+                //    defaultPoint.path = CGPath.Circle(10.0)
+                //}
                 let point = i < points.count ? points[i] : Point(layer: defaultPoint)
                 point.dataset = self
                 point.delegate = delegate
                 point.value = data[i]
                 point.path = nil
-                if circlePoints.filter({ el in el == point.value }).count > 0 {
+                if circlePoints.filter({ el in el == CGFloat(i) }).count > 0 {
                     point.path = CGPath.Circle(10.0)
                 }
                 point.highlighted = false

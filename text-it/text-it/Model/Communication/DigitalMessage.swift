@@ -7,13 +7,28 @@
 //
 
 import Cocoa
+import JavaScriptCore
 
-class DigitalMessage: CommunicationType {
+// Custom protocol must be declared with `@objc`
+@objc
+protocol DigitalMessageJSExports : JSExport {
+    static func new() -> DigitalMessage
+    var pin: Int {get set}
+    var data:[CGFloat] {get set}
+    
+}
+
+@objc(DigitalMessage)
+class DigitalMessage: CommunicationType, DigitalMessageJSExports{
     var pin: Int = 0
     var data = [CGFloat]()
     
+    override static func new() -> DigitalMessage {
+        return DigitalMessage()
+    }
+    
     override var description : String {
-        var description = "type: Digitalmessage " + " name: " + self.name + ": pin: " + self.pin.description + " data: " + data.description
+        var description = "type: DigitalMessage " + " name: " + self.name + " pin: " + self.pin.description + " data: " + data.description
         return description
     }
 }

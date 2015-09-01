@@ -99,6 +99,10 @@ class JavascriptRunner: NSObject {
         self.context.setObject(LinearAcceleration.self, forKeyedSubscript: "LinearAcceleration")
         self.context.setObject(THBandageData.self, forKeyedSubscript: "THBandageData")
         self.context.setObject(BandageDataArray.self, forKeyedSubscript: "BandageDataArray")
-
+        
+        self.context.setObject(CommunicationType.self, forKeyedSubscript: "CommunicationType")
+        self.context.setObject(I2CReply.self, forKeyedSubscript: "I2CReply")
+        self.context.setObject(AnalogMessage.self, forKeyedSubscript: "AnalogMessage")
+        self.context.setObject(DigitalMessage.self, forKeyedSubscript: "DigitalMessage")
     }
 }

@@ -26,7 +26,6 @@ class ViewController: NSViewController {
     //text view
     var previousData: [CGFloat] = []
     var previousCircles: [CGFloat] = []
-    var circlesChanged: Bool = true
     
     //code text view
     var lineNumberView: NoodleLineNumberView!
@@ -156,20 +155,22 @@ class ViewController: NSViewController {
         let load: @objc_block String -> [CGFloat] = { input in
             return file.loadData(input)
         }
-        
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(load, AnyObject.self), forKeyedSubscript: "load")
         
         let read: @objc_block String -> String? = { input in
             return file.read(input)
         }
-        
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(read, AnyObject.self), forKeyedSubscript: "read")
         
         let sringToBandageData: @objc_block String -> BandageDataArray? = { input in
             return file.sringToBandageData(input)
         }
-        
         JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(sringToBandageData, AnyObject.self), forKeyedSubscript: "sringToBandageData")
+        
+        let stringToMessages: @objc_block String -> () = { input in
+            return file.stringToMessages(input)
+        }
+        JavascriptRunner.sharedInstance.context.setObject(unsafeBitCast(stringToMessages, AnyObject.self), forKeyedSubscript: "stringToMessages")
         
         let display: @objc_block AnyObject? -> () = { input in
             return self.display(input)
@@ -196,16 +197,18 @@ class ViewController: NSViewController {
     
     func addCircles(data: [CGFloat]?)
     {
-        if let myData: [CGFloat] = data {
-            if let lineChart = self.lineChartView.layer as? LineChart {
-                if(data!.count > 0 && lineChart.datasets.count > 0 && self.previousCircles != data! )
-                {
-                    lineChart.datasets[0].addCircle(data!)
-                    self.previousCircles = data!
-                    self.circlesChanged = true
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            if let myData: [CGFloat] = data {
+                if let lineChart = self.lineChartView.layer as? LineChart {
+                    if(data!.count > 0 && lineChart.datasets.count > 0 && self.previousCircles != data! )
+                    {
+                        lineChart.datasets[0].addCircle(data!)
+                        self.previousCircles = data!
+                    }
                 }
             }
-        }
+        })
     }
     
     func display(data: AnyObject?)
@@ -215,9 +218,8 @@ class ViewController: NSViewController {
                 switch myData {
                 case let floatArray as [CGFloat]:
                     if let lineChart = self.lineChartView.layer as? LineChart {
-                        if(floatArray.count > 0 && self.previousData != floatArray && self.circlesChanged)
+                        if(floatArray.count > 0 && self.previousData != floatArray)
                         {
-                            self.circlesChanged = false
                             self.previousData = floatArray
                             let dataset1 = LineChart.Dataset(label: "Data", data: floatArray)
                             dataset1.color = NSColor.redColor().CGColor
