@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>E6662CD9-039C-4332-A96C-C31C8B5F9B85</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>text-it</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>134988B673C4A37F23FEF7FA1630ED13E479E8DB</key>
 		<string>https://github.com/mcany/Text-IT.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>text-it/text-it.xcodeproj/project.xcworkspace</string>
+	<string>text-it/text-it.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>134988B673C4A37F23FEF7FA1630ED13E479E8DB</key>

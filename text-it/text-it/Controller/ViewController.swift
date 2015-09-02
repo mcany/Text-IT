@@ -226,6 +226,7 @@ class ViewController: NSViewController {
                             dataset1.fillColor = nil
                             dataset1.curve = .Bezier(0.3)
                             lineChart.datasets = [dataset1]
+                            self.previousCircles = []
                         }
                     }
                     break
