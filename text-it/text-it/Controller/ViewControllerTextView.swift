@@ -23,14 +23,16 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
     
     func printResult(result: JSValue?)
     {
-        println(result)
-        
-        if(!result!.toString().hasPrefix("undefined") && self.printResult)
-        {
-            self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
-            self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-            self.printResult = false
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            println(result)
+            
+            if(!result!.toString().hasPrefix("undefined") && self.printResult)
+            {
+                self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
+                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+                self.printResult = false
+            }
+        })
     }
     
     func readCurrentFile()
@@ -46,12 +48,13 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
         if (self.codeChanged)
         {
             dispatch_async(self.queue) {
+                self.codeChanged = false
+                self.writeLoop = true
                 var file = File()
-                //file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
-                file.write((self.currentFile), data: self.codeTextView.string)
-                dispatch_async(dispatch_get_main_queue(), {self.writeToCurrentFile()})
+                file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
+                //file.write((self.currentFile), data: self.codeTextView.string)
+                dispatch_async(dispatch_get_main_queue(), {self.writeLoop = false; if(self.codeChanged){self.writeToCurrentFile()}})
             }
-            self.codeChanged = false
         }
     }
     
@@ -62,8 +65,10 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
             
             JavascriptRunner.sharedInstance.executionCode = textView.string!
             self.codeChanged = true
-            self.writeToCurrentFile()
-            
+            if !self.writeLoop
+            {
+                self.writeToCurrentFile()
+            }
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {

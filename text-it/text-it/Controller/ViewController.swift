@@ -37,6 +37,7 @@ class ViewController: NSViewController {
         }
     }
     var codeChanged: Bool = false
+    var writeLoop:Bool = false
     
     //connections
     var firmataController: IFFirmata!

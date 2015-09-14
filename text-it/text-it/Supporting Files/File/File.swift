@@ -71,7 +71,6 @@ class File {
                 for aData in c
                 {
                     text  += aData.printData()
-                    
                 }
                 break
             case let c as String:
@@ -100,6 +99,8 @@ class File {
         // if full path is given open directly
         //if path.rangeOfString(Constants.Path.FolderName) != nil{
         if self.fileExists(path) {
+            //NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+            
             text = String(contentsOfFile:path, encoding: NSUTF8StringEncoding, error: &error)!
         }
             //}
@@ -209,7 +210,7 @@ class File {
     
     func loadData(fileName: String) -> [CGFloat]
     {
-        var appFile: String = Constants.Path.Documents.stringByAppendingPathComponent(fileName)
+        var appFile: String = Constants.Path.FullPath.stringByAppendingPathComponent(fileName)
         var cgFloatArray: [CGFloat] = []
         
         if(self.fileExists(appFile))
