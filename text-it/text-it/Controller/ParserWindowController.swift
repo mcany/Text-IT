@@ -11,7 +11,7 @@ import JavaScriptCore
 
 @objc(ParserWindowController) class ParserWindowController: NSWindowController {
 
-    var parser: Parser!
+    var parser: CustomParser!
 
     @IBOutlet weak var view: NSView!
     @IBOutlet var codeTextView: NSTextView!
@@ -46,7 +46,7 @@ import JavaScriptCore
             self.parser.name = self.funcName.stringValue
             JavascriptRunner.sharedInstance.execute(parser.name+"()"){result in println (result)}
             //println(JavascriptRunner.sharedInstance.execute(parser.name+"()"))
-            ViewControllerOutlineView.sharedInstance.parserComponent.methodNames.append(SubComponentModel(name: self.parser.name))
+            //ViewControllerOutlineView.sharedInstance.parserComponent.methodNames.append(SubComponentModel(name: self.parser.name))
             self.close()
         }
     }

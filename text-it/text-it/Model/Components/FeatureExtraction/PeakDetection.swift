@@ -16,6 +16,8 @@ protocol PeakDetectionJSExports : JSExport {
     var minPeaks: [CGFloat] {get}
     var numOfMaxPeaks: Int {get}
     var numOfMinPeaks: Int {get}
+    var maxPeaksPositions: [CGFloat] {get}
+    var minPeaksPositions: [CGFloat] {get}
     
     func detectPeaks(arrayData:[CGFloat],_ peakThreshold:CGFloat )
     static func new() -> PeakDetection
@@ -55,6 +57,8 @@ class PeakDetection: Component, PeakDetectionJSExports{
     var numOfMaxPeaks: Int
     var numOfMinPeaks: Int
 
+    var maxPeaksPositions = [CGFloat]()
+    var minPeaksPositions = [CGFloat]()
     
     override static func new() -> PeakDetection {
         return PeakDetection()
@@ -79,6 +83,8 @@ class PeakDetection: Component, PeakDetectionJSExports{
         }
         var minimum = CGFloat.max
         var maximum = CGFloat.min
+        var minimumPosition = -1
+        var maximumPosition = -1
         var mnpos = 0
         var mxpos = 0
         var lookformax = true
@@ -87,14 +93,16 @@ class PeakDetection: Component, PeakDetectionJSExports{
         for var index = 0; index < arrayData.count; ++index {
             var current = arrayData[index]
             
-            if (current > maximum)
+            if (current >= maximum)
             {
                 maximum = current
+                maximumPosition = index
             }
             
-            if (current < minimum)
+            if (current <= minimum)
             {
                 minimum = current
+                minimumPosition = index
             }
             
             
@@ -103,6 +111,7 @@ class PeakDetection: Component, PeakDetectionJSExports{
                 if(current < maximum - peakThreshold)
                 {
                     self.maxPeaks.append(maximum)
+                    self.maxPeaksPositions.append(CGFloat(maximumPosition))
                     minimum = current
                     lookformax = false
                 }
@@ -112,11 +121,11 @@ class PeakDetection: Component, PeakDetectionJSExports{
                 if(current > minimum + peakThreshold)
                 {
                     self.minPeaks.append(minimum)
+                    self.minPeaksPositions.append(CGFloat(minimumPosition))
                     minimum = current
                     lookformax = true
                 }
             }
         }
-        //println(maxPeaks)
     }
 }

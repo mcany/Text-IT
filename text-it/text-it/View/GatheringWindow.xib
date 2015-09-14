@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GatheringWindowController" customModule="text_it" customModuleProvider="target">
             <connections>
+                <outlet property="exitButton" destination="kcx-MN-Sg7" id="prx-nb-zNx"/>
                 <outlet property="fileNameTextField" destination="xzC-Ek-tcZ" id="Mn1-Jn-TPX"/>
                 <outlet property="outputTextView" destination="3PA-Fn-WBl" id="gp6-Ay-3j8"/>
-                <outlet property="startButton" destination="kcx-MN-Sg7" id="nNe-WB-WvT"/>
-                <outlet property="stopButton" destination="r99-aw-R3u" id="RRt-33-pXJ"/>
+                <outlet property="saveButton" destination="r99-aw-R3u" id="v3z-Du-3vu"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="YSa-TV-bhI"/>
             </connections>
         </customObject>
@@ -19,7 +19,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -33,7 +33,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xzC-Ek-tcZ">
-                        <rect key="frame" x="94" y="239" width="195" height="22"/>
+                        <rect key="frame" x="94" y="239" width="200" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="3cX-lW-ABy">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -44,23 +44,23 @@
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcx-MN-Sg7">
-                        <rect key="frame" x="308" y="233" width="70" height="32"/>
-                        <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fzm-J2-Mbr">
+                        <rect key="frame" x="313" y="233" width="64" height="32"/>
+                        <buttonCell key="cell" type="push" title="Exit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fzm-J2-Mbr">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="startButtonTapped:" target="-2" id="TwU-Nd-Dpz"/>
+                            <action selector="exitButtonTapped:" target="-2" id="qNg-Wm-zWL"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r99-aw-R3u">
-                        <rect key="frame" x="396" y="233" width="70" height="32"/>
-                        <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZFG-Vl-wY6">
+                        <rect key="frame" x="395" y="233" width="71" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZFG-Vl-wY6">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="stopButtonTapped:" target="-2" id="Ekv-9b-Hef"/>
+                            <action selector="saveButtonTapped:" target="-2" id="Wj7-Rz-TG3"/>
                         </connections>
                     </button>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2H-D8-Sh7">

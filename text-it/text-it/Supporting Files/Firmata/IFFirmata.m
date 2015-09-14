@@ -389,33 +389,14 @@ www.interactex.org
 }
 
 -(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)originalLength{
-    
-    printf("before:\n");
-    for (int i = 0 ; i < originalLength; i++) {
-        int value = buffer[i];
-        printf("%d ",value);
-    }
-    printf("\n");
-
-    
     if(self.communicationModule.usesFillBytes){
         [self cleanAddedBytes:buffer lenght:&originalLength];
     }
     
     NSInteger length = originalLength;
     
-    printf("receiving:\n");
-    for (int i = 0 ; i < length; i++) {
-        int value = buffer[i];
-        printf("%d ",value);
-    }
-    printf("\n");
-    
-    
-    /*
     for (int i = 0 ; i < length; i++) {
         uint8_t value = buffer[i];
-        
 		uint8_t msn = value & START_SYSEX;
 		if (msn == 0xE0 || msn == 0x90 || value == 0xF9) {//digital / analog pin, or protocol version
 			parseCommandLength = 3;
@@ -441,7 +422,6 @@ www.interactex.org
             parseCommandLength = 0;
 		}
 	}
-     */
 }
 
 @end

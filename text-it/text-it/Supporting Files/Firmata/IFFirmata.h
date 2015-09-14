@@ -61,11 +61,11 @@ typedef enum{
 
 -(void) firmataController:(IFFirmata*) firmataController didReceiveAnalogMappingResponse:(uint8_t*) buffer length:(NSInteger) length;
 
--(void) firmataController:(IFFirmata*) firmataController didReceiveAnalogMessageOnChannel:(NSInteger) channel value:(NSInteger) value;
+-(void) firmataController:(IFFirmata*) firmataController didReceiveAnalogMessageOnChannel:(NSInteger) channel value:(NSInteger) value;//
 
--(void) firmataController:(IFFirmata*) firmataController didReceiveDigitalMessageForPort:(NSInteger) port value:(NSInteger) value;
+-(void) firmataController:(IFFirmata*) firmataController didReceiveDigitalMessageForPort:(NSInteger) port value:(NSInteger) value;//
 
--(void) firmataController:(IFFirmata*) firmataController didReceiveI2CReply:(uint8_t*) buffer length:(NSInteger) length;
+-(void) firmataController:(IFFirmata*) firmataController didReceiveI2CReply:(uint8_t*) buffer length:(NSInteger) length;//
 
 @end
 
@@ -104,9 +104,9 @@ typedef enum{
 -(void) sendDigitalOutputForPort:(NSInteger) port value:(NSInteger) value;
 -(void) sendAnalogOutputForPin:(NSInteger) pin value:(NSInteger) value;
 -(void) sendReportRequestsForDigitalPins;
--(void) sendReportRequestsForDigitalPin:(NSInteger) pin reports:(BOOL) reports;
--(void) sendReportRequestForAnalogPin:(NSInteger) pin reports:(BOOL) reports;
--(void) sendI2CStartReadingAddress:(NSInteger) address reg:(NSInteger) reg size:(NSInteger) size;
+-(void) sendReportRequestsForDigitalPin:(NSInteger) pin reports:(BOOL) reports;//
+-(void) sendReportRequestForAnalogPin:(NSInteger) pin reports:(BOOL) reports;//
+-(void) sendI2CStartReadingAddress:(NSInteger) address reg:(NSInteger) reg size:(NSInteger) size;//
 -(void) sendI2CConfigMessage;
 -(void) sendI2CStopReadingAddress:(NSInteger) address;
 -(void) sendI2CWriteToAddress:(NSInteger) address reg:(NSInteger) reg bytes:(uint8_t*) bytes numBytes:(NSInteger) numBytes;

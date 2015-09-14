@@ -17,7 +17,8 @@ protocol StandardDeviationJSExports : JSExport {
     static func new() -> StandardDeviation
 }
 
-class StandardDeviation: NSObject, StandardDeviationJSExports {
+@objc(StandardDeviation)
+class StandardDeviation: Component, StandardDeviationJSExports {
 
     override static func new() -> StandardDeviation {
         return StandardDeviation()

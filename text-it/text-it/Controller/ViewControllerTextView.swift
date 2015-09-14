@@ -23,29 +23,65 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
     
     func printResult(result: JSValue?)
     {
-        println(result)
-        
-        if(!result!.toString().hasPrefix("undefined"))
+        dispatch_async(dispatch_get_main_queue(), {
+            println(result)
+            
+            if(!result!.toString().hasPrefix("undefined") && self.printResult)
+            {
+                self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
+                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+                self.printResult = false
+            }
+        })
+    }
+    
+    func readCurrentFile()
+    {
+        var file = File();
+        //var savedCode = file.read(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile))
+        var savedCode = file.read(self.currentFile)
+        self.codeTextView.string = savedCode!
+    }
+    
+    func writeToCurrentFile()
+    {
+        if (self.codeChanged)
         {
-            self.debugTextView.string = self.debugTextView.string! + result!.toString() + "\n"
-            self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+            dispatch_async(self.queue) {
+                self.codeChanged = false
+                self.writeLoop = true
+                var file = File()
+                file.write(Constants.Path.FullPath.stringByAppendingPathComponent(self.currentFile), data: self.codeTextView.string)
+                //file.write((self.currentFile), data: self.codeTextView.string)
+                dispatch_async(dispatch_get_main_queue(), {self.writeLoop = false; if(self.codeChanged){self.writeToCurrentFile()}})
+            }
         }
     }
     
     func textDidChange(notification: NSNotification) {
         var textView = notification.object as! NSTextView
-        
         if(textView == self.codeTextView)
         {
+            
+            JavascriptRunner.sharedInstance.executionCode = textView.string!
+            self.codeChanged = true
+            if !self.writeLoop
+            {
+                self.writeToCurrentFile()
+            }
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
             {
+                self.printResult = true
+                // var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
                 
-               // var result = JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!)
+                //JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!){result in self.printResult(result)}
                 
-                JavascriptRunner.sharedInstance.execute(codeWithoutWhitespaceAndNewline!){result in self.printResult(result)}
-
                 
+            }
+            else
+            {
+                self.printResult = false
             }
             
             /*

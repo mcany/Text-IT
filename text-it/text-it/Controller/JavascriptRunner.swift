@@ -20,16 +20,21 @@ protocol ExceptionHandler{
 }
 
 class JavascriptRunner: NSObject {
-
+    
     var context: JSContext!
     static let sharedInstance = JavascriptRunner()
     var debugDelegate : Debugger?
     var exceptionHandler : ExceptionHandler?
-
+    var executionCode: String = ""{
+        didSet{
+            self.codeChanged = true
+        }
+    }
+    var codeChanged: Bool = false
     
     /** Serial dispatch queue */
     private let queue = dispatch_queue_create("serial-worker", DISPATCH_QUEUE_SERIAL)
-
+    
     override init(){
         super.init()
         self.context = JSContext()
@@ -46,21 +51,58 @@ class JavascriptRunner: NSObject {
         }
     }
     
+    func executeLoop(completionHandler: (JSValue) -> Void )
+    {
+        
+        let seconds = 2.0
+        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
+        var dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            if(self.codeChanged)
+            {
+                dispatch_async(self.queue) {
+                    self.codeChanged = false
+                    let result = self.context.evaluateScript(self.executionCode)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        completionHandler(result);
+                        self.executeLoop(){result in  completionHandler(result)}
+                    })
+                }
+            }
+            else
+            {
+                self.executeLoop(){result in  completionHandler(result)}
+            }
+        })
+    }
     
     func executeMain(code: String) -> JSValue?{
         var result = self.context.evaluateScript(code)
         return result
     }
-  
+    
     func addFunctionsToJSContext()
     {
         // export JS class
+        self.context.setObject(FastFourierTransform.self, forKeyedSubscript: "FastFourierTransform")
+        self.context.setObject(Median.self, forKeyedSubscript: "Median")
+        self.context.setObject(Mean.self, forKeyedSubscript: "Mean")
         self.context.setObject(PeakDetection.self, forKeyedSubscript: "PeakDetection")
         self.context.setObject(StandardDeviation.self, forKeyedSubscript: "StandardDeviation")
+        self.context.setObject(HighPassFilter.self, forKeyedSubscript: "HighPassFilter")
         self.context.setObject(LowPassFilter.self, forKeyedSubscript: "LowPassFilter")
         self.context.setObject(RCFilter.self, forKeyedSubscript: "RCFilter")
         self.context.setObject(Evaluator.self, forKeyedSubscript: "Evaluator")
         self.context.setObject(TestCase.self, forKeyedSubscript: "TestCase")
-        self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
+        //self.context.setObject(Parser.self, forKeyedSubscript: "Parser")
+        self.context.setObject(LinearAcceleration.self, forKeyedSubscript: "LinearAcceleration")
+        self.context.setObject(THBandageData.self, forKeyedSubscript: "THBandageData")
+        self.context.setObject(BandageDataArray.self, forKeyedSubscript: "BandageDataArray")
+        
+        self.context.setObject(CommunicationType.self, forKeyedSubscript: "CommunicationType")
+        self.context.setObject(I2CReply.self, forKeyedSubscript: "I2CReply")
+        self.context.setObject(AnalogMessage.self, forKeyedSubscript: "AnalogMessage")
+        self.context.setObject(DigitalMessage.self, forKeyedSubscript: "DigitalMessage")
     }
 }

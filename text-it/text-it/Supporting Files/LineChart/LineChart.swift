@@ -703,10 +703,18 @@ extension LineChart {
             self.init(label: label, data: data)
             self.yAxis = yAxis
         }
+        
+        var circlePoints: [CGFloat] = []
+        func addCircle(data: [CGFloat])
+        {
+            circlePoints = data
+            updatePoints()
+        }
+        
         init(label: String, data: [CGFloat]) {
             self.label = label
             self.data = data
-            
+            circlePoints = []
             
             //defaultPoint.path = CGPath.Circle(10.0)
             defaultPoint.strokeColor = CGColorCreateFromHex(0xFFFFFF)
@@ -716,9 +724,9 @@ extension LineChart {
             
             lineWidth = 2.0
             
-            defaultPoint.addObserver(self, forKeyPath: "strokeColor", options: NSKeyValueObservingOptions.allZeros, context: nil)
-            defaultPoint.addObserver(self, forKeyPath: "fillColor", options: NSKeyValueObservingOptions.allZeros, context: nil)
-            defaultPoint.addObserver(self, forKeyPath: "path", options: NSKeyValueObservingOptions.allZeros, context: nil)
+            //defaultPoint.addObserver(self, forKeyPath: "strokeColor", options: NSKeyValueObservingOptions.allZeros, context: nil)
+            //defaultPoint.addObserver(self, forKeyPath: "fillColor", options: NSKeyValueObservingOptions.allZeros, context: nil)
+            //defaultPoint.addObserver(self, forKeyPath: "path", options: NSKeyValueObservingOptions.allZeros, context: nil)
             
             addSublayer(fillLayer)
             //updatePoints();
@@ -740,10 +748,15 @@ extension LineChart {
             }
             var newPoints = [Point]()
             for var i = 0; i < data.count; i++ {
+                defaultPoint.path = nil
                 let point = i < points.count ? points[i] : Point(layer: defaultPoint)
                 point.dataset = self
                 point.delegate = delegate
                 point.value = data[i]
+                point.path = nil
+                if circlePoints.filter({ el in el == CGFloat(i) }).count > 0 {
+                    point.path = CGPath.Circle(10.0)
+                }
                 point.highlighted = false
                 addSublayer(point)
                 newPoints += [point]

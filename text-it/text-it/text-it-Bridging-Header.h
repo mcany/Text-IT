@@ -17,3 +17,5 @@
 
 
 #import "THServerController.h"
+
+#import "FileSystemItem.h"

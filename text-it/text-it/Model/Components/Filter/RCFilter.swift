@@ -13,7 +13,6 @@ import JavaScriptCore
 @objc
 protocol RCFilterJSExports : JSExport {
     func filter(data:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
-    func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
     static func new() -> RCFilter
 }
 
@@ -23,12 +22,6 @@ class RCFilter: Component,RCFilterJSExports  {
     
     override static func new() -> RCFilter {
         return RCFilter()
-    }
-    
-    func test(acc:[CGFloat],_ asd:Int) -> [CGFloat]
-    {
-        println("success!")
-        return acc
     }
     
     func filter(data:[CGFloat],_ kFilteringFactor:CGFloat,_ frequency: CGFloat) -> [CGFloat]
@@ -42,3 +35,4 @@ class RCFilter: Component,RCFilterJSExports  {
         return filteredData
     }
 }
+
