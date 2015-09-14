@@ -13,12 +13,15 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
     
     
     func handleException(exception: JSValue) -> Void {
-        println("JS Error: \(exception)")
-        if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
-        {
-            self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
-            self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            println("JS Error: \(exception)")
+            if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
+            {
+                self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
+                self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
+            }
+        })
     }
     
     func printResult(result: JSValue?)
@@ -67,7 +70,7 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
             self.codeChanged = true
             if !self.writeLoop
             {
-                self.writeToCurrentFile()
+                //self.writeToCurrentFile()
             }
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")

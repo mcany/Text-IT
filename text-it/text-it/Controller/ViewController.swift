@@ -102,7 +102,7 @@ class ViewController: NSViewController {
             fileHelper.write(currentFilePath,data: "")
         }
         self.readCurrentFile()
-        self.writeToCurrentFile()
+        //self.writeToCurrentFile()
         
         
         //feature extraction
