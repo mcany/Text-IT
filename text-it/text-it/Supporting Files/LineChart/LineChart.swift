@@ -477,7 +477,10 @@ extension LineChart {
                     let tick = index < ticks.count ? ticks[index] : Tick(value: value, alignment: alignment, major: true)
                     tick.delegate = delegate
                     tick.value = value
-                    
+                    if(-0.01 < tick.value && tick.value < 0.01)
+                    {
+                        tick.value = 0
+                    }
                     if labels != nil && index < labels!.count {
                         tick.label = labels![index]
                     }
