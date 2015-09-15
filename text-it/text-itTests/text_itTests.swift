@@ -59,7 +59,7 @@ class text_itTests: XCTestCase {
         peakDetector.detectPeaks(array, 10)
         var expectedMaxPeak = 1
         
-        XCTAssertEqual(expectedMaxPeak, peakDetector.numOfMaxPeaks, "should be equal")
+        XCTAssertEqual(expectedMaxPeak, peakDetector.numberOfMaxPeaks, "should be equal")
     }
     
     func testFeatureExtractionMean()

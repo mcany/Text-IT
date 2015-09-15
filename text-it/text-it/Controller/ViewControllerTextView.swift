@@ -16,7 +16,7 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
         dispatch_async(dispatch_get_main_queue(), {
             
             println("JS Error: \(exception)")
-            if (self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true)
+            if ((self.debugTextView.string?.hasSuffix("JS Error: \(exception)") != true) && (!exception.debugDescription.hasSuffix("EOF")) && (!exception.debugDescription.hasSuffix("Unexpected end of script")))
             {
                 self.debugTextView.string = self.debugTextView.string! + "JS Error: \(exception)\n"
                 self.debugTextView.scrollRangeToVisible(NSRange(location: count(self.debugTextView.string!), length: 0))
