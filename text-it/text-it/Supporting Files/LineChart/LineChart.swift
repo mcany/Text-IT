@@ -527,7 +527,7 @@ extension LineChart {
             let maxInterval: CGFloat = 15.0 // todo: calc based on label font height
             let minInterval = (max - min) / 0.9 / maxInterval // if we used the max amount of steps, each step would have represent at least this many units
             // divide by 0.9 because we want all the data points to only take up ~90% of the available vertical space. the leftover is to provide some extra space below the min point and above the max point
-            var magnitude = round(pow(10.0, round( log10(minInterval) )))
+            var magnitude = pow(10.0, round( log10(minInterval) ))
             
             // in order for the ticks to be "pretty" or intuitive, make them in multiples of either (100, 10, 1, .1, etc) or (50, 5, .5, .05) or (20, 2, .2, .02, etc)
             var stepBase: CGFloat = 0.0
