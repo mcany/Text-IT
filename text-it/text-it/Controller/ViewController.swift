@@ -102,7 +102,7 @@ class ViewController: NSViewController {
             fileHelper.write(currentFilePath,data: "")
         }
         self.readCurrentFile()
-        self.writeToCurrentFile()
+        //self.writeToCurrentFile()
         
         
         //feature extraction
@@ -202,7 +202,7 @@ class ViewController: NSViewController {
             
             if let myData: [CGFloat] = data {
                 if let lineChart = self.lineChartView.layer as? LineChart {
-                    if(data!.count > 0 && lineChart.datasets.count > 0 && self.previousCircles != data! )
+                    if(lineChart.datasets.count > 0 && self.previousCircles != data! )
                     {
                         lineChart.datasets[0].addCircle(data!)
                         self.previousCircles = data!

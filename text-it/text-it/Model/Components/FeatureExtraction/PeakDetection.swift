@@ -14,10 +14,10 @@ import JavaScriptCore
 protocol PeakDetectionJSExports : JSExport {
     var maxPeaks: [CGFloat] {get}
     var minPeaks: [CGFloat] {get}
-    var numOfMaxPeaks: Int {get}
-    var numOfMinPeaks: Int {get}
-    var maxPeaksPositions: [CGFloat] {get}
-    var minPeaksPositions: [CGFloat] {get}
+    var numberOfMaxPeaks: Int {get}
+    var numberOfMinPeaks: Int {get}
+    var positionOfMaxPeaks: [CGFloat] {get}
+    var positionOfMinPeaks: [CGFloat] {get}
     
     func detectPeaks(arrayData:[CGFloat],_ peakThreshold:CGFloat )
     static func new() -> PeakDetection
@@ -44,21 +44,21 @@ class PeakDetection: Component, PeakDetectionJSExports{
     
     var maxPeaks: [CGFloat]{
         didSet{
-            self.numOfMaxPeaks = self.maxPeaks.count
+            self.numberOfMaxPeaks = self.maxPeaks.count
         }
     }
     
     var minPeaks: [CGFloat]{
         didSet{
-            self.numOfMinPeaks = self.minPeaks.count
+            self.numberOfMinPeaks = self.minPeaks.count
         }
     }
     
-    var numOfMaxPeaks: Int
-    var numOfMinPeaks: Int
-
-    var maxPeaksPositions = [CGFloat]()
-    var minPeaksPositions = [CGFloat]()
+    var numberOfMaxPeaks: Int
+    var numberOfMinPeaks: Int
+    
+    var positionOfMaxPeaks = [CGFloat]()
+    var positionOfMinPeaks = [CGFloat]()
     
     override static func new() -> PeakDetection {
         return PeakDetection()
@@ -67,8 +67,8 @@ class PeakDetection: Component, PeakDetectionJSExports{
     override init() {
         self.maxPeaks = []
         self.minPeaks = []
-        self.numOfMaxPeaks = 0
-        self.numOfMinPeaks = 0
+        self.numberOfMaxPeaks = 0
+        self.numberOfMinPeaks = 0
         super.init()
     }
     
@@ -93,13 +93,13 @@ class PeakDetection: Component, PeakDetectionJSExports{
         for var index = 0; index < arrayData.count; ++index {
             var current = arrayData[index]
             
-            if (current >= maximum)
+            if (current > maximum)
             {
                 maximum = current
                 maximumPosition = index
             }
             
-            if (current <= minimum)
+            if (current < minimum)
             {
                 minimum = current
                 minimumPosition = index
@@ -110,20 +110,28 @@ class PeakDetection: Component, PeakDetectionJSExports{
             {
                 if(current < maximum - peakThreshold)
                 {
-                    self.maxPeaks.append(maximum)
-                    self.maxPeaksPositions.append(CGFloat(maximumPosition))
-                    minimum = current
+                    if(!contains(self.maxPeaks, maximum))
+                    {
+                        self.maxPeaks.append(maximum)
+                        self.positionOfMaxPeaks.append(CGFloat(maximumPosition))
+                        maximum = current
+                    }
                     lookformax = false
+
                 }
             }
             else
             {
                 if(current > minimum + peakThreshold)
                 {
-                    self.minPeaks.append(minimum)
-                    self.minPeaksPositions.append(CGFloat(minimumPosition))
-                    minimum = current
+                    if(!contains(self.minPeaks, minimum))
+                    {
+                        self.minPeaks.append(minimum)
+                        self.positionOfMinPeaks.append(CGFloat(minimumPosition))
+                        minimum = current
+                    }
                     lookformax = true
+
                 }
             }
         }

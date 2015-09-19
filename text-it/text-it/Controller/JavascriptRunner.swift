@@ -64,10 +64,10 @@ class JavascriptRunner: NSObject {
                 dispatch_async(self.queue) {
                     self.codeChanged = false
                     let result = self.context.evaluateScript(self.executionCode)
-                    dispatch_async(dispatch_get_main_queue(), {
+                    //dispatch_async(dispatch_get_main_queue(), {
                         completionHandler(result);
                         self.executeLoop(){result in  completionHandler(result)}
-                    })
+                    //})
                 }
             }
             else

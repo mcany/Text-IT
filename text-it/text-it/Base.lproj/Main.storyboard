@@ -723,10 +723,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view id="euF-E2-a6y" customClass="LineChartView" customModule="text_it" customModuleProvider="target">
-                                <rect key="frame" x="311" y="143" width="171" height="158"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                            </view>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="kDW-If-4eu">
                                 <rect key="frame" x="349" y="0.0" width="133" height="135"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -747,10 +743,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="51"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="120" height="51"/>
+                                            <size key="minSize" width="150" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="120" height="51"/>
+                                            <size key="minSize" width="150" height="51"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -860,10 +856,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="214"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="120" height="214"/>
+                                            <size key="minSize" width="150" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="120" height="214"/>
+                                            <size key="minSize" width="150" height="214"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -878,6 +874,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <view id="euF-E2-a6y" customClass="LineChartView" customModule="text_it" customModuleProvider="target">
+                                <rect key="frame" x="285" y="143" width="195" height="148"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            </view>
                         </subviews>
                     </view>
                     <connections>
