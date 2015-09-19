@@ -70,7 +70,7 @@ extension ViewController: NSTextViewDelegate, ExceptionHandler {
             self.codeChanged = true
             if !self.writeLoop
             {
-                //self.writeToCurrentFile()
+                self.writeToCurrentFile()
             }
             var codeWithoutWhitespaceAndNewline = textView.string?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
             if codeWithoutWhitespaceAndNewline!.hasSuffix(";")
